@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="План поездки 15.12.2026 – 13.01.2027: Кейптаун, Намибия, водопад Виктория, Маврикий. Маршруты по дням, билеты с ценами, особенности остановок.">
-<meta property="og:title" content="Кейптаун / Намиб / Замбези">
-<meta property="og:description" content="Маршруты, билеты и цены на 15.12.2026 – 13.01.2027">
+<title>Cape Town to Victoria Falls 26/27</title>
+<meta name="description" content="Trip planner for 15 Dec 2026 – 13 Jan 2027: Cape Town, Namibia, Victoria Falls, Kruger and Mauritius. Day-by-day routes, fares and booking links, entry rules for Russian and French passports.">
+<meta property="og:title" content="Cape Town / Namib / Zambezi">
+<meta property="og:description" content="Routes, fares and notes for 15 Dec 2026 – 13 Jan 2027">
 <meta property="og:type" content="website">
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
-<title>Кейптаун — Виктория 26/27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap">
-<style>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
 /* Layout: route chart (sticky) beside a day-by-day manifest; tickets, stops, comparison and checklist follow in one column */
 :root{
   --bg:#EEF2F1; --surface:#FFFFFF; --surface-2:#F5F8F7; --ink:#14212B; --muted:#56646F; --faint:#8A979F; --line:#D0D9DA;
@@ -203,34 +203,37 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   .price{text-align:left}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.linkbtn{border:0;background:none;color:var(--note);text-decoration:underline;cursor:pointer;padding:0;font:inherit}
+.muted{color:var(--faint)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="eyebrow">ЮАР · Намибия · Зимбабве · Маврикий</div>
-      <h1>Кейптаун <span class="sep">/</span> Намиб <span class="sep">/</span> Замбези</h1>
-      <p class="lede">Маршруты на 15 декабря 2026 – 13 января 2027 из Сараево через Стамбул, без пересадок в шенгене. Выбери вариант, отфильтруй по попутчику, нажми на перелёт, чтобы увидеть детали и ссылку на билет.</p>
+      <div class="eyebrow">South Africa · Namibia · Zimbabwe · Mauritius</div>
+      <h1>Cape Town <span class="sep">/</span> Namib <span class="sep">/</span> Zambezi</h1>
+      <p class="lede">Route options for 15 December 2026 – 13 January 2027. Traveller A flies from Sarajevo via Istanbul and avoids Schengen transits; traveller B joins on 25 December and flies home from Johannesburg. Pick a route, filter by traveller, tap a flight for the fare and booking link.</p>
     </div>
     <div class="stamp">
-      <span>Цены Kayak за 1 взрослого</span>
-      <b id="stampDate">проверены 16–18 окт 2026</b>
-      <span>курс 84,8 ₽ за $</span>
+      <span>Kayak fares, 1 adult, economy</span>
+      <b>checked 16–18 Oct 2026</b>
+      <span>₽ at 84.8 per $</span>
     </div>
   </header>
 
-  <div class="controls" role="toolbar" aria-label="Настройки маршрута">
+  <div class="controls" role="toolbar" aria-label="Route settings">
     <div class="ctl">
-      <span class="ctl-label" id="lblScn">Вариант</span>
+      <span class="ctl-label" id="lblScn">Route</span>
       <div class="seg" id="segScn" aria-labelledby="lblScn"></div>
     </div>
     <div class="ctl">
-      <span class="ctl-label" id="lblWho">Кто</span>
+      <span class="ctl-label" id="lblWho">Show</span>
       <div class="seg" id="segWho" aria-labelledby="lblWho"></div>
     </div>
     <div class="ctl">
-      <span class="ctl-label" id="lblCur">Валюта</span>
+      <span class="ctl-label" id="lblCur">Currency</span>
       <div class="seg" id="segCur" aria-labelledby="lblCur"></div>
     </div>
   </div>
@@ -240,18 +243,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
   <div class="main">
     <div class="mapcard">
       <div class="maphead">
-        <h2 id="mapTitle">Схема маршрута</h2>
+        <h2 id="mapTitle">Route map</h2>
         <div class="legend">
-          <span><span class="dot a"></span>ты</span>
-          <span><span class="dot b"></span>второй</span>
-          <span><span class="dot ab"></span>вместе</span>
-          <span><i></i>перелёт</span>
-          <span><i class="drive"></i>на машине</span>
-          <span><i class="home"></i>Стамбул и домой</span>
+          <span><span class="dot a"></span>A</span>
+          <span><span class="dot b"></span>B</span>
+          <span><span class="dot ab"></span>together</span>
+          <span><i></i>flight</span>
+          <span><i class="drive"></i>by car</span>
+          <span><i class="home"></i>long-haul</span>
         </div>
       </div>
-      <svg class="map" id="map" role="img" aria-label="Схема маршрута на карте юга Африки"></svg>
-      <div class="mapnote">Схема, береговая линия упрощена. Нажми на город, чтобы открыть его особенности.</div>
+      <svg class="map" id="map" role="img" aria-label="Route map of southern Africa"></svg>
+      <div class="mapnote">Schematic map with a simplified coastline. Tap a place to jump to its notes.</div>
     </div>
     <div>
       <div class="timeline" id="timeline"></div>
@@ -260,49 +263,49 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <section class="block" id="tickets">
     <div class="bhead">
-      <h2>Билеты и цены</h2>
-      <p>Только перелёты. Цена в момент проверки, за одного взрослого в экономе; тарифы меняются каждый день.</p>
+      <h2>Tickets and fares</h2>
+      <p>Flights only, per adult, economy, at the time of the check. Fares change daily.</p>
     </div>
     <div class="tablewrap"><table id="costTable"></table></div>
   </section>
 
   <section class="block" id="stops">
     <div class="bhead">
-      <h2>Остановки</h2>
-      <p>Въезд с российским паспортом, сезон, деньги и то, что легко упустить.</p>
+      <h2>Places</h2>
+      <p>Entry rules for both passports, season, money and the things people tend to miss.</p>
     </div>
     <div class="stops" id="stopCards"></div>
   </section>
 
   <section class="block" id="compare">
     <div class="bhead">
-      <h2>Все варианты рядом</h2>
-      <p>Перелёты на одного, из Сараево через Стамбул или Персидский залив. Строки без ссылки проверялись как сумма нескольких билетов.</p>
+      <h2>All options side by side</h2>
+      <p>Flights for traveller A from Sarajevo, sorted by price. Rows marked ≈ are sums of several tickets.</p>
     </div>
     <div class="tablewrap"><table id="compareTable"></table></div>
   </section>
 
   <section class="block" id="todo">
     <div class="bhead">
-      <h2>Что сделать</h2>
+      <h2>To do</h2>
       <span class="progress" id="progress"></span>
     </div>
     <ul class="check" id="checklist"></ul>
   </section>
 
   <section class="block">
-    <div class="bhead"><h2>Как читать цены</h2></div>
+    <div class="bhead"><h2>How to read the fares</h2></div>
     <div class="notes">
-      <p><b>Источник.</b> Kayak, поиск только через безвизовые для россиян хабы: Стамбул, Доха, Дубай, Абу-Даби, Аддис-Абеба, Йоханнесбург. Дата проверки указана у каждого билета.</p>
-      <p><b>Оценки.</b> Рейс FlyNamibia Виндхук → Виктория Kayak не продаёт. В октябре–ноябре он стоит 160–230 $, на праздники в расчёте взято 250 $.</p>
-      <p><b>Оплата.</b> Российские карты не работают ни на сайтах, ни в ЮАР, Намибии и Зимбабве. Для проката машины нужна иностранная кредитная карта под залог.</p>
-      <p><b>Здоровье.</b> ЮАР, Намибия и Зимбабве не в списке стран риска жёлтой лихорадки, сертификат на этом маршруте не нужен. У водопада малярия: профилактику начинают до прилёта.</p>
+      <p><b>Source.</b> Kayak. For traveller A only hubs that need no visa for a Russian passport: Istanbul, Doha, Dubai, Abu Dhabi, Addis Ababa, Johannesburg. Traveller B has a French passport, so any hub works for B.</p>
+      <p><b>Estimates.</b> Kayak does not sell the FlyNamibia flights between Windhoek and Victoria Falls. They cost $160–230 in October–November; $250 is used for the holidays.</p>
+      <p><b>Paying.</b> Russian bank cards do not work abroad. Car hire in Namibia and South Africa needs a credit card in the driver's name for the deposit.</p>
+      <p><b>Health.</b> South Africa, Namibia and Zimbabwe are not yellow fever risk countries, so no certificate is needed on these routes. Victoria Falls and Kruger are malaria areas: start prophylaxis before arrival.</p>
     </div>
   </section>
 
   <footer>
-    <span>Собрано 18 октября 2026. Цены и расписания перепроверять перед покупкой.</span>
-    <span class="mono">SJJ · IST · CPT · WDH · VFA · JNB · MRU</span>
+    <span>Compiled 18 October 2026. Re-check fares and schedules before buying.</span>
+    <span class="mono">SJJ · IST · CPT · JNB · WDH · VFA · MRU</span>
   </footer>
 </div>
 
@@ -312,197 +315,315 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 var RATE = 84.8;
 
 var PLACES = {
-  SJJ:{name:"Сараево"}, IST:{name:"Стамбул"},
-  CPT:{name:"Кейптаун", code:"CPT", lat:-33.97, lon:18.60, country:"ЮАР"},
-  JNB:{name:"Йоханнесбург", code:"JNB", lat:-26.14, lon:28.24, country:"ЮАР", dx:10, dy:-10},
-  WDH:{name:"Виндхук", code:"WDH", lat:-22.48, lon:17.47, country:"Намибия", dx:12, dy:4},
-  SOS:{name:"Соссусфлей", lat:-24.73, lon:15.29, country:"Намибия", minor:true, dx:-12, dy:16, anchor:"end"},
-  SWP:{name:"Свакопмунд", lat:-22.68, lon:14.53, country:"Намибия", minor:true, dx:-12, dy:-8, anchor:"end"},
-  VFA:{name:"Водопад Виктория", code:"VFA", lat:-17.93, lon:25.83, country:"Зимбабве", dx:12, dy:-8},
-  MRU:{name:"Маврикий", code:"MRU", lat:-20.30, lon:57.58, country:"Маврикий", dx:-12, dy:-12, anchor:"end"}
+  SJJ:{name:"Sarajevo"}, IST:{name:"Istanbul"},
+  CPT:{name:"Cape Town", code:"CPT", lat:-33.97, lon:18.60, country:"South Africa"},
+  JNB:{name:"Johannesburg", code:"JNB", lat:-26.14, lon:28.24, country:"South Africa", dx:-12, dy:-12, anchor:"end"},
+  KRU:{name:"Kruger", lat:-24.99, lon:31.59, country:"South Africa", dx:12, dy:4},
+  WDH:{name:"Windhoek", code:"WDH", lat:-22.48, lon:17.47, country:"Namibia", dx:12, dy:4},
+  SOS:{name:"Sossusvlei", lat:-24.73, lon:15.29, country:"Namibia", minor:true, dx:-12, dy:16, anchor:"end"},
+  SWP:{name:"Swakopmund", lat:-22.68, lon:14.53, country:"Namibia", minor:true, dx:-12, dy:-8, anchor:"end"},
+  VFA:{name:"Victoria Falls", code:"VFA", lat:-17.93, lon:25.83, country:"Zimbabwe", dx:12, dy:-8},
+  MRU:{name:"Mauritius", code:"MRU", lat:-20.30, lon:57.58, country:"Mauritius", dx:-12, dy:-12, anchor:"end"}
 };
+var STOP_OF = {SOS:"WDH", SWP:"WDH"};
 
 var LEGS = {
-  a1:{kind:"flight", from:"SJJ", to:"CPT", date:"2026-12-15", dep:"08:00", arr:"23:00", dur:"14 ч", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"T1"},
-  a4:{kind:"flight", from:"CPT", to:"SJJ", date:"2027-01-13", dep:"00:55", arr:"19:30", dur:"19 ч 35", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"T1", note:"Вылет в ночь с 12 на 13 января: в аэропорт вечером 12-го."},
-  b1:{kind:"flight", from:"SJJ", to:"JNB", date:"2026-12-25", dep:"08:00", arr:"≈22:25", dur:"13 ч 25", carrier:"Turkish Airlines", via:"IST", who:["b"], ticket:"T2", note:"Время прилёта примерное, сверить при покупке. Ночь в отеле при аэропорту."},
-  a2:{kind:"flight", from:"CPT", to:"WDH", date:"2026-12-26", dep:"12:50", arr:"14:55", dur:"2 ч 05", carrier:"FlySafair", via:"", who:["a"], ticket:"T3", note:"Airlink в 10:40 → 12:50 стоит 251 $ и прилетает одновременно со вторым."},
-  b2:{kind:"flight", from:"JNB", to:"WDH", date:"2026-12-26", dep:"10:40", arr:"12:50", dur:"2 ч 10", carrier:"Airlink", via:"", who:["b"], ticket:"T4"},
-  d1:{kind:"drive", from:"WDH", to:"SOS", date:"2026-12-27", dist:"340–355 км", dur:"5–6,5 ч", who:["a","b"], note:"B1 → C24 → C19, около 100 км гравия. Ехать светлым днём."},
-  d2:{kind:"drive", from:"SOS", to:"SWP", date:"2026-12-29", dist:"≈345 км", dur:"≈5,5 ч", who:["a","b"], note:"Через Solitaire, около 285 км гравия. Дальше 263 км без единой заправки."},
-  d3:{kind:"drive", from:"SWP", to:"WDH", date:"2027-01-02", dist:"≈360 км", dur:"≈4 ч", who:["a","b"], note:"Асфальт B2. Ночь у аэропорта, машину сдать утром перед вылетом."},
-  ab1:{kind:"flight", from:"WDH", to:"VFA", date:"2027-01-03", dep:"09:15", arr:"10:40", dur:"1 ч 25", carrier:"FlyNamibia (Airlink 4Z8135)", via:"", who:["a","b"], ticket:"T5", note:"Летает каждый день, кроме понедельника. Самолёт на 37–50 мест, раскупят быстро."},
-  b3:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-07", dep:"12:15", arr:"14:05", dur:"1 ч 50", carrier:"Fastjet", via:"", who:["b"], ticket:"T6", note:"Отдельный билет: в Йоханнесбурге паспортный контроль и новая регистрация, запас больше 4 часов."},
-  b4:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-07", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 ч 50", carrier:"Turkish Airlines", via:"IST", who:["b"], ticket:"T2", note:"Дома 8 января, до дедлайна 10 января остаётся 2 дня."},
-  a3:{kind:"flight", from:"VFA", to:"CPT", date:"2027-01-08", dep:"", arr:"", dur:"6–7 ч, 1 пересадка", carrier:"через Йоханнесбург", via:"JNB", who:["a"], ticket:"T7", note:"Повторный въезд в ЮАР: до вылета домой меньше 7 дней, ограничение на повторный въезд не мешает."},
-  m2:{kind:"flight", from:"CPT", to:"MRU", date:"2027-01-05", dep:"10:05", arr:"17:15", dur:"5 ч 10", carrier:"Airlink", via:"", who:["a"], ticket:"M2", note:"Прямой рейс летает по вторникам и пятницам. 1 января (пт) тот же рейс за 402 $."},
-  m3:{kind:"flight", from:"MRU", to:"SJJ", date:"2027-01-13", dep:"20:30", arr:"14:40", arrNext:true, dur:"21 ч 10", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"M1"}
+  /* traveller A long-haul */
+  a1:{kind:"flight", from:"SJJ", to:"CPT", date:"2026-12-15", dep:"08:00", arr:"23:00", dur:"14 h", carrier:"Turkish Airlines", via:"IST", who:["a"]},
+  a4:{kind:"flight", from:"CPT", to:"SJJ", date:"2027-01-13", dep:"00:55", arr:"19:30", dur:"19 h 35", carrier:"Turkish Airlines", via:"IST", who:["a"], note:"Departs just after midnight: be at the airport on the evening of 12 January."},
+  m3:{kind:"flight", from:"MRU", to:"SJJ", date:"2027-01-13", dep:"20:30", arr:"14:40", arrNext:true, dur:"21 h 10", carrier:"Turkish Airlines", via:"IST", who:["a"]},
+  /* traveller B long-haul */
+  b1:{kind:"flight", from:"SJJ", to:"JNB", date:"2026-12-25", dep:"08:00", arr:"22:25", dur:"13 h 25", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Night at an airport hotel, regional flight next morning."},
+  b4_7:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-07", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 h 50", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Home on 8 January. The same ticket returning on 8 or 9 January costs the same."},
+  b4_8:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-08", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 h 50", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Home on 9 January, a day before the deadline."},
+  /* base: Namibia then the Falls */
+  a2:{kind:"flight", from:"CPT", to:"WDH", date:"2026-12-26", dep:"12:50", arr:"14:55", dur:"2 h 05", carrier:"FlySafair", via:"", who:["a"], note:"Airlink 10:40 → 12:50 costs $251 and lands together with B."},
+  b2:{kind:"flight", from:"JNB", to:"WDH", date:"2026-12-26", dep:"10:40", arr:"12:50", dur:"2 h 10", carrier:"Airlink", via:"", who:["b"]},
+  d1:{kind:"drive", from:"WDH", to:"SOS", date:"2026-12-27", dist:"340–355 km", dur:"5–6.5 h", who:["a","b"], note:"B1 → C24 → C19, about 100 km of gravel. Drive in daylight only."},
+  d2:{kind:"drive", from:"SOS", to:"SWP", date:"2026-12-29", dist:"≈345 km", dur:"≈5.5 h", who:["a","b"], note:"Via Solitaire, about 285 km of gravel, then 263 km with no fuel at all."},
+  d3:{kind:"drive", from:"SWP", to:"WDH", date:"2027-01-02", dist:"≈360 km", dur:"≈4 h", who:["a","b"], note:"Tarred B2. Overnight near the airport, return the car before the morning flight."},
+  ab1:{kind:"flight", from:"WDH", to:"VFA", date:"2027-01-03", dep:"09:15", arr:"10:40", dur:"1 h 25", carrier:"FlyNamibia (Airlink 4Z8135)", via:"", who:["a","b"], note:"Daily except Mondays. 37–50 seat aircraft, sells out early."},
+  b3:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-07", dep:"12:15", arr:"14:05", dur:"1 h 50", carrier:"Fastjet", via:"", who:["b"], note:"Separate ticket: clear immigration in Johannesburg and check in again; 4 h 45 to the home flight."},
+  a3:{kind:"flight", from:"VFA", to:"CPT", date:"2027-01-08", dep:"", arr:"", dur:"6–7 h, 1 stop", carrier:"via Johannesburg", via:"JNB", who:["a"], note:"Re-entering South Africa less than 7 days before the flight home, so the re-entry limit does not bite."},
+  /* reverse: the Falls then Namibia */
+  r_a2:{kind:"flight", from:"CPT", to:"VFA", date:"2026-12-26", dep:"07:00", arr:"13:20", dur:"6 h 20", carrier:"Airlink", via:"JNB", who:["a"], note:"Lands at the same minute as B's flight from Johannesburg."},
+  r_b2:{kind:"flight", from:"JNB", to:"VFA", date:"2026-12-26", dep:"11:35", arr:"13:20", dur:"1 h 45", carrier:"Airlink", via:"", who:["b"]},
+  r_ab1:{kind:"flight", from:"VFA", to:"WDH", date:"2026-12-30", dep:"11:15", arr:"12:50", dur:"1 h 35", carrier:"FlyNamibia (Airlink 4Z8136)", via:"", who:["a","b"], note:"Daily except Mondays; 30 December is a Wednesday. Small aircraft, book early."},
+  r_d1:{kind:"drive", from:"WDH", to:"SWP", date:"2026-12-31", dist:"≈360 km", dur:"≈4 h", who:["a","b"], note:"Tarred B2 all the way. New Year's Eve on the coast."},
+  r_d2:{kind:"drive", from:"SWP", to:"SOS", date:"2027-01-03", dist:"≈345 km", dur:"≈5.5 h", who:["a","b"], note:"Via Walvis Bay and Solitaire: 263 km with no fuel, fill up in Walvis Bay."},
+  r_d3:{kind:"drive", from:"SOS", to:"WDH", date:"2027-01-06", dist:"340–355 km", dur:"5–6.5 h", who:["a","b"], note:"C19 → C24 → B1. Leave early, gravel in the first half."},
+  r_b3:{kind:"flight", from:"WDH", to:"JNB", date:"2027-01-08", dep:"07:10", arr:"09:00", dur:"1 h 50", carrier:"Airlink", via:"", who:["b"], note:"Take the morning flight: on a separate ticket you need hours in Johannesburg. Afternoon SAA at 14:30 is $178 but leaves only 2 h 35."},
+  r_a3:{kind:"flight", from:"WDH", to:"CPT", date:"2027-01-08", dep:"13:40", arr:"15:45", dur:"2 h 05", carrier:"Airlink", via:"", who:["a"]},
+  /* Kruger finale */
+  k_ab:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-06", dep:"12:15", arr:"14:05", dur:"1 h 50", carrier:"Fastjet", via:"", who:["a","b"], note:"Pick up a hire car at OR Tambo and head east."},
+  k_d1:{kind:"drive", from:"JNB", to:"KRU", date:"2027-01-06", dist:"≈400 km", dur:"4.5–5 h", who:["a","b"], note:"N4 / N12 towards Hazyview. Arrive before dark; sleep outside the park the first night."},
+  k_d2:{kind:"drive", from:"KRU", to:"JNB", date:"2027-01-08", dist:"≈420 km", dur:"5–5.5 h", who:["a","b"], note:"Leave the park by 09:00 to reach OR Tambo by mid-afternoon for B's 18:50 flight."},
+  k_a5:{kind:"flight", from:"JNB", to:"CPT", date:"2027-01-08", dep:"19:35", arr:"21:50", dur:"2 h 15", carrier:"FlySafair", via:"", who:["a"]},
+  /* Mauritius */
+  m2:{kind:"flight", from:"CPT", to:"MRU", date:"2027-01-05", dep:"10:05", arr:"17:15", dur:"5 h 10", carrier:"Airlink", via:"", who:["a"], note:"Nonstop on Tuesdays and Fridays. Friday 1 January is $402."}
 };
 
 var K = function(path){ return "https://www.kayak.com/flights/" + path; };
+var T_A_RT = {id:"A1", label:"Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), legs:["a1","a4"], rt:true};
+var B_NOTE = "French passport: a 2-stop routing through Europe was $1,065.";
 
 var SCENARIOS = [
   {
-    id:"namibia", short:"Намибия и водопад", title:"Кейптаун, Намибия и водопад вдвоём", travellers:["a","b"],
-    blurb:"Ты прилетаешь 15 декабря, второй 25-го в Йоханнесбург. Встречаетесь в Виндхуке 26-го, Новый год на побережье Намибии, потом водопад Виктория.",
+    id:"namibia-falls", short:"Namibia → Falls", title:"Namibia first, then Victoria Falls", travellers:["a","b"],
+    blurb:"A arrives 15 Dec, B lands in Johannesburg on the 25th. You meet in Windhoek on 26 Dec, see in the New Year on the Namibian coast, then fly to Victoria Falls. B flies home from Johannesburg on 7 Jan.",
     tickets:[
-      {id:"T1", label:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST")},
-      {id:"T2", label:"Сараево ⇄ Йоханнесбург, 25 дек → 7 янв", carrier:"Turkish Airlines", who:["b"], price:1134, checked:"18.10", url:K("SJJ-JNB/2026-12-25/2027-01-07?sort=price_a&fs=layoverair=IST")},
-      {id:"T3", label:"Кейптаун → Виндхук, 26 дек", carrier:"FlySafair", who:["a"], price:194, checked:"18.10", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0")},
-      {id:"T4", label:"Йоханнесбург → Виндхук, 26 дек", carrier:"Airlink", who:["b"], price:185, checked:"18.10", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0")},
-      {id:"T5", label:"Виндхук → водопад Виктория, 3 янв", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"оценка", url:"https://www.flyairlink.com/"},
-      {id:"T6", label:"Водопад Виктория → Йоханнесбург, 7 янв", carrier:"Fastjet", who:["b"], price:183, checked:"18.10", url:K("VFA-JNB/2027-01-07?sort=price_a&fs=stops=0")},
-      {id:"T7", label:"Водопад Виктория → Кейптаун, 8 янв", carrier:"1 пересадка", who:["a"], price:286, checked:"18.10", url:K("VFA-CPT/2027-01-08?sort=price_a")}
+      T_A_RT,
+      {id:"B1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 7 Jan", carrier:"Turkish Airlines", who:["b"], price:1134, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-07?sort=price_a"), legs:["b1","b4_7"], rt:true, note:B_NOTE},
+      {id:"N1", label:"Cape Town → Windhoek, 26 Dec", carrier:"FlySafair", who:["a"], price:194, checked:"18 Oct", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["a2"]},
+      {id:"N2", label:"Johannesburg → Windhoek, 26 Dec", carrier:"Airlink", who:["b"], price:185, checked:"18 Oct", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["b2"]},
+      {id:"N3", label:"Windhoek → Victoria Falls, 3 Jan", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["ab1"]},
+      {id:"N4", label:"Victoria Falls → Johannesburg, 7 Jan", carrier:"Fastjet", who:["b"], price:183, checked:"18 Oct", url:K("VFA-JNB/2027-01-07?sort=price_a&fs=stops=0"), legs:["b3"]},
+      {id:"N5", label:"Victoria Falls → Cape Town, 8 Jan", carrier:"1 stop", who:["a"], price:286, checked:"18 Oct", url:K("VFA-CPT/2027-01-08?sort=price_a"), legs:["a3"]}
     ],
     timeline:[
       {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Кейптаун", text:"Столовая гора и даманы с утра, Капский полуостров и пингвины Боулдерс, винодельни Стелленбоса и Франсхука, Хермануc. 25-го Рождество, многое закрыто."}},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain and the dassies early in the morning, the Cape Peninsula and Boulders penguins, Stellenbosch and Franschhoek, Hermanus. Much is closed on the 25th."}},
       {date:"2026-12-25", leg:"b1"},
-      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Ночь у аэропорта", text:"Отель прямо при аэропорту OR Tambo, утром рейс в Виндхук."}},
+      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, morning flight to Windhoek."}},
       {date:"2026-12-26", leg:"b2"},
       {date:"2026-12-26", leg:"a2"},
-      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Встреча в Виндхуке", text:"Машину берёте в аэропорту. 26-е выходной: запастись наличными, водой и продуктами, купить SIM-карту."}},
+      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Meet in Windhoek", text:"Collect the car at the airport. The 26th is a public holiday: stock up on cash, water and food, buy a SIM card."}},
       {date:"2026-12-27", leg:"d1"},
-      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Соссусфлей и Дедвлей", text:"Дюны и Дедвлей на рассвете, каньон Сесрием. Днём до +34–38°."}},
+      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes and Deadvlei at sunrise, Sesriem Canyon. Up to 34–38 °C by midday."}},
       {date:"2026-12-29", leg:"d2"},
-      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Свакопмунд, Новый год", text:"Уолфиш-Бей и фламинго, Сэндвич-Харбор только с гидом. На побережье прохладно и туманно, нужна куртка."}},
+      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Swakopmund, New Year", text:"Walvis Bay lagoon and flamingos, Sandwich Harbour with a guide. Cool and foggy on the coast, bring a jacket."}},
       {date:"2027-01-02", leg:"d3"},
-      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Ночь у аэропорта", text:"Рейс в 09:15, машину сдать утром в аэропорту."}},
+      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Near the airport", text:"Flight at 09:15, drop the car at the airport in the morning."}},
       {date:"2027-01-03", leg:"ab1"},
-      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-06", nights:4, who:["a","b"], title:"Водопад Виктория", text:"Зимбабвийская сторона и тропа Rainforest, полдня на замбийской стороне по KAZA, день в Чобе (Ботсвана), рафтинг."}},
+      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-06", nights:4, who:["a","b"], title:"Victoria Falls", text:"Rainforest trail on the Zimbabwe side, half a day on the Zambian side with KAZA, a day in Chobe (Botswana), rafting."}},
       {date:"2027-01-07", leg:"b3"},
-      {date:"2027-01-07", leg:"b4"},
-      {date:"2027-01-07", stay:{place:"VFA", nights:1, who:["a"], title:"Ещё ночь у водопада", text:"Второй улетает днём, у тебя рейс на следующее утро."}},
+      {date:"2027-01-07", leg:"b4_7"},
+      {date:"2027-01-07", stay:{place:"VFA", nights:1, who:["a"], title:"One more night at the Falls", text:"B leaves at midday, A flies the next morning."}},
       {date:"2027-01-08", leg:"a3"},
-      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Снова Кейптаун", text:"Хвост поездки: то, что не успел в декабре."}},
+      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Whatever was left over from December."}},
       {date:"2027-01-13", leg:"a4"}
     ],
-    checklist:["c_b","c_a","c_wdh","c_vfa","c_stay","c_car","c_cash","c_malaria","c_serb","c_back","c_card"]
+    checklist:["b_ticket","a_ticket","wdh_in","wdh_vfa","nam_stay","nam_car","falls","malaria","b_namvisa","back_nf","card"]
   },
   {
-    id:"mauritius", short:"ЮАР и Маврикий", title:"Кейптаун, потом Маврикий", travellers:["a"],
-    blurb:"Три недели в Кейптауне, 5 января прямой рейс на Маврикий и домой прямо с острова. Один билет Turkish на оба дальних участка.",
+    id:"falls-namibia", short:"Falls → Namibia", title:"Victoria Falls first, then Namibia", travellers:["a","b"],
+    blurb:"You meet at Victoria Falls on 26 Dec (both flights land at 13:20), fly to Windhoek on the 30th and spend New Year on the coast. B flies Windhoek → Johannesburg → home on 8 Jan, A returns to Cape Town.",
     tickets:[
-      {id:"M1", label:"Сараево → Кейптаун 15 дек + Маврикий → Сараево 13 янв", carrier:"Turkish Airlines", who:["a"], price:979, checked:"16.10", url:K("SJJ-CPT/2026-12-15/MRU-SJJ/2027-01-13?sort=price_a&fs=layoverair=IST")},
-      {id:"M2", label:"Кейптаун → Маврикий, 5 янв", carrier:"Airlink", who:["a"], price:403, checked:"16.10", url:K("CPT-MRU/2027-01-05?sort=price_a&fs=stops=0")}
-    ],
-    timeline:[
-      {date:"2026-12-15", leg:"a1", ticketOverride:"M1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-04", nights:21, who:["a"], title:"Кейптаун и окрестности", text:"Столовая гора, полуостров, винодельни, Хермануc. Можно вставить вылазку в Намибию: Кейптаун ⇄ Виндхук прямым рейсом от 319 $."}},
-      {date:"2027-01-05", leg:"m2"},
-      {date:"2027-01-05", stay:{place:"MRU", end:"2027-01-12", nights:8, who:["a"], title:"Маврикий", text:"Январь: жарко, влажно, ливни, пик сезона циклонов. Жильё только с бесплатной отменой."}},
-      {date:"2027-01-13", leg:"m3"}
-    ],
-    checklist:["m_t1","m_t2","m_stay","m_ins","c_card"]
-  },
-  {
-    id:"sa", short:"Только ЮАР", title:"Только ЮАР, месяц в Кейптауне", travellers:["a"],
-    blurb:"Самый дешёвый вариант. Туда 15 декабря, обратно в ночь на 13 января. Есть и двухнедельный: 15 → 29 декабря за 825 $.",
-    tickets:[
-      {id:"T1", label:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST")}
+      T_A_RT,
+      {id:"R1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", carrier:"Turkish Airlines", who:["b"], price:1131, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-08?sort=price_a"), legs:["b1","b4_8"], rt:true, note:B_NOTE},
+      {id:"R2", label:"Cape Town → Victoria Falls, 26 Dec", carrier:"Airlink, via Johannesburg", who:["a"], price:339, checked:"18 Oct", url:K("CPT-VFA/2026-12-26?sort=price_a"), legs:["r_a2"]},
+      {id:"R3", label:"Johannesburg → Victoria Falls, 26 Dec", carrier:"Airlink", who:["b"], price:198, checked:"18 Oct", url:K("JNB-VFA/2026-12-26?sort=price_a&fs=stops=0"), legs:["r_b2"]},
+      {id:"R4", label:"Victoria Falls → Windhoek, 30 Dec", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["r_ab1"]},
+      {id:"R5", label:"Windhoek → Johannesburg, 8 Jan, 07:10", carrier:"Airlink", who:["b"], price:195, est:true, checked:"2 Jan fare", url:K("WDH-JNB/2027-01-08?sort=price_a&fs=stops=0"), legs:["r_b3"]},
+      {id:"R6", label:"Windhoek → Cape Town, 8 Jan", carrier:"Airlink", who:["a"], price:209, checked:"18 Oct", url:K("WDH-CPT/2027-01-08?sort=price_a&fs=stops=0"), legs:["r_a3"]}
     ],
     timeline:[
       {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-11", nights:28, who:["a"], title:"Кейптаун и Западный Кейп", text:"Время на всё: полуостров, Хермануc, Садовый маршрут, винодельни. Вылазки в соседние страны выше, в сравнении вариантов."}},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain, the Peninsula, the Winelands, Hermanus. Christmas Day in town."}},
+      {date:"2026-12-25", leg:"b1"},
+      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, flight to the Falls at 11:35."}},
+      {date:"2026-12-26", leg:"r_a2"},
+      {date:"2026-12-26", leg:"r_b2"},
+      {date:"2026-12-26", stay:{place:"VFA", end:"2026-12-29", nights:4, who:["a","b"], title:"Victoria Falls", text:"Zimbabwe side and the Rainforest trail, the Zambian side with KAZA, Chobe day trip, Zambezi sunset cruise. Busy Christmas week: book now."}},
+      {date:"2026-12-30", leg:"r_ab1"},
+      {date:"2026-12-30", stay:{place:"WDH", nights:1, who:["a","b"], title:"Windhoek", text:"Collect the car at the airport, stock up for New Year."}},
+      {date:"2026-12-31", leg:"r_d1"},
+      {date:"2026-12-31", stay:{place:"SWP", end:"2027-01-02", nights:3, who:["a","b"], title:"Swakopmund, New Year", text:"New Year's Eve on the coast, Walvis Bay lagoon, Sandwich Harbour with a guide."}},
+      {date:"2027-01-03", leg:"r_d2"},
+      {date:"2027-01-03", stay:{place:"SOS", end:"2027-01-05", nights:3, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes at sunrise two mornings running, Sesriem Canyon, the night sky."}},
+      {date:"2027-01-06", leg:"r_d3"},
+      {date:"2027-01-06", stay:{place:"WDH", end:"2027-01-07", nights:2, who:["a","b"], title:"Windhoek", text:"A slack day: Daan Viljoen reserve or a cheetah farm. Return the car on the 8th."}},
+      {date:"2027-01-08", leg:"r_b3"},
+      {date:"2027-01-08", leg:"b4_8"},
+      {date:"2027-01-08", leg:"r_a3"},
+      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Re-entering South Africa less than 7 days before the flight home."}},
       {date:"2027-01-13", leg:"a4"}
     ],
-    checklist:["s_t1","s_stay","s_cable","c_card"]
+    checklist:["b_ticket8","a_ticket","vfa_in","vfa_wdh","falls_dec","nam_stay2","nam_car2","malaria","b_namvisa","back_fn","card"]
+  },
+  {
+    id:"kruger", short:"+ Kruger", title:"Namibia, Victoria Falls, then Kruger", travellers:["a","b"],
+    blurb:"The base route with a safari at the end: from the Falls you fly to Johannesburg on 6 Jan, drive to Kruger for two nights and are back at OR Tambo for B's flight on 8 Jan.",
+    tickets:[
+      T_A_RT,
+      {id:"K1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", carrier:"Turkish Airlines", who:["b"], price:1131, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-08?sort=price_a"), legs:["b1","b4_8"], rt:true, note:B_NOTE},
+      {id:"K2", label:"Cape Town → Windhoek, 26 Dec", carrier:"FlySafair", who:["a"], price:194, checked:"18 Oct", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["a2"]},
+      {id:"K3", label:"Johannesburg → Windhoek, 26 Dec", carrier:"Airlink", who:["b"], price:185, checked:"18 Oct", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["b2"]},
+      {id:"K4", label:"Windhoek → Victoria Falls, 3 Jan", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["ab1"]},
+      {id:"K5", label:"Victoria Falls → Johannesburg, 6 Jan", carrier:"Fastjet", who:["a","b"], price:182, checked:"18 Oct", url:K("VFA-JNB/2027-01-06?sort=price_a&fs=stops=0"), legs:["k_ab"]},
+      {id:"K6", label:"Johannesburg → Cape Town, 8 Jan", carrier:"FlySafair", who:["a"], price:103, checked:"18 Oct", url:K("JNB-CPT/2027-01-08?sort=price_a&fs=stops=0"), legs:["k_a5"]}
+    ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain, the Peninsula, the Winelands, Hermanus."}},
+      {date:"2026-12-25", leg:"b1"},
+      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, morning flight to Windhoek."}},
+      {date:"2026-12-26", leg:"b2"},
+      {date:"2026-12-26", leg:"a2"},
+      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Meet in Windhoek", text:"Collect the car, stock up: the 26th is a public holiday."}},
+      {date:"2026-12-27", leg:"d1"},
+      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes at sunrise, Sesriem Canyon."}},
+      {date:"2026-12-29", leg:"d2"},
+      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Swakopmund, New Year", text:"Coast, flamingos, Sandwich Harbour with a guide."}},
+      {date:"2027-01-02", leg:"d3"},
+      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Near the airport", text:"Morning flight to the Falls."}},
+      {date:"2027-01-03", leg:"ab1"},
+      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-05", nights:3, who:["a","b"], title:"Victoria Falls", text:"Both sides of the Falls and a Zambezi cruise. Chobe only if time allows."}},
+      {date:"2027-01-06", leg:"k_ab"},
+      {date:"2027-01-06", leg:"k_d1"},
+      {date:"2027-01-06", stay:{place:"KRU", end:"2027-01-07", nights:2, who:["a","b"], title:"Kruger National Park", text:"First night near Hazyview, second in a SANParks rest camp such as Skukuza or Lower Sabie. Game drives at dawn and dusk; gates close at sunset."}},
+      {date:"2027-01-08", leg:"k_d2"},
+      {date:"2027-01-08", leg:"b4_8"},
+      {date:"2027-01-08", leg:"k_a5"},
+      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Re-entered South Africa on 6 Jan; leaving on the 13th is within 7 days."}},
+      {date:"2027-01-13", leg:"a4"}
+    ],
+    checklist:["b_ticket8","a_ticket","wdh_in","wdh_vfa","nam_stay","nam_car","falls3","kruger_book","kruger_car","malaria","b_namvisa","card"]
+  },
+  {
+    id:"mauritius", short:"SA + Mauritius", title:"Cape Town, then Mauritius", travellers:["a"],
+    blurb:"Three weeks in Cape Town, a nonstop flight to Mauritius on 5 Jan and home straight from the island. One Turkish ticket covers both long-haul flights.",
+    tickets:[
+      {id:"M1", label:"Sarajevo → Cape Town 15 Dec + Mauritius → Sarajevo 13 Jan", carrier:"Turkish Airlines", who:["a"], price:979, checked:"16 Oct", url:K("SJJ-CPT/2026-12-15/MRU-SJJ/2027-01-13?sort=price_a&fs=layoverair=IST"), legs:["a1","m3"], rt:true},
+      {id:"M2", label:"Cape Town → Mauritius, 5 Jan", carrier:"Airlink", who:["a"], price:403, checked:"16 Oct", url:K("CPT-MRU/2027-01-05?sort=price_a&fs=stops=0"), legs:["m2"]}
+    ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-04", nights:21, who:["a"], title:"Cape Town and around", text:"Table Mountain, the Peninsula, the Winelands, Hermanus. Room for a Namibia side trip: Cape Town ⇄ Windhoek nonstop from $319."}},
+      {date:"2027-01-05", leg:"m2"},
+      {date:"2027-01-05", stay:{place:"MRU", end:"2027-01-12", nights:8, who:["a"], title:"Mauritius", text:"Hot, humid, heavy showers, the peak of cyclone season. Book only with free cancellation."}},
+      {date:"2027-01-13", leg:"m3"}
+    ],
+    checklist:["m_t1","m_t2","m_stay","m_ins","card"]
+  },
+  {
+    id:"sa-only", short:"SA only", title:"South Africa only, a month in Cape Town", travellers:["a"],
+    blurb:"The cheapest option: out 15 Dec, back overnight into 13 Jan. A two-week version, 15 → 29 Dec, is $825.",
+    tickets:[ T_A_RT ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-11", nights:28, who:["a"], title:"Cape Town and the Western Cape", text:"Time for everything: the Peninsula, Hermanus, the Garden Route, the Winelands. Side trips are listed in the comparison below."}},
+      {date:"2027-01-13", leg:"a4"}
+    ],
+    checklist:["s_t1","s_stay","s_cable","card"]
   }
 ];
 
 var CHECK = {
-  c_b:{t:"Купить билет второго: Сараево ⇄ Йоханнесбург, 25 дек → 7 янв", w:"1 134 $, самый дорогой и сильнее всего дорожает"},
-  c_a:{t:"Купить свой билет: Сараево ⇄ Кейптаун, 15 дек → 13 янв", w:"843 $"},
-  c_wdh:{t:"Перелёты в Виндхук на 26 декабря: тебе из Кейптауна, второму из Йоханнесбурга", w:"FlySafair 194 $ / Airlink 185 $"},
-  c_vfa:{t:"Виндхук → водопад Виктория, 3 января, FlyNamibia", w:"Маленький самолёт, брать сразу"},
-  c_stay:{t:"Жильё: Виндхук 26 дек и 2 янв, Сесрием 27–28 дек, Свакопмунд 29 дек – 1 янв", w:"На Новый год раскупают, бронировать с бесплатной отменой"},
-  c_car:{t:"Машина в Виндхуке на 26 дек – 3 янв", w:"Высокий 2WD-кроссовер, кредитная карта под залог, международные права"},
-  c_cash:{t:"Водопад: жильё на 3–7 янв, наличные доллары мелкими купюрами", w:"KAZA UniVisa 50 $ или виза Зимбабве 30 $"},
-  c_malaria:{t:"Таблетки от малярии для водопада", w:"Начинать до прилёта, по схеме препарата"},
-  c_serb:{t:"Если второй — гражданин Сербии: ETA для ЮАР и виза Намибии онлайн", w:"eta.dha.gov.za и портал визы по прилёту Намибии, около 90 $"},
-  c_back:{t:"Обратные перелёты: второму Виктория → Йоханнесбург 7 янв, тебе Виктория → Кейптаун 8 янв", w:"183 $ и 286 $"},
-  c_card:{t:"Иностранная карта для всех оплат", w:"Российские карты не работают"},
-  m_t1:{t:"Билет Turkish: Сараево → Кейптаун 15 дек + Маврикий → Сараево 13 янв", w:"979 $"},
-  m_t2:{t:"Airlink Кейптаун → Маврикий, 5 января", w:"403 $, проверить, входит ли чемодан"},
-  m_stay:{t:"Жильё на Маврикии с бесплатной отменой", w:"Январь — пик циклонов"},
-  m_ins:{t:"Страховка с покрытием отмены из-за погоды", w:""},
-  s_t1:{t:"Билет Turkish: Сараево ⇄ Кейптаун, 15 дек → 13 янв", w:"843 $"},
-  s_stay:{t:"Жильё в Кейптауне на весь срок", w:"Школьные каникулы в ЮАР, бронировать заранее"},
-  s_cable:{t:"Билет на канатку Столовой горы онлайн", w:"R475 туда-обратно, действует 7 дней"}
+  b_ticket:{t:"B: Sarajevo ⇄ Johannesburg, 25 Dec → 7 Jan", w:"$1,134, the most expensive ticket and the one most likely to rise"},
+  b_ticket8:{t:"B: Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", w:"$1,131, the most expensive ticket and the one most likely to rise"},
+  a_ticket:{t:"A: Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", w:"$843"},
+  wdh_in:{t:"Flights to Windhoek on 26 Dec: A from Cape Town, B from Johannesburg", w:"FlySafair $194 / Airlink $185"},
+  wdh_vfa:{t:"Windhoek → Victoria Falls, 3 Jan, FlyNamibia", w:"Small aircraft, book as soon as the dates are fixed"},
+  vfa_in:{t:"Flights to Victoria Falls on 26 Dec: A via Johannesburg, B nonstop", w:"Both land at 13:20"},
+  vfa_wdh:{t:"Victoria Falls → Windhoek, 30 Dec, FlyNamibia", w:"Small aircraft, book early"},
+  nam_stay:{t:"Beds: Windhoek 26 Dec and 2 Jan, Sesriem 27–28 Dec, Swakopmund 29 Dec – 1 Jan", w:"New Year sells out; book with free cancellation"},
+  nam_stay2:{t:"Beds: Windhoek 30 Dec and 6–7 Jan, Swakopmund 31 Dec – 2 Jan, Sesriem 3–5 Jan", w:"New Year sells out; book with free cancellation"},
+  nam_car:{t:"Car in Windhoek, 26 Dec – 3 Jan", w:"High-clearance 2WD, credit card for the deposit, international driving permit"},
+  nam_car2:{t:"Car in Windhoek, 30 Dec – 8 Jan", w:"High-clearance 2WD, credit card for the deposit, international driving permit"},
+  falls:{t:"Victoria Falls: room for 3–7 Jan, small US dollar notes", w:"KAZA UniVisa $50 or a Zimbabwe visa $30"},
+  falls3:{t:"Victoria Falls: room for 3–5 Jan, small US dollar notes", w:"KAZA UniVisa $50 or a Zimbabwe visa $30"},
+  falls_dec:{t:"Victoria Falls: room for 26–29 Dec, small US dollar notes", w:"Christmas week is busy; KAZA $50 or visa $30"},
+  kruger_book:{t:"Kruger: a room near Hazyview on 6 Jan and a SANParks rest camp on 7 Jan", w:"School holidays, camps fill up"},
+  kruger_car:{t:"Hire car at OR Tambo, 6–8 Jan", w:"Return at the airport before B's 18:50 flight"},
+  malaria:{t:"Malaria tablets", w:"Victoria Falls and Kruger are malaria areas; start before arrival"},
+  b_namvisa:{t:"B (French passport): Namibia visa online before travel", w:"Visa on arrival portal, about $88; South Africa and Botswana need no visa"},
+  back_nf:{t:"Flights out of the Falls: B to Johannesburg on 7 Jan, A to Cape Town on 8 Jan", w:"$183 and $286"},
+  back_fn:{t:"Flights out of Windhoek on 8 Jan: B to Johannesburg 07:10, A to Cape Town 13:40", w:"≈$195 and $209"},
+  card:{t:"A non-Russian card for every payment", w:"Russian bank cards do not work abroad"},
+  m_t1:{t:"Turkish: Sarajevo → Cape Town 15 Dec + Mauritius → Sarajevo 13 Jan", w:"$979"},
+  m_t2:{t:"Airlink Cape Town → Mauritius, 5 Jan", w:"$403; check whether a suitcase is included"},
+  m_stay:{t:"Accommodation in Mauritius with free cancellation", w:"January is peak cyclone season"},
+  m_ins:{t:"Travel insurance that covers weather cancellations", w:""},
+  s_t1:{t:"Turkish: Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", w:"$843"},
+  s_stay:{t:"Accommodation in Cape Town for the whole stay", w:"South African school holidays: book early"},
+  s_cable:{t:"Table Mountain cableway ticket online", w:"R475 return, valid 7 days"}
 };
 
 var STOPS = {
-  CPT:{name:"Кейптаун", country:"ЮАР", facts:[
-    {k:"Въезд", v:"Россиянам без визы до 90 дней. Паспорт действует ещё 30 дней после выезда, 2 чистые страницы, обратный билет. Новая ETA для россиян не обязательна."},
-    {k:"Сезон", v:"Школьные каникулы 10 декабря – 12 января: пик цен на жильё и машины. 16 декабря выходной, 25-го многое закрыто."},
-    {k:"Даманы", v:"Колония у верхней станции канатки, лучше первым вагоном утром. Ещё Stony Point в Betty's Bay (вход R45, 08:00–16:30) и тропа вдоль скал в Hermanus."},
-    {k:"Канатка", v:"Закрывается при юго-восточном ветре, в декабре–январе часто. Онлайн-билет R475 действует 7 дней: ехать в первое тихое утро.", warn:true},
-    {k:"Здоровье", v:"Малярии нет."}
-  ], links:[{t:"Посольство РФ: ЮАР", u:"https://www.kdmid.ru/docs/south-africa/information-about-the-country/"},{t:"Канатка", u:"https://www.tablemountain.net/"}]},
-  JNB:{name:"Йоханнесбург", country:"ЮАР", facts:[
-    {k:"Роль", v:"Пересадочный хаб: отсюда прямые рейсы в Виндхук, на водопад и домой через Стамбул."},
-    {k:"Стыковки", v:"На отдельных билетах проходишь паспортный контроль ЮАР и сдаёшь багаж заново. Россиянам виза не нужна, запас на пересадку от 4 часов."}
+  CPT:{name:"Cape Town", country:"South Africa", facts:[
+    {k:"Entry", v:"Russian passport: visa-free up to 90 days, passport valid 30 days past departure, 2 blank pages, onward ticket. French passport: visa-free up to 90 days."},
+    {k:"Season", v:"School holidays 10 Dec – 12 Jan: peak prices for beds and cars. 16 Dec is a public holiday, much is shut on the 25th."},
+    {k:"Dassies", v:"A colony by the upper cableway station, best on the first car up. Also Stony Point at Betty's Bay (R45, 08:00–16:30) and the Hermanus cliff path."},
+    {k:"Cableway", v:"Closes in the south-easterly wind, often in December and January. The online ticket (R475) is valid 7 days: go on the first calm morning.", warn:true},
+    {k:"Health", v:"No malaria."}
+  ], links:[{t:"Russian MFA: South Africa", u:"https://www.kdmid.ru/docs/south-africa/information-about-the-country/"},{t:"Table Mountain cableway", u:"https://www.tablemountain.net/"}]},
+  JNB:{name:"Johannesburg", country:"South Africa", facts:[
+    {k:"Role", v:"The hub: nonstop flights to Windhoek, Victoria Falls, Cape Town and Istanbul."},
+    {k:"Connections", v:"On separate tickets you clear immigration and check bags again. Leave at least 4 hours."},
+    {k:"Overnight", v:"Hotels inside the OR Tambo terminal area save a night-time transfer."}
   ], links:[]},
-  WDH:{name:"Намибия", country:"Виндхук · Соссусфлей · Свакопмунд", facts:[
-    {k:"Въезд", v:"Россиянам без визы, 90 дней в 180. Обратный билет, брони жилья, паспорт на 6 месяцев. Гражданам Сербии нужна виза по прилёту через онлайн-портал, около 90 $."},
-    {k:"Дюны", v:"С 1 мая 2026 к Дедвлей и Соссусфлей своей машиной не проехать: шаттл от парковки, N$260 со взрослого. Полный привод ради этого не нужен."},
-    {k:"Машина", v:"Высокий 2WD-кроссовер с двумя запасками. Залог кредитной картой от N$3–5 тыс., международные права обязательны."},
-    {k:"Дороги", v:"Гравий: не быстрее 60–80 км/ч и никогда в темноте, перевороты — главная причина аварий у туристов. Между Solitaire и Уолфиш-Бей 263 км без заправок.", warn:true},
-    {k:"Жильё", v:"Намибийцы встречают праздники на побережье, Свакопмунд и Сесрием раскупают. Кемпинг Sesriem Camp: N$670 с человека, тел. +264 63 293 652."},
-    {k:"Здоровье", v:"В пустыне и на побережье малярии нет."}
-  ], links:[{t:"Посольство РФ: Намибия", u:"https://www.kdmid.ru/docs/namibia/information-about-the-country/"}]},
-  VFA:{name:"Водопад Виктория", country:"Зимбабве", facts:[
-    {k:"Въезд", v:"Виза по прилёту: 30 $ однократная. Или KAZA UniVisa 50 $: 30 дней, Зимбабве и Замбия, поездки на день в Ботсвану. Наклеек KAZA иногда не хватает, держи наличные на обычную визу."},
-    {k:"Январь", v:"Вода прибывает, брызг умеренно, хватит лёгкого дождевика. Devil's Pool в это время обычно закрыт, есть Angel's Pool."},
-    {k:"Деньги", v:"Наличные доллары мелкими купюрами после 2009 года, целые и чистые. Банкоматы ненадёжны.", warn:true},
-    {k:"Здоровье", v:"Малярийная зона, профилактика обязательна. Сертификат о прививке от жёлтой лихорадки на этом маршруте не нужен."}
-  ], links:[{t:"Посольство РФ: Зимбабве", u:"https://www.kdmid.ru/docs/zimbabwe/information-about-the-country/"}]},
-  MRU:{name:"Маврикий", country:"Маврикий", facts:[
-    {k:"Въезд", v:"Россиянам без визы до 60 дней. На границе спрашивают обратный билет и бронь жилья."},
-    {k:"Сезон", v:"Циклоны с 15 ноября по 15 мая, сильнее всего в январе–марте. В январе 2024 циклон Belal закрыл аэропорт. Тарифы с возвратом и страховка с отменой из-за погоды.", warn:true},
-    {k:"Рейсы", v:"Airlink из Кейптауна прямым рейсом по вторникам и пятницам, 5 ч 10."},
-    {k:"Здоровье", v:"Малярии нет."}
+  KRU:{name:"Kruger National Park", country:"South Africa", facts:[
+    {k:"Getting there", v:"About 400 km from OR Tambo on the N4/N12, 4.5–5 hours to Hazyview and the Phabeni or Paul Kruger gates."},
+    {k:"Inside", v:"Speed limits 50 km/h on tar and 40 on gravel; gates open around dawn and close at sunset. Be in camp or out of the park by closing time.", warn:true},
+    {k:"Beds", v:"SANParks rest camps fill up in the school holidays. Book directly with SANParks; private lodges just outside the gates are the fallback."},
+    {k:"Fees", v:"Daily conservation fee per international visitor, paid at the gate or with the booking. Check the current tariff on the SANParks site."},
+    {k:"Health", v:"Malaria area, higher risk in the summer rainy season: prophylaxis, long sleeves at dusk.", warn:true}
+  ], links:[{t:"SANParks: Kruger", u:"https://www.sanparks.org/parks/kruger"}]},
+  WDH:{name:"Namibia", country:"Windhoek · Sossusvlei · Swakopmund", facts:[
+    {k:"Entry", v:"Russian passport: visa-free, 90 days in 180. French passport: visa needed since April 2025, visa on arrival applied for online, N$1,600 (about $88)."},
+    {k:"Dunes", v:"Since 1 May 2026 private cars stop at the 2×4 parking: a shuttle goes on to Deadvlei and Sossusvlei, N$260 per adult. You do not need a 4×4 for it."},
+    {k:"Car", v:"High-clearance 2WD with two spare tyres. Deposit on a credit card from N$3,000–5,000; an international driving permit is required."},
+    {k:"Roads", v:"Gravel: 60–80 km/h at most and never after dark; roll-overs are the main cause of tourist deaths. No fuel for 263 km between Solitaire and Walvis Bay.", warn:true},
+    {k:"Beds", v:"Namibians spend the holidays on the coast; Swakopmund and Sesriem sell out. Sesriem Camp: N$670 per person, tel. +264 63 293 652."},
+    {k:"Health", v:"No malaria in the desert or on the coast."}
+  ], links:[{t:"Russian MFA: Namibia", u:"https://www.kdmid.ru/docs/namibia/information-about-the-country/"}]},
+  VFA:{name:"Victoria Falls", country:"Zimbabwe", facts:[
+    {k:"Entry", v:"Both passports: visa on arrival, $30 single entry. Or KAZA UniVisa, $50: 30 days for Zimbabwe and Zambia plus day trips to Botswana. KAZA stickers sometimes run out; carry cash for a regular visa."},
+    {k:"Water", v:"Rising in late December and January, light spray, a thin rain jacket is enough. Devil's Pool is usually closed; Angel's Pool is the alternative."},
+    {k:"Money", v:"Cash US dollars in small, clean notes printed after 2009. ATMs are unreliable.", warn:true},
+    {k:"Health", v:"Malaria area, prophylaxis needed. No yellow fever certificate on these routes."}
+  ], links:[{t:"Russian MFA: Zimbabwe", u:"https://www.kdmid.ru/docs/zimbabwe/information-about-the-country/"}]},
+  MRU:{name:"Mauritius", country:"Mauritius", facts:[
+    {k:"Entry", v:"Russian passport: visa-free up to 60 days. Border staff ask for the onward ticket and accommodation."},
+    {k:"Season", v:"Cyclones from 15 November to 15 May, strongest January–March. Cyclone Belal closed the airport in January 2024. Refundable fares and weather cover.", warn:true},
+    {k:"Flights", v:"Airlink nonstop from Cape Town on Tuesdays and Fridays, 5 h 10."},
+    {k:"Health", v:"No malaria."}
   ], links:[]}
 };
 
 var COMPARE = [
-  {name:"Только ЮАР", detail:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", price:843, date:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), scn:"sa"},
-  {name:"ЮАР, две недели", detail:"15 → 29 дек, обратно 14 ч 45", price:825, date:"16.10", url:K("SJJ-CPT/2026-12-15/2026-12-29?sort=price_a&fs=layoverair=IST")},
-  {name:"ЮАР + Намибия, вылазка", detail:"Кейптаун ⇄ Виндхук 5 → 9 янв, прямой FlySafair", price:1178, date:"12.10", approx:true},
-  {name:"ЮАР + Занзибар", detail:"Домой с Занзибара 10 янв", price:1346, date:"12.10", approx:true},
-  {name:"ЮАР + водопад Виктория, вылазка", detail:"Кейптаун ⇄ Виктория 3 → 7 янв", price:1367, date:"12.10", approx:true},
-  {name:"ЮАР + Маврикий", detail:"Домой с Маврикия 13 янв", price:1382, date:"16.10", scn:"mauritius"},
-  {name:"ЮАР + Кения", detail:"Домой из Найроби 10 янв", price:1494, date:"12.10", approx:true},
-  {name:"Лондон ⇄ Кейптаун", detail:"Norse, прямой, 15 дек → 14 янв", price:1412, date:"12.10", url:K("LON-CPT/2026-12-15/2027-01-14?sort=price_a&fs=stops=0")},
-  {name:"ЮАР + Мадагаскар", detail:"Домой из Антананариву", price:2150, date:"12.10", approx:true},
-  {name:"Намибия и водопад вдвоём", detail:"Твой маршрут, перелёты на тебя", price:1573, date:"16–18.10", approx:true, scn:"namibia"}
+  {name:"South Africa only", detail:"Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", price:843, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), scn:"sa-only"},
+  {name:"South Africa, two weeks", detail:"15 → 29 Dec, return 14 h 45", price:825, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2026-12-29?sort=price_a&fs=layoverair=IST")},
+  {name:"SA + Namibia side trip", detail:"Cape Town ⇄ Windhoek 5 → 9 Jan, FlySafair nonstop", price:1178, date:"12 Oct", approx:true},
+  {name:"SA + Zanzibar", detail:"Home from Zanzibar on 10 Jan", price:1346, date:"12 Oct", approx:true},
+  {name:"SA + Victoria Falls side trip", detail:"Cape Town ⇄ Victoria Falls 3 → 7 Jan", price:1367, date:"12 Oct", approx:true},
+  {name:"SA + Mauritius", detail:"Home from Mauritius on 13 Jan", price:1382, date:"16 Oct", scn:"mauritius"},
+  {name:"London ⇄ Cape Town", detail:"Norse, nonstop, 15 Dec → 14 Jan", price:1412, date:"12 Oct", url:K("LON-CPT/2026-12-15/2027-01-14?sort=price_a&fs=stops=0")},
+  {name:"SA + Kenya", detail:"Home from Nairobi on 10 Jan", price:1494, date:"12 Oct", approx:true},
+  {name:"Namibia → Falls with B", detail:"A's flights on the base route", price:1573, date:"16–18 Oct", approx:true, scn:"namibia-falls"},
+  {name:"Namibia → Falls → Kruger with B", detail:"A's flights, car hire extra", price:1572, date:"16–18 Oct", approx:true, scn:"kruger"},
+  {name:"Falls → Namibia with B", detail:"A's flights on the reversed route", price:1641, date:"16–18 Oct", approx:true, scn:"falls-namibia"},
+  {name:"SA + Madagascar", detail:"Home from Antananarivo", price:2150, date:"12 Oct", approx:true}
 ];
 
 /* ---------- state ---------- */
-var state = {scn:"namibia", who:"all", cur:"usd", sel:null, open:{}};
+var state = {scn:SCENARIOS[0].id, who:"all", cur:"usd", sel:null, open:{}};
 function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function save(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-var savedCur = load("route-cur"); if(savedCur==="usd"||savedCur==="rub") state.cur = savedCur;
-var savedScn = load("route-scn"); if(savedScn && SCENARIOS.some(function(s){return s.id===savedScn;})) state.scn = savedScn;
-var hash = (location.hash||"").replace("#","");
-if(SCENARIOS.some(function(s){return s.id===hash;})) state.scn = hash;
-var checks = {}; try{ checks = JSON.parse(load("route-checks")||"{}")||{}; }catch(e){ checks = {}; }
+function isScn(id){ return SCENARIOS.some(function(s){return s.id===id;}); }
+var savedCur = load("route-en-cur"); if(savedCur==="usd"||savedCur==="rub") state.cur = savedCur;
+var savedScn = load("route-en-scn"); if(savedScn && isScn(savedScn)) state.scn = savedScn;
+var hash = (location.hash||"").replace("#",""); if(isScn(hash)) state.scn = hash;
+var checks = {}; try{ checks = JSON.parse(load("route-en-checks")||"{}")||{}; }catch(e){ checks = {}; }
 
 function scn(){ return SCENARIOS.filter(function(s){return s.id===state.scn;})[0]; }
 function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
-function nf(n){ return n.toLocaleString("ru-RU").replace(/[  ]/g," "); }
+function nf(n){ return n.toLocaleString("en-US"); }
 function money(usd, approx){
-  if(state.cur==="rub"){ return "≈ " + nf(Math.round(usd*RATE/1000)*1000) + " ₽"; }
-  return (approx?"≈ ":"") + nf(usd) + " $";
+  if(state.cur==="rub"){ return "≈ " + Math.round(usd*RATE/1000).toLocaleString("ru-RU").replace(/[  ]/g," ") + " 000 ₽"; }
+  return (approx?"≈ ":"") + "$" + nf(usd);
 }
-var MON = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
-var WD = ["вс","пн","вт","ср","чт","пт","сб"];
+var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var WD = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 function parse(d){ var p=d.split("-"); return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); }
 function dayLabel(d){ var x=parse(d); return {n:x.getUTCDate(), m:MON[x.getUTCMonth()], w:WD[x.getUTCDay()]}; }
 function short(d){ var x=parse(d); return x.getUTCDate()+" "+MON[x.getUTCMonth()]; }
 function whoKey(w){ return (w.indexOf("a")>-1 && w.indexOf("b")>-1) ? "ab" : w[0]; }
 function visible(w){ return state.who==="all" || w.indexOf(state.who)>-1; }
 function placeName(code){ return (PLACES[code]&&PLACES[code].name)||code; }
+function chipsFor(w){ return w.map(function(x){ return '<span class="chip '+x+'">'+x.toUpperCase()+'</span>'; }).join(""); }
+function ticketForLeg(s, legId){ return s.tickets.filter(function(t){ return t.legs && t.legs.indexOf(legId)>-1; })[0]; }
 
 /* ---------- controls ---------- */
 function seg(el, opts, cur, onPick){
@@ -513,16 +634,16 @@ function seg(el, opts, cur, onPick){
     b.addEventListener("click", function(){ onPick(b.getAttribute("data-v")); });
   });
 }
+function setScn(v){
+  state.scn=v; state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all";
+  save("route-en-scn",v); try{ history.replaceState(null,"","#"+v); }catch(e){}
+  renderAll();
+}
 function renderControls(){
-  var s = scn();
-  seg(document.getElementById("segScn"), SCENARIOS.map(function(x){return {v:x.id,t:x.short};}), state.scn, function(v){
-    state.scn=v; state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all";
-    save("route-scn",v); try{ history.replaceState(null,"","#"+v); }catch(e){}
-    renderAll();
-  });
-  var two = s.travellers.length>1;
-  seg(document.getElementById("segWho"), [{v:"all",t:"Оба"},{v:"a",t:"Ты"},{v:"b",t:"Второй",disabled:!two}], state.who, function(v){ state.who=v; renderAll(); });
-  seg(document.getElementById("segCur"), [{v:"usd",t:"$"},{v:"rub",t:"₽"}], state.cur, function(v){ state.cur=v; save("route-cur",v); renderAll(); });
+  var s = scn(), two = s.travellers.length>1;
+  seg(document.getElementById("segScn"), SCENARIOS.map(function(x){return {v:x.id,t:x.short};}), state.scn, setScn);
+  seg(document.getElementById("segWho"), [{v:"all",t:"Both"},{v:"a",t:"A"},{v:"b",t:"B",disabled:!two}], state.who, function(v){ state.who=v; renderAll(); });
+  seg(document.getElementById("segCur"), [{v:"usd",t:"$"},{v:"rub",t:"₽"}], state.cur, function(v){ state.cur=v; save("route-en-cur",v); renderAll(); });
 }
 
 /* ---------- totals ---------- */
@@ -535,87 +656,74 @@ function totals(s){
   return t;
 }
 function nightsBy(s, who){
-  var out={};
+  var out={}, order=[];
   s.timeline.forEach(function(e){
     if(!e.stay || e.stay.who.indexOf(who)<0) return;
-    var c = PLACES[e.stay.place].country; out[c]=(out[c]||0)+e.stay.nights;
+    var c = PLACES[e.stay.place].country; if(!out[c]){ out[c]=0; order.push(c); } out[c]+=e.stay.nights;
   });
-  return out;
+  return order.map(function(c){ return c+" "+out[c]; }).join(" · ");
 }
-function nightsStr(o){ return Object.keys(o).map(function(k){return k+" "+o[k];}).join(" · "); }
-
 function renderSummary(){
-  var s=scn(), t=totals(s), el=document.getElementById("summary"), two=s.travellers.length>1;
-  var na=nightsBy(s,"a"), nb=nightsBy(s,"b");
-  var html = '<div class="sum"><span class="k"><span class="dot a"></span>Ты, перелёты</span><span class="v">'+money(t.a,t.aEst)+'</span><span class="s">Ночей: '+esc(nightsStr(na))+'</span></div>';
+  var s=scn(), t=totals(s), two=s.travellers.length>1, html="";
+  html += '<div class="sum"><span class="k"><span class="dot a"></span>A, flights</span><span class="v">'+money(t.a,t.aEst)+'</span><span class="s">Nights: '+esc(nightsBy(s,"a"))+'</span></div>';
   if(two){
-    html += '<div class="sum"><span class="k"><span class="dot b"></span>Второй, перелёты</span><span class="v">'+money(t.b,t.bEst)+'</span><span class="s">Ночей: '+esc(nightsStr(nb))+'</span></div>';
-    html += '<div class="sum"><span class="k"><span class="dot ab"></span>Вдвоём</span><span class="v">'+money(t.a+t.b,true)+'</span><span class="s">Без жилья, машины и виз</span></div>';
+    html += '<div class="sum"><span class="k"><span class="dot b"></span>B, flights</span><span class="v">'+money(t.b,t.bEst)+'</span><span class="s">Nights: '+esc(nightsBy(s,"b"))+'</span></div>';
+    html += '<div class="sum"><span class="k"><span class="dot ab"></span>Together</span><span class="v">'+money(t.a+t.b,true)+'</span><span class="s">Before beds, car hire and visas</span></div>';
+    html += '<div class="sum"><span class="k">The plan</span><span class="s" style="font-size:14px;color:var(--ink)">'+esc(s.blurb)+'</span></div>';
   } else {
-    html += '<div class="sum"><span class="k">Вариант</span><span class="v" style="font-size:19px;line-height:1.25">'+esc(s.title)+'</span><span class="s">'+esc(s.blurb)+'</span></div>';
+    html += '<div class="sum"><span class="k">The plan</span><span class="v" style="font-size:19px;line-height:1.25">'+esc(s.title)+'</span><span class="s">'+esc(s.blurb)+'</span></div>';
   }
-  if(two) html += '<div class="sum"><span class="k">Суть</span><span class="s" style="font-size:14px;color:var(--ink)">'+esc(s.blurb)+'</span></div>';
-  el.innerHTML = html;
+  document.getElementById("summary").innerHTML = html;
   document.getElementById("mapTitle").textContent = s.title;
 }
 
 /* ---------- timeline ---------- */
-function ticketOf(s, id){ return s.tickets.filter(function(t){return t.id===id;})[0]; }
 function legItem(s, e){
   var L = LEGS[e.leg], wk = whoKey(L.who), dim = !visible(L.who), open = !!state.open[e.leg];
-  var t = ticketOf(s, e.ticketOverride || L.ticket);
-  var who = L.who.map(function(w){ return '<span class="chip '+w+'">'+(w==="a"?"ты":"второй")+'</span>'; }).join("");
   if(L.kind==="drive"){
-    return '<div class="item who-'+wk+(dim?' dim':'')+'" data-leg="'+e.leg+'"><div class="ihead"><div>'+
-      '<div class="kind">На машине</div>'+
+    return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div>'+
+      '<div class="kind">By car</div>'+
       '<div class="route">'+esc(placeName(L.from))+' <span aria-hidden="true">→</span> '+esc(placeName(L.to))+'</div>'+
       '<div class="meta"><span class="mono">'+esc(L.dist)+'</span><span class="mono">'+esc(L.dur)+'</span></div>'+
-      '<p class="stay-text">'+esc(L.note)+'</p></div><div class="chips">'+who+'</div></div></div>';
+      '<p class="stay-text">'+esc(L.note)+'</p></div><div class="chips">'+chipsFor(L.who)+'</div></div></div>';
   }
+  var t = ticketForLeg(s, e.leg);
   var time = L.dep ? '<span class="mono">'+esc(L.dep)+' → '+esc(L.arr)+(L.arrNext?' +1':'')+'</span>' : '';
-  var price = t ? (t.who.length>1 && L.who.length>1 ? money(t.price,t.est)+" / чел." : money(t.price,t.est)) : "";
-  var shared = t && (t.id==="T1"||t.id==="T2"||t.id==="M1") ? '<span class="sub">в билете туда-обратно</span>' : '';
   var head = '<button type="button" class="ihead" aria-expanded="'+open+'" data-toggle="'+e.leg+'"><div>'+
-    '<div class="kind">Перелёт · '+esc(L.carrier)+'</div>'+
-    '<div class="route"><span class="code">'+esc(L.from)+'</span><span aria-hidden="true">→</span><span class="code">'+esc(L.to)+'</span>'+(L.via?'<span class="via">через '+esc(L.via)+'</span>':'')+'</div>'+
+    '<div class="kind">Flight · '+esc(L.carrier)+'</div>'+
+    '<div class="route"><span class="code">'+esc(L.from)+'</span><span aria-hidden="true">→</span><span class="code">'+esc(L.to)+'</span>'+(L.via?'<span class="via">via '+esc(L.via)+'</span>':'')+'</div>'+
     '<div class="meta">'+time+'<span>'+esc(L.dur)+'</span></div></div>'+
-    '<div class="chips">'+who+(t&&t.est?'<span class="chip est">оценка</span>':'')+'</div></button>';
+    '<div class="chips">'+chipsFor(L.who)+(t&&t.est?'<span class="chip est">estimate</span>':'')+'</div></button>';
   var detail = '';
   if(open && t){
+    var per = (t.who.length>1) ? " per person" : "";
     detail = '<div class="detail">'+
-      '<div class="row"><span><span class="lbl">Билет:</span> '+esc(t.label)+'</span></div>'+
-      '<div class="row"><span><span class="lbl">Цена:</span> <b class="mono">'+price+'</b> '+shared+'</span><span><span class="lbl">Проверено:</span> '+esc(t.checked)+'</span></div>'+
-      (L.note?'<p>'+esc(L.note)+'</p>':'')+
-      '<div class="links"><a href="'+esc(t.url)+'" target="_blank" rel="noopener">Открыть билет</a></div></div>';
+      '<div class="row"><span><span class="lbl">Ticket:</span> '+esc(t.label)+'</span></div>'+
+      '<div class="row"><span><span class="lbl">Fare:</span> <b class="mono">'+money(t.price,t.est)+per+'</b>'+(t.rt?' <span class="lbl">(return ticket, both directions)</span>':'')+'</span><span><span class="lbl">Checked:</span> '+esc(t.checked)+'</span></div>'+
+      (L.note?'<p>'+esc(L.note)+'</p>':'')+(t.note?'<p>'+esc(t.note)+'</p>':'')+
+      '<div class="links"><a href="'+esc(t.url)+'" target="_blank" rel="noopener">Open fare</a></div></div>';
   }
-  return '<div class="item who-'+wk+(dim?' dim':'')+'" data-leg="'+e.leg+'">'+head+detail+'</div>';
+  return '<div class="item who-'+wk+(dim?' dim':'')+'">'+head+detail+'</div>';
 }
 function stayItem(e){
   var S = e.stay, wk=whoKey(S.who), dim=!visible(S.who);
-  var who = S.who.map(function(w){ return '<span class="chip '+w+'">'+(w==="a"?"ты":"второй")+'</span>'; }).join("");
   var range = S.end ? short(e.date)+" – "+short(S.end) : short(e.date);
   return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div>'+
-    '<div class="kind">Ночёвки · '+esc(placeName(S.place))+'</div>'+
+    '<div class="kind">Stay · '+esc(placeName(S.place))+'</div>'+
     '<div class="stay-title">'+esc(S.title)+'</div>'+
-    '<div class="meta"><span class="nights">'+range+' · '+S.nights+' '+plural(S.nights,"ночь","ночи","ночей")+'</span></div>'+
+    '<div class="meta"><span class="nights">'+range+' · '+S.nights+' night'+(S.nights===1?'':'s')+'</span></div>'+
     (S.text?'<p class="stay-text">'+esc(S.text)+'</p>':'')+
-    '</div><div class="chips">'+who+'</div></div></div>';
+    '</div><div class="chips">'+chipsFor(S.who)+'</div></div></div>';
 }
-function plural(n,a,b,c){ var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return a; if(m10>=2&&m10<=4&&(m100<12||m100>14)) return b; return c; }
-
 function renderTimeline(){
   var s=scn(), groups=[], byDate={};
-  s.timeline.forEach(function(e){
-    if(!byDate[e.date]){ byDate[e.date]=[]; groups.push(e.date); }
-    byDate[e.date].push(e);
-  });
-  var html = groups.map(function(d){
-    var L = dayLabel(d);
-    var items = byDate[d].map(function(e){ return e.leg ? legItem(s,e) : stayItem(e); }).join("");
-    return '<div class="day"><div class="date"><b>'+L.n+' '+L.m+'</b>'+L.w+'</div><div class="items">'+items+'</div></div>';
-  }).join("");
+  s.timeline.forEach(function(e){ if(!byDate[e.date]){ byDate[e.date]=[]; groups.push(e.date); } byDate[e.date].push(e); });
   var el = document.getElementById("timeline");
-  el.innerHTML = html;
+  el.innerHTML = groups.map(function(d){
+    var L = dayLabel(d);
+    return '<div class="day"><div class="date"><b>'+L.n+' '+L.m+'</b>'+L.w+'</div><div class="items">'+
+      byDate[d].map(function(e){ return e.leg ? legItem(s,e) : stayItem(e); }).join("")+'</div></div>';
+  }).join("");
   Array.prototype.forEach.call(el.querySelectorAll("[data-toggle]"), function(b){
     var id=b.getAttribute("data-toggle");
     b.addEventListener("click", function(){
@@ -630,26 +738,27 @@ function renderTimeline(){
 
 /* ---------- map ---------- */
 var LON0=8, LON1=62, LAT0=3, LAT1=-37, KX=Math.cos(17*Math.PI/180), W=1000;
-var SC = W/((LON1-LON0)*KX), H=(LAT0-LAT1)*SC;
+var SC = W/((LON1-LON0)*KX);
 function px(lon){ return (lon-LON0)*KX*SC; }
 function py(lat){ return (LAT0-lat)*SC; }
 var COAST = [[3,9.6],[1,9.4],[-1,8.9],[-3,10.4],[-4.8,11.85],[-5.9,12.3],[-8.8,13.2],[-12.4,13.5],[-15.2,12.1],[-17.3,11.8],[-20,13.1],[-22.95,14.5],[-24.6,14.8],[-26.6,15.15],[-28.6,16.45],[-31.5,18.1],[-33.9,18.4],[-34.36,18.47],[-34.4,19.3],[-34.83,20.0],[-34.2,22.1],[-34.05,24.9],[-33.96,25.6],[-33.0,27.9],[-31.6,29.5],[-29.86,31.03],[-27.3,32.6],[-25.97,32.6],[-24.7,34.9],[-23.9,35.5],[-21.9,35.4],[-19.8,34.85],[-17.9,36.9],[-16.2,39.9],[-15.0,40.7],[-13.0,40.55],[-10.5,40.4],[-8.0,39.3],[-6.8,39.3],[-5.1,39.1],[-4.05,39.67],[-2.3,40.9],[-0.4,42.5],[2.0,45.3],[3,46.5],[3,9.6]];
 var MADA = [[-11.95,49.26],[-13.4,50.0],[-15.5,50.4],[-17.0,49.8],[-18.15,49.4],[-21.3,48.3],[-23.4,47.6],[-25.03,46.99],[-25.5,45.1],[-24.6,43.9],[-23.35,43.67],[-21.5,43.4],[-20.28,44.28],[-18.2,44.0],[-16.2,44.5],[-15.72,46.3],[-14.4,47.9],[-12.9,48.9]];
-var ZANZ = [[-5.75,39.29],[-6.1,39.35],[-6.45,39.5],[-6.3,39.22],[-5.9,39.2]];
 function poly(pts){ return pts.map(function(p,i){ return (i?"L":"M")+px(p[1]).toFixed(1)+" "+py(p[0]).toFixed(1); }).join(" ")+" Z"; }
-
-function viewBox(s){
-  var pts=[];
+function scnPoints(s){
+  var pts={};
   s.timeline.forEach(function(e){
-    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts.push(PLACES[c]); }); }
-    if(e.stay){ pts.push(PLACES[e.stay.place]); }
+    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts[c]=1; }); }
+    if(e.stay) pts[e.stay.place]=1;
   });
+  return Object.keys(pts);
+}
+function viewBox(s){
+  var pts=scnPoints(s).map(function(c){return PLACES[c];});
   var xs=pts.map(function(p){return px(p.lon);}), ys=pts.map(function(p){return py(p.lat);});
-  var x0=Math.min.apply(null,xs)-90, x1=Math.max.apply(null,xs)+150, y0=Math.min.apply(null,ys)-110, y1=Math.max.apply(null,ys)+70;
+  var x0=Math.min.apply(null,xs)-110, x1=Math.max.apply(null,xs)+150, y0=Math.min.apply(null,ys)-110, y1=Math.max.apply(null,ys)+70;
   var w=x1-x0, h=y1-y0, ratio=0.86;
   if(h/w<ratio){ var nh=w*ratio; y0-=(nh-h)/2; h=nh; } else { var nw=h/ratio; x0-=(nw-w)/2; w=nw; }
-  if(x0<0){ x0=0; } if(y0<0){ y0=0; }
-  return {x:x0,y:y0,w:w,h:h};
+  return {x:Math.max(0,x0),y:Math.max(0,y0),w:w,h:h};
 }
 function curve(a,b,bend){
   var x1=px(a.lon),y1=py(a.lat),x2=px(b.lon),y2=py(b.lat);
@@ -657,69 +766,52 @@ function curve(a,b,bend){
   var k=bend*len, cx=mx-dy/len*k, cy=my+dx/len*k;
   return "M"+x1.toFixed(1)+" "+y1.toFixed(1)+" Q"+cx.toFixed(1)+" "+cy.toFixed(1)+" "+x2.toFixed(1)+" "+y2.toFixed(1);
 }
-
+var BEND = {a2:0.14, b2:-0.12, a3:0.18, b3:-0.14, r_a2:0.16, r_b2:-0.1, r_ab1:0.12, r_b3:-0.12, r_a3:0.14, k_ab:0.12, k_a5:0.16, ab1:-0.12, m2:-0.1};
 function renderMap(){
-  var s=scn(), vb=viewBox(s), svg=document.getElementById("map"), f=vb.w/1000;
+  var s=scn(), vb=viewBox(s), svg=document.getElementById("map"), f=vb.w/1000, out=[];
   svg.setAttribute("viewBox", vb.x.toFixed(1)+" "+vb.y.toFixed(1)+" "+vb.w.toFixed(1)+" "+vb.h.toFixed(1));
-  var out=[];
-  // graticule
   for(var lat=0; lat>=-35; lat-=5){
     var y=py(lat); if(y<vb.y||y>vb.y+vb.h) continue;
     out.push('<line class="grat" x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>');
-    out.push('<text class="gratlbl" x="'+(vb.x+8*f)+'" y="'+(y-5*f)+'" font-size="'+(12*f)+'">'+(lat===0?"экватор":Math.abs(lat)+"° ю.ш.")+'</text>');
+    out.push('<text class="gratlbl" x="'+(vb.x+8*f)+'" y="'+(y-5*f)+'" font-size="'+(12*f)+'">'+(lat===0?"equator":Math.abs(lat)+"°S")+'</text>');
   }
   for(var lon=10; lon<=60; lon+=5){
     var x=px(lon); if(x<vb.x||x>vb.x+vb.w) continue;
     out.push('<line class="grat" x1="'+x+'" y1="'+vb.y+'" x2="'+x+'" y2="'+(vb.y+vb.h)+'"/>');
-    out.push('<text class="gratlbl" x="'+(x+5*f)+'" y="'+(vb.y+vb.h-8*f)+'" font-size="'+(12*f)+'">'+lon+'° в.д.</text>');
+    out.push('<text class="gratlbl" x="'+(x+5*f)+'" y="'+(vb.y+vb.h-8*f)+'" font-size="'+(12*f)+'">'+lon+'°E</text>');
   }
   out.push('<path class="land" d="'+poly(COAST)+'"/>');
   out.push('<path class="land" d="'+poly(MADA)+'"/>');
-  out.push('<path class="land" d="'+poly(ZANZ)+'"/>');
-  if(px(10)>vb.x-50) out.push('<text class="sealbl" x="'+(px(9.5))+'" y="'+py(-29)+'" font-size="'+(14*f)+'">АТЛАНТИКА</text>');
-  if(px(44)<vb.x+vb.w) out.push('<text class="sealbl" x="'+(Math.max(px(36),vb.x+vb.w-240*f))+'" y="'+py(-32)+'" font-size="'+(14*f)+'">ИНДИЙСКИЙ ОКЕАН</text>');
+  out.push('<text class="sealbl" x="'+(Math.max(vb.x+10*f,px(9.5)))+'" y="'+py(-29)+'" font-size="'+(14*f)+'">ATLANTIC</text>');
+  if(px(40)<vb.x+vb.w) out.push('<text class="sealbl" x="'+(Math.min(px(36),vb.x+vb.w-210*f))+'" y="'+py(-32)+'" font-size="'+(14*f)+'">INDIAN OCEAN</text>');
 
-  // legs
-  var legsOut=[], homeOut=[], used={}, bendSign=1;
+  var legsOut=[], homeOut=[], used={}, flip=1;
   s.timeline.forEach(function(e){
     if(!e.leg) return; var L=LEGS[e.leg], wk=whoKey(L.who);
-    var cls = "leg "+L.kind+" "+wk;
     var dim = !visible(L.who) || (state.sel && state.sel!==e.leg);
-    if(state.sel===e.leg) cls+=" sel";
-    if(dim) cls+=" dim";
-    var A=PLACES[L.from], B=PLACES[L.to];
+    var extra = (state.sel===e.leg?" sel":"")+(dim?" dim":"");
     if(L.from==="SJJ"||L.to==="SJJ"){
-      var p = L.from==="SJJ" ? B : A, inbound = L.from==="SJJ";
-      var x2=px(p.lon), y2=py(p.lat), off=(inbound? -38 : 38)*f + (L.who[0]==="b"?24*f:0);
-      var x1=x2+off+ (inbound?-30*f:30*f), y1=vb.y+4*f;
-      var d = inbound ? "M"+x1+" "+y1+" Q"+(x1+(x2-x1)*0.2)+" "+((y1+y2)/2)+" "+x2+" "+y2 : "M"+x2+" "+y2+" Q"+(x1+(x2-x1)*0.2)+" "+((y1+y2)/2)+" "+x1+" "+y1;
-      homeOut.push('<path class="leg home '+wk+(dim?' dim':'')+(state.sel===e.leg?' sel':'')+'" d="'+d+'" data-mleg="'+e.leg+'"/>');
-      var key=(inbound?"in":"out")+L.who.join("");
-      if(!used[key]){ used[key]=1; homeOut.push('<text class="homelbl" x="'+(x1+(inbound?-4:4)*f)+'" y="'+(y1+16*f)+'" text-anchor="'+(inbound?"end":"start")+'" font-size="'+(12*f)+'">'+(inbound?"из Стамбула ↓":"↑ домой")+'</text>'); }
+      var inbound = L.from==="SJJ", p = PLACES[inbound?L.to:L.from];
+      var x2=px(p.lon), y2=py(p.lat), off=(inbound?-36:36)*f + (L.who[0]==="b"?26*f:0);
+      var x1=x2+off+(inbound?-30*f:30*f), y1=vb.y+4*f, cx=x1+(x2-x1)*0.2, cy=(y1+y2)/2;
+      var d = inbound ? "M"+x1+" "+y1+" Q"+cx+" "+cy+" "+x2+" "+y2 : "M"+x2+" "+y2+" Q"+cx+" "+cy+" "+x1+" "+y1;
+      homeOut.push('<path class="leg home '+wk+extra+'" d="'+d+'" data-mleg="'+e.leg+'"/>');
+      var key=(inbound?"in":"out")+L.who.join("")+(inbound?L.to:L.from);
+      if(!used[key]){ used[key]=1; homeOut.push('<text class="homelbl" x="'+(x1+(inbound?-4:4)*f)+'" y="'+(y1+16*f)+'" text-anchor="'+(inbound?"end":"start")+'" font-size="'+(12*f)+'">'+(inbound?"from Istanbul ↓":"↑ home")+'</text>'); }
       return;
     }
-    bendSign = -bendSign;
-    var bend = L.kind==="drive" ? 0.08*bendSign : 0.16*bendSign;
-    if(e.leg==="a2") bend=0.14; if(e.leg==="b2") bend=-0.12; if(e.leg==="a3") bend=0.18; if(e.leg==="b3") bend=-0.14;
-    legsOut.push('<path class="'+cls+'" d="'+curve(A,B,bend)+'" data-mleg="'+e.leg+'"/>');
+    flip=-flip;
+    var bend = BEND[e.leg]!=null ? BEND[e.leg] : (L.kind==="drive" ? 0.08*flip : 0.15*flip);
+    legsOut.push('<path class="leg '+L.kind+' '+wk+extra+'" d="'+curve(PLACES[L.from],PLACES[L.to],bend)+'" data-mleg="'+e.leg+'"/>');
   });
   out = out.concat(homeOut, legsOut);
-
-  // points
-  var pts={};
-  s.timeline.forEach(function(e){
-    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts[c]=1; }); }
-    if(e.stay) pts[e.stay.place]=1;
-  });
-  Object.keys(pts).forEach(function(c){
+  scnPoints(s).forEach(function(c){
     var P=PLACES[c], x=px(P.lon), y=py(P.lat), r=(P.minor?5:7)*f;
-    var dx=(P.dx!=null?P.dx:12)*f, dy=(P.dy!=null?P.dy:-8)*f, anc=P.anchor||"start";
-    var stopId = (c==="SOS"||c==="SWP") ? "WDH" : c;
+    var dx=(P.dx!=null?P.dx:12)*f, dy=(P.dy!=null?P.dy:-8)*f, anc=P.anchor||"start", stopId=STOP_OF[c]||c;
     out.push('<g class="pt'+(P.minor?' minor':'')+'" tabindex="0" role="button" aria-label="'+esc(P.name)+'" data-stop="'+stopId+'">'+
       '<circle cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+
       '<text x="'+(x+dx)+'" y="'+(y+dy)+'" text-anchor="'+anc+'" font-size="'+((P.minor?13:15)*f)+'">'+esc(P.name)+'</text>'+
-      (P.code?'<text class="code" x="'+(x+dx)+'" y="'+(y+dy+15*f)+'" text-anchor="'+anc+'" font-size="'+(11*f)+'">'+P.code+'</text>':'')+
-      '</g>');
+      (P.code?'<text class="code" x="'+(x+dx)+'" y="'+(y+dy+15*f)+'" text-anchor="'+anc+'" font-size="'+(11*f)+'">'+P.code+'</text>':'')+'</g>');
   });
   svg.innerHTML = out.join("");
   Array.prototype.forEach.call(svg.querySelectorAll(".pt"), function(g){
@@ -729,31 +821,30 @@ function renderMap(){
   });
 }
 function highlight(id){
-  var s=scn();
   Array.prototype.forEach.call(document.querySelectorAll("#map [data-mleg]"), function(p){
     var lid=p.getAttribute("data-mleg"), L=LEGS[lid];
-    var dim = !visible(L.who) || (id && id!==lid);
-    p.classList.toggle("dim", dim); p.classList.toggle("sel", id===lid);
+    p.classList.toggle("dim", !visible(L.who) || (!!id && id!==lid)); p.classList.toggle("sel", id===lid);
   });
 }
 
-/* ---------- tables, stops, checklist ---------- */
+/* ---------- tables, places, checklist ---------- */
 function renderCosts(){
   var s=scn(), two=s.travellers.length>1, t=totals(s);
-  var head='<thead><tr><th>Билет</th>'+(two?'<th class="num">Ты</th><th class="num">Второй</th>':'<th class="num">Цена</th>')+'<th class="num">Проверено</th><th>Купить</th></tr></thead>';
+  var head='<thead><tr><th>Ticket</th>'+(two?'<th class="num">A</th><th class="num">B</th>':'<th class="num">Fare</th>')+'<th class="num">Checked</th><th>Book</th></tr></thead>';
   var rows=s.tickets.map(function(k){
     var a=k.who.indexOf("a")>-1, b=k.who.indexOf("b")>-1;
     var cells = two ? '<td class="num">'+(a?money(k.price,k.est):'—')+'</td><td class="num">'+(b?money(k.price,k.est):'—')+'</td>' : '<td class="num">'+money(k.price,k.est)+'</td>';
-    return '<tr><td>'+esc(k.label)+'<span class="sub">'+esc(k.carrier)+(k.est?' · цена оценочная':'')+'</span></td>'+cells+'<td class="num">'+esc(k.checked)+'</td><td><a href="'+esc(k.url)+'" target="_blank" rel="noopener">'+(k.url.indexOf("kayak")>-1?"Kayak":"Сайт")+'</a></td></tr>';
+    var sub = esc(k.carrier)+(k.rt?' · return ticket':'')+(k.est?' · estimated fare':'')+(k.note?' · '+esc(k.note):'');
+    return '<tr><td>'+esc(k.label)+'<span class="sub">'+sub+'</span></td>'+cells+'<td class="num">'+esc(k.checked)+'</td><td><a href="'+esc(k.url)+'" target="_blank" rel="noopener">'+(k.url.indexOf("kayak")>-1?"Kayak":"Airline")+'</a></td></tr>';
   }).join("");
-  var tot = '<tr class="total"><td>Итого перелёты'+(two?'<span class="sub">вдвоём '+money(t.a+t.b,true)+'</span>':'')+'</td>'+(two?'<td class="num">'+money(t.a,t.aEst)+'</td><td class="num">'+money(t.b,t.bEst)+'</td>':'<td class="num">'+money(t.a,t.aEst)+'</td>')+'<td></td><td></td></tr>';
+  var tot = '<tr class="total"><td>Flights total'+(two?'<span class="sub">together '+money(t.a+t.b,true)+'</span>':'')+'</td>'+(two?'<td class="num">'+money(t.a,t.aEst)+'</td><td class="num">'+money(t.b,t.bEst)+'</td>':'<td class="num">'+money(t.a,t.aEst)+'</td>')+'<td></td><td></td></tr>';
   document.getElementById("costTable").innerHTML = head+'<tbody>'+rows+tot+'</tbody>';
 }
 function renderStops(){
   var s=scn(), order=[], seen={};
   s.timeline.forEach(function(e){
     var codes = e.leg ? [LEGS[e.leg].from, LEGS[e.leg].to] : [e.stay.place];
-    codes.forEach(function(c){ var id=(c==="SOS"||c==="SWP")?"WDH":c; if(STOPS[id] && !seen[id]){ seen[id]=1; order.push(id); } });
+    codes.forEach(function(c){ var id=STOP_OF[c]||c; if(STOPS[id] && !seen[id]){ seen[id]=1; order.push(id); } });
   });
   document.getElementById("stopCards").innerHTML = order.map(function(id){
     var S=STOPS[id];
@@ -764,29 +855,29 @@ function renderStops(){
 }
 function renderCompare(){
   var rows = COMPARE.slice().sort(function(a,b){return a.price-b.price;}).map(function(r){
-    var hl = r.scn===state.scn ? ' class="hl"' : '';
-    var link = r.url ? '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">Kayak</a>' : (r.scn ? '<button type="button" class="linkbtn" data-scn="'+r.scn+'" style="border:0;background:none;color:var(--note);text-decoration:underline;cursor:pointer;padding:0">Показать</button>' : '<span style="color:var(--faint)">—</span>');
-    return '<tr'+hl+'><td><b>'+esc(r.name)+'</b><span class="sub">'+esc(r.detail)+'</span></td><td class="num">'+money(r.price,r.approx)+'</td><td class="num">'+esc(r.date)+'</td><td>'+link+'</td></tr>';
+    var link = r.url ? '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">Kayak</a>' :
+      (r.scn ? '<button type="button" class="linkbtn" data-scn="'+r.scn+'">Show route</button>' : '<span class="muted">—</span>');
+    if(r.url && r.scn) link += ' · <button type="button" class="linkbtn" data-scn="'+r.scn+'">Show route</button>';
+    return '<tr'+(r.scn===state.scn?' class="hl"':'')+'><td><b>'+esc(r.name)+'</b><span class="sub">'+esc(r.detail)+'</span></td><td class="num">'+money(r.price,r.approx)+'</td><td class="num">'+esc(r.date)+'</td><td>'+link+'</td></tr>';
   }).join("");
   var el=document.getElementById("compareTable");
-  el.innerHTML='<thead><tr><th>Вариант</th><th class="num">Перелёты на 1</th><th class="num">Проверено</th><th>Ссылка</th></tr></thead><tbody>'+rows+'</tbody>';
+  el.innerHTML='<thead><tr><th>Option</th><th class="num">A\'s flights</th><th class="num">Checked</th><th>Link</th></tr></thead><tbody>'+rows+'</tbody>';
   Array.prototype.forEach.call(el.querySelectorAll("[data-scn]"), function(b){
-    b.addEventListener("click", function(){ state.scn=b.getAttribute("data-scn"); state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all"; save("route-scn",state.scn); try{history.replaceState(null,"","#"+state.scn);}catch(e){} renderAll(); window.scrollTo({top:0,behavior:"smooth"}); });
+    b.addEventListener("click", function(){ setScn(b.getAttribute("data-scn")); window.scrollTo({top:0,behavior:"smooth"}); });
   });
 }
 function renderChecklist(){
   var s=scn(), done=0;
-  var html=s.checklist.map(function(id){
+  var el=document.getElementById("checklist");
+  el.innerHTML=s.checklist.map(function(id){
     var c=CHECK[id], on=!!checks[id]; if(on) done++;
     return '<li class="'+(on?'done':'')+'"><label for="ck-'+id+'"><input type="checkbox" id="ck-'+id+'" data-ck="'+id+'"'+(on?' checked':'')+'><span class="t">'+esc(c.t)+'</span><span class="w">'+esc(c.w)+'</span></label></li>';
   }).join("");
-  var el=document.getElementById("checklist"); el.innerHTML=html;
-  document.getElementById("progress").textContent = done+" из "+s.checklist.length+" готово";
+  document.getElementById("progress").textContent = done+" of "+s.checklist.length+" done";
   Array.prototype.forEach.call(el.querySelectorAll("[data-ck]"), function(inp){
-    inp.addEventListener("change", function(){ checks[inp.getAttribute("data-ck")]=inp.checked; save("route-checks", JSON.stringify(checks)); renderChecklist(); var n=document.getElementById(inp.id); if(n) n.focus(); });
+    inp.addEventListener("change", function(){ checks[inp.getAttribute("data-ck")]=inp.checked; save("route-en-checks", JSON.stringify(checks)); renderChecklist(); var n=document.getElementById(inp.id); if(n) n.focus(); });
   });
 }
-
 function renderAll(){ renderControls(); renderSummary(); renderTimeline(); renderMap(); renderCosts(); renderStops(); renderCompare(); renderChecklist(); }
 renderAll();
 })();
