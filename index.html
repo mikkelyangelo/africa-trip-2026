@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cape Town to Victoria Falls 26/27</title>
-<meta name="description" content="Trip planner for 15 Dec 2026 – 13 Jan 2027: Cape Town, Namibia, Victoria Falls, Kruger and Mauritius. Day-by-day routes, fares and booking links, entry rules for Russian and French passports.">
-<meta property="og:title" content="Cape Town / Namib / Zambezi">
-<meta property="og:description" content="Routes, fares and notes for 15 Dec 2026 – 13 Jan 2027">
+<title>Cape Town to Lesotho 26/27</title>
+<meta name="description" content="Trip planner for 15 Dec 2026 – 13 Jan 2027: Cape Town, Johannesburg, Kruger, Eswatini, Lesotho. Interactive map with 40+ places to see, day-by-day routes, fares and booking links.">
+<meta property="og:title" content="Cape Town / Kruger / Lesotho">
+<meta property="og:description" content="Map of places to see, routes, fares and notes for 15 Dec 2026 – 13 Jan 2027">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap">
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-
-/* Layout: route chart (sticky) beside a day-by-day manifest; tickets, stops, comparison and checklist follow in one column */
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Layout: full-width live map with category filters, then a photo atlas of places, then the day-by-day plan and the paperwork */
 :root{
   --bg:#EEF2F1; --surface:#FFFFFF; --surface-2:#F5F8F7; --ink:#14212B; --muted:#56646F; --faint:#8A979F; --line:#D0D9DA;
-  --sea:#D6E4E8; --land:#E5E1D4; --land-edge:#BDB6A0; --grid:#BFD0D5;
   --a:#0D716C; --a-soft:#D3EAE7; --b:#A3561A; --b-soft:#F2E1CF; --both:#2C3B47; --both-soft:#DDE4E8;
-  --warn:#93381A; --warn-soft:#F5E2D8; --note:#2F5E86; --note-soft:#DCE8F2;
+  --warn:#93381A; --note:#2F5E86; --note-soft:#DCE8F2;
+  --c-wild:#9A5B13; --c-mtn:#3E6B3A; --c-coast:#1F6E8C; --c-culture:#7A3F6E; --c-wine:#8E2B3A; --c-nature:#4F6B12;
   --display:"Archivo","Arial Narrow",Arial,sans-serif;
   --body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
@@ -28,95 +28,111 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0D1418; --surface:#141D22; --surface-2:#18232A; --ink:#E4EBED; --muted:#9AA8AF; --faint:#6E7D85; --line:#26343C;
-    --sea:#0F2129; --land:#1D2A2E; --land-edge:#33454A; --grid:#1D343D;
     --a:#45B9AE; --a-soft:#163A38; --b:#E39A55; --b-soft:#3D2A18; --both:#B9C6CE; --both-soft:#25333B;
-    --warn:#F0956B; --warn-soft:#3A2018; --note:#86B5DE; --note-soft:#182B3B;
+    --warn:#F0956B; --note:#86B5DE; --note-soft:#182B3B;
+    --c-wild:#E0A35A; --c-mtn:#8DC184; --c-coast:#6CB9D6; --c-culture:#D193C4; --c-wine:#E2808F; --c-nature:#B5CF6B;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0D1418; --surface:#141D22; --surface-2:#18232A; --ink:#E4EBED; --muted:#9AA8AF; --faint:#6E7D85; --line:#26343C;
-  --sea:#0F2129; --land:#1D2A2E; --land-edge:#33454A; --grid:#1D343D;
   --a:#45B9AE; --a-soft:#163A38; --b:#E39A55; --b-soft:#3D2A18; --both:#B9C6CE; --both-soft:#25333B;
-  --warn:#F0956B; --warn-soft:#3A2018; --note:#86B5DE; --note-soft:#182B3B;
+  --warn:#F0956B; --note:#86B5DE; --note-soft:#182B3B;
+  --c-wild:#E0A35A; --c-mtn:#8DC184; --c-coast:#6CB9D6; --c-culture:#D193C4; --c-wine:#E2808F; --c-nature:#B5CF6B;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
 a{color:var(--note)}
-a:hover{text-decoration-thickness:2px}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--note);outline-offset:2px;border-radius:6px}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
 
-/* Header */
 .top{display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 h1{font-size:clamp(30px,5vw,54px);font-weight:800;font-stretch:118%;line-height:1;letter-spacing:-.01em;margin-top:8px}
 h1 .sep{color:var(--faint);font-weight:500}
-.lede{max-width:62ch;color:var(--muted);margin:12px 0 0}
+.lede{max-width:64ch;color:var(--muted);margin:12px 0 0}
 .stamp{display:grid;gap:4px;justify-items:end;text-align:right;font-size:13px;color:var(--muted)}
 .stamp b{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.jump{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:14px;font-size:14px}
 
-/* Controls */
-.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-block:18px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
-.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ctl-label{font-size:12px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+section.block{margin-top:44px}
+.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.bhead h2{font-size:clamp(22px,3vw,30px);font-weight:800;font-stretch:112%}
+.bhead p{margin:0;color:var(--muted);font-size:14px;max-width:64ch}
+
+/* chips / segmented */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.fchip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px 6px 10px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.fchip[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.fchip .sw{width:10px;height:10px;border-radius:50%}
+.fchip .n{font-family:var(--mono);font-size:12px;color:var(--faint)}
 .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
 .seg button{border:0;background:transparent;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .seg button:hover:not([aria-pressed="true"]){color:var(--ink);background:var(--surface-2)}
 .seg button:disabled{opacity:.4;cursor:not-allowed}
+.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctl-label{font-size:12px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-block:4px 16px}
 
-/* Summary */
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:26px}
+/* map */
+.mapshell{display:grid;grid-template-columns:minmax(0,1fr) 340px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+#map{height:600px;min-width:0;background:var(--surface-2)}
+.panel{border-left:1px solid var(--line);display:flex;flex-direction:column;min-width:0;max-height:600px}
+.panel-empty{padding:20px;color:var(--muted);font-size:14px;display:grid;gap:10px}
+.panel-empty b{color:var(--ink);font-family:var(--display);font-size:18px}
+.pcard{display:flex;flex-direction:column;overflow:auto}
+.pcard img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
+.pbody{padding:14px 16px 16px;display:grid;gap:8px}
+.pbody h3{font-size:22px;font-weight:800;font-stretch:110%}
+.pmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.cat{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink)}
+.cat .sw{width:8px;height:8px;border-radius:50%}
+.pbody p{margin:0;font-size:15px}
+.tip{font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
+.credit{font-size:11px;color:var(--faint)}
+.credit a{color:var(--faint)}
+.leaflet-container{font-family:var(--body)}
+.leaflet-tooltip.stoplbl{background:var(--surface);color:var(--ink);border:1px solid var(--line);font-weight:700;font-size:12px;box-shadow:none;padding:2px 6px}
+.leaflet-tooltip.stoplbl:before{display:none}
+.maplegend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.maplegend span{display:inline-flex;align-items:center;gap:6px}
+.maplegend i{display:inline-block;width:22px;height:0;border-top:3px solid var(--both)}
+.maplegend i.drive{border-top-style:dashed}
+
+/* atlas */
+.atlas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px}
+.poi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;min-width:0;scroll-margin-top:20px}
+.poi.flash{outline:2px solid var(--note);outline-offset:2px}
+.poi img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--surface-2)}
+.poi .pb{padding:12px 14px 14px;display:grid;gap:6px;flex:1;align-content:start}
+.poi h3{font-size:18px;font-weight:800;font-stretch:108%}
+.poi .reg{font-size:12px;font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.poi p{margin:0;font-size:14px}
+.poi .acts{display:flex;gap:12px;align-items:center;margin-top:4px;font-size:13px}
+.linkbtn{border:0;background:none;color:var(--note);text-decoration:underline;cursor:pointer;padding:0;font:inherit}
+.onroute{font-size:11px;font-weight:700;color:var(--a);background:var(--a-soft);padding:1px 7px;border-radius:999px}
+
+/* plan */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
 .sum{background:var(--surface);padding:14px 16px;display:grid;gap:2px;min-width:0}
 .sum .k{font-size:12px;font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
 .sum .v{font-family:var(--display);font-size:26px;font-weight:700;font-stretch:105%;font-variant-numeric:tabular-nums}
 .sum .s{font-size:13px;color:var(--muted)}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
 .dot.a{background:var(--a)} .dot.b{background:var(--b)} .dot.ab{background:var(--both)}
-
-/* Main grid */
-.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
-.mapcard{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.maphead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.maphead h2{font-size:15px;font-weight:700;font-stretch:110%}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-.legend span{display:inline-flex;align-items:center;gap:6px}
-.legend i{display:inline-block;width:22px;height:0;border-top:2.5px solid var(--both)}
-.legend i.drive{border-top-style:dashed}
-.legend i.home{border-top:1.5px dotted var(--faint)}
-svg.map{display:block;width:100%;height:auto;background:var(--sea)}
-.map .land{fill:var(--land);stroke:var(--land-edge);stroke-width:1.2;vector-effect:non-scaling-stroke}
-.map .grat{stroke:var(--grid);stroke-width:1;vector-effect:non-scaling-stroke;fill:none}
-.map .gratlbl{fill:var(--faint);font-family:var(--mono)}
-.map .sealbl{fill:var(--faint);font-family:var(--body);font-style:italic;letter-spacing:.12em}
-.map .leg{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:opacity .2s,stroke-width .2s}
-.map .leg.a{stroke:var(--a)} .map .leg.b{stroke:var(--b)} .map .leg.ab{stroke:var(--both)}
-.map .leg.flight{stroke-width:2.6}
-.map .leg.drive{stroke-width:2.6;stroke-dasharray:7 6}
-.map .leg.home{stroke-width:1.6;stroke-dasharray:2 5;opacity:.9}
-.map .leg.dim{opacity:.13}
-.map .leg.sel{stroke-width:5}
-.map .pt{cursor:pointer}
-.map .pt circle{fill:var(--surface);stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
-.map .pt.minor circle{stroke-width:1.5}
-.map .pt text{fill:var(--ink);font-family:var(--body);font-weight:700;paint-order:stroke;stroke:var(--sea);stroke-width:4px;stroke-linejoin:round}
-.map .pt .code{font-family:var(--mono);font-weight:600;fill:var(--muted)}
-.map .pt:hover circle,.map .pt:focus-visible circle{fill:var(--ink)}
-.map .pt:focus{outline:none}
-.map .homelbl{fill:var(--muted);font-family:var(--mono);paint-order:stroke;stroke:var(--sea);stroke-width:4px}
-.mapnote{padding:10px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
-
-/* Timeline */
-.timeline{display:grid;gap:0}
+.timeline{display:grid}
 .day{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;padding-block:14px;border-top:1px solid var(--line)}
 .day:first-child{border-top:0;padding-top:0}
 .date{font-family:var(--mono);font-size:13px;line-height:1.3;color:var(--muted);padding-top:3px}
-.date b{display:block;font-size:20px;color:var(--ink);font-family:var(--display);font-weight:700;font-stretch:100%}
+.date b{display:block;font-size:20px;color:var(--ink);font-family:var(--display);font-weight:700}
 .items{display:grid;gap:8px;min-width:0}
 .item{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);min-width:0;transition:opacity .2s}
 .item.dim{opacity:.35}
@@ -134,20 +150,13 @@ button.ihead:hover{background:var(--surface-2)}
 .chip{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
 .chip.a{background:var(--a-soft);color:var(--a)} .chip.b{background:var(--b-soft);color:var(--b)}
 .chip.est{background:var(--note-soft);color:var(--note)}
-.price{font-family:var(--mono);font-weight:600;font-size:14px;text-align:right;white-space:nowrap}
-.detail{padding:0 16px 14px;display:grid;gap:8px;font-size:14px;border-top:1px dashed var(--line);margin-top:2px;padding-top:12px}
+.detail{padding:12px 16px 14px;display:grid;gap:8px;font-size:14px;border-top:1px dashed var(--line)}
 .detail p{margin:0}
 .detail .row{display:flex;gap:6px 18px;flex-wrap:wrap}
 .detail .lbl{color:var(--muted)}
 .stay-title{font-weight:700;font-size:16px}
-.stay-text{margin:2px 0 0;font-size:14px;color:var(--muted);grid-column:1/-1}
+.stay-text{margin:2px 0 0;font-size:14px;color:var(--muted)}
 .nights{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
-
-/* Sections */
-section.block{margin-top:52px}
-.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.bhead h2{font-size:clamp(22px,3vw,30px);font-weight:800;font-stretch:112%}
-.bhead p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
 th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -156,12 +165,9 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
 tr:last-child td{border-bottom:0}
 tr.total td{font-weight:700;background:var(--surface-2);border-top:2px solid var(--ink)}
 td .sub{display:block;font-size:13px;color:var(--muted)}
-td.empty{color:var(--faint);text-align:right}
 tr.hl td{background:var(--a-soft)}
-
 .stops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px}
-.stop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:12px;align-content:start;min-width:0;scroll-margin-top:90px}
-.stop.flash{outline:2px solid var(--note);outline-offset:2px}
+.stop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
 .stop header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 .stop h3{font-size:22px;font-weight:800;font-stretch:112%}
 .stop .ctry{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -171,50 +177,46 @@ tr.hl td{background:var(--a-soft)}
 .fact dd{margin:0}
 .fact.warn dd{color:var(--warn)}
 .links{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:13px}
-
-.check{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.check{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
 .check li{border-bottom:1px solid var(--line)}
 .check li:last-child{border-bottom:0}
 .check label{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 16px;cursor:pointer}
 .check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--a)}
-.check .t{font-size:15px}
 .check .w{font-size:13px;color:var(--muted)}
 .check li.done .t{text-decoration:line-through;color:var(--muted)}
 .progress{font-family:var(--mono);font-size:13px;color:var(--muted)}
-
 .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;font-size:14px;color:var(--muted)}
 .notes p{margin:0}
 .notes b{color:var(--ink)}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.plan-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
 
 @media (max-width:960px){
-  .main{grid-template-columns:minmax(0,1fr)}
-  .mapcard{position:static}
+  .mapshell{grid-template-columns:minmax(0,1fr)}
+  .panel{border-left:0;border-top:1px solid var(--line);max-height:none}
+  #map{height:460px}
 }
 @media (max-width:640px){
   .top{grid-template-columns:minmax(0,1fr)}
   .stamp{justify-items:start;text-align:left}
-  .controls{position:static}
   .day{grid-template-columns:minmax(0,1fr);gap:8px}
   .date b{display:inline;margin-right:6px}
   .fact{grid-template-columns:minmax(0,1fr);gap:2px}
   .ihead{grid-template-columns:minmax(0,1fr)}
   .chips{justify-content:start}
-  .price{text-align:left}
+  #map{height:400px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-
-.linkbtn{border:0;background:none;color:var(--note);text-decoration:underline;cursor:pointer;padding:0;font:inherit}
-.muted{color:var(--faint)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="eyebrow">South Africa · Namibia · Zimbabwe · Mauritius</div>
-      <h1>Cape Town <span class="sep">/</span> Namib <span class="sep">/</span> Zambezi</h1>
-      <p class="lede">Route options for 15 December 2026 – 13 January 2027. Traveller A flies from Sarajevo via Istanbul and avoids Schengen transits; traveller B joins on 25 December and flies home from Johannesburg. Pick a route, filter by traveller, tap a flight for the fare and booking link.</p>
+      <div class="eyebrow">South Africa · Eswatini · Lesotho</div>
+      <h1>Cape Town <span class="sep">/</span> Kruger <span class="sep">/</span> Lesotho</h1>
+      <p class="lede">Places worth seeing on one map, plus the day-by-day plan for 15 December 2026 – 13 January 2027. Traveller A flies from Sarajevo via Istanbul; traveller B joins in Johannesburg on 25 December and flies home from there on 8 January.</p>
+      <nav class="jump" aria-label="Sections"><a href="#places">Map</a><a href="#atlas">Photo atlas</a><a href="#plan">Day by day</a><a href="#tickets">Fares</a><a href="#notes">Entry and money</a><a href="#todo">To do</a></nav>
     </div>
     <div class="stamp">
       <span>Kayak fares, 1 adult, economy</span>
@@ -223,663 +225,474 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     </div>
   </header>
 
-  <div class="controls" role="toolbar" aria-label="Route settings">
-    <div class="ctl">
-      <span class="ctl-label" id="lblScn">Route</span>
-      <div class="seg" id="segScn" aria-labelledby="lblScn"></div>
+  <section class="block" id="places">
+    <div class="bhead">
+      <h2>Places to see</h2>
+      <p>Tap a dot for the photo and notes. Filter by type; the coloured line is the selected route.</p>
     </div>
-    <div class="ctl">
-      <span class="ctl-label" id="lblWho">Show</span>
-      <div class="seg" id="segWho" aria-labelledby="lblWho"></div>
+    <div class="filters" id="catFilters" role="group" aria-label="Filter places by type"></div>
+    <div class="mapshell">
+      <div id="map" role="region" aria-label="Interactive map of places to see"></div>
+      <aside class="panel" id="panel" aria-live="polite">
+        <div class="panel-empty"><b>Pick a place</b><span>Tap any dot on the map or a card in the photo atlas below. Larger dark dots are overnight stops on the selected route.</span></div>
+      </aside>
     </div>
-    <div class="ctl">
-      <span class="ctl-label" id="lblCur">Currency</span>
-      <div class="seg" id="segCur" aria-labelledby="lblCur"></div>
+    <div class="maplegend">
+      <span><span class="dot a"></span>A</span><span><span class="dot b"></span>B</span><span><span class="dot ab"></span>together</span>
+      <span><i></i>flight</span><span><i class="drive"></i>by car</span>
+      <span class="mono" style="color:var(--faint)">Map © OpenStreetMap contributors © CARTO</span>
     </div>
-  </div>
+  </section>
 
-  <div class="summary" id="summary"></div>
+  <section class="block" id="atlas">
+    <div class="bhead">
+      <h2>Photo atlas</h2>
+      <p id="atlasCount"></p>
+    </div>
+    <div class="atlas" id="atlasGrid"></div>
+  </section>
 
-  <div class="main">
-    <div class="mapcard">
-      <div class="maphead">
-        <h2 id="mapTitle">Route map</h2>
-        <div class="legend">
-          <span><span class="dot a"></span>A</span>
-          <span><span class="dot b"></span>B</span>
-          <span><span class="dot ab"></span>together</span>
-          <span><i></i>flight</span>
-          <span><i class="drive"></i>by car</span>
-          <span><i class="home"></i>long-haul</span>
-        </div>
-      </div>
-      <svg class="map" id="map" role="img" aria-label="Route map of southern Africa"></svg>
-      <div class="mapnote">Schematic map with a simplified coastline. Tap a place to jump to its notes.</div>
+  <section class="block" id="plan">
+    <div class="bhead">
+      <h2>Day by day</h2>
+      <p>Pick a route. Tap a flight for the fare and booking link.</p>
     </div>
-    <div>
-      <div class="timeline" id="timeline"></div>
+    <div class="controls" role="toolbar" aria-label="Route settings">
+      <div class="ctl"><span class="ctl-label" id="lblScn">Route</span><div class="seg" id="segScn" aria-labelledby="lblScn"></div></div>
+      <div class="ctl"><span class="ctl-label" id="lblWho">Show</span><div class="seg" id="segWho" aria-labelledby="lblWho"></div></div>
+      <div class="ctl"><span class="ctl-label" id="lblCur">Currency</span><div class="seg" id="segCur" aria-labelledby="lblCur"></div></div>
     </div>
-  </div>
+    <div class="summary" id="summary"></div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <section class="block" id="stays">
+    <div class="bhead"><h2>Where to stay</h2><p>Cheapest well-reviewed options for 2 adults found on 18 Oct, Booking 8+ or Airbnb 4.7+. Eswatini and Lesotho were searched for 27–30 Dec and 30 Dec – 3 Jan; on the loop above they fall 1–3 and 5–6 Jan, so re-check the dates.</p></div>
+    <div class="stops" id="stayCards"></div>
+  </section>
 
   <section class="block" id="tickets">
-    <div class="bhead">
-      <h2>Tickets and fares</h2>
-      <p>Flights only, per adult, economy, at the time of the check. Fares change daily.</p>
-    </div>
+    <div class="bhead"><h2>Tickets and fares</h2><p>Flights only, per adult, economy, at the time of the check. Fares change daily.</p></div>
     <div class="tablewrap"><table id="costTable"></table></div>
   </section>
 
-  <section class="block" id="stops">
-    <div class="bhead">
-      <h2>Places</h2>
-      <p>Entry rules for both passports, season, money and the things people tend to miss.</p>
-    </div>
+  <section class="block" id="notes">
+    <div class="bhead"><h2>Entry, roads and money</h2><p>For a Russian passport (A) and a French passport (B).</p></div>
     <div class="stops" id="stopCards"></div>
   </section>
 
   <section class="block" id="compare">
-    <div class="bhead">
-      <h2>All options side by side</h2>
-      <p>Flights for traveller A from Sarajevo, sorted by price. Rows marked ≈ are sums of several tickets.</p>
-    </div>
+    <div class="bhead"><h2>Other options for A</h2><p>Flights from Sarajevo, sorted by price. Rows marked ≈ are sums of several tickets.</p></div>
     <div class="tablewrap"><table id="compareTable"></table></div>
   </section>
 
   <section class="block" id="todo">
-    <div class="bhead">
-      <h2>To do</h2>
-      <span class="progress" id="progress"></span>
-    </div>
+    <div class="bhead"><h2>To do</h2><span class="progress" id="progress"></span></div>
     <ul class="check" id="checklist"></ul>
   </section>
 
-  <section class="block">
-    <div class="bhead"><h2>How to read the fares</h2></div>
-    <div class="notes">
-      <p><b>Source.</b> Kayak. For traveller A only hubs that need no visa for a Russian passport: Istanbul, Doha, Dubai, Abu Dhabi, Addis Ababa, Johannesburg. Traveller B has a French passport, so any hub works for B.</p>
-      <p><b>Estimates.</b> Kayak does not sell the FlyNamibia flights between Windhoek and Victoria Falls. They cost $160–230 in October–November; $250 is used for the holidays.</p>
-      <p><b>Paying.</b> Russian bank cards do not work abroad. Car hire in Namibia and South Africa needs a credit card in the driver's name for the deposit.</p>
-      <p><b>Health.</b> South Africa, Namibia and Zimbabwe are not yellow fever risk countries, so no certificate is needed on these routes. Victoria Falls and Kruger are malaria areas: start prophylaxis before arrival.</p>
-    </div>
-  </section>
-
   <footer>
-    <span>Compiled 18 October 2026. Re-check fares and schedules before buying.</span>
-    <span class="mono">SJJ · IST · CPT · JNB · WDH · VFA · MRU</span>
+    <span>Compiled 18 October 2026. Photos from Wikimedia Commons, credited on each card. Re-check fares and rules before buying.</span>
+    <span class="mono">SJJ · IST · CPT · JNB · MRU</span>
   </footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 (function(){
 "use strict";
 var RATE = 84.8;
+var POIS = [{"id": "table", "name": "Table Mountain", "region": "Cape Town", "cat": "mtn", "blurb": "Flat-topped mountain above the city. Cableway up in five minutes or a 2–3 hour hike via Platteklip Gorge. Dassies live by the upper station.", "tip": "The cableway closes in a strong south-easter; go on the first calm morning.", "lat": -33.9622, "lon": 18.4099, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Table_Mountain_DanieVDM.jpg/960px-Table_Mountain_DanieVDM.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Table_Mountain", "artist": "Danie van der Merwe from Cape Town, South Africa", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg", "order": 0}, {"id": "lionshead", "name": "Lion's Head", "region": "Cape Town", "cat": "mtn", "blurb": "Short, steep hike with chains near the top and a 360° view over the Atlantic seaboard and the city.", "tip": "Popular at sunset; do not hike alone after dark.", "lat": -33.9347, "lon": 18.3892, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Fynbos%2C_Lion%27s_Head_and_trees_from_Table_Mountain_trail.jpg/960px-Fynbos%2C_Lion%27s_Head_and_trees_from_Table_Mountain_trail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Lion%27s_Head_(Cape_Town)", "artist": "Daniel Case", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Fynbos,_Lion%27s_Head_and_trees_from_Table_Mountain_trail.jpg", "order": 1}, {"id": "signal", "name": "Signal Hill", "region": "Cape Town", "cat": "mtn", "blurb": "Drive-up viewpoint over Sea Point, the stadium and Table Bay. The easy sunset spot.", "tip": "", "lat": -33.9178, "lon": 18.4028, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Lions_Head_%26_Signal_Hill_wza.jpg/960px-Lions_Head_%26_Signal_Hill_wza.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Signal_Hill_(Cape_Town)", "artist": "Winstonza", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Lions_Head_%26_Signal_Hill_wza.jpg", "order": 2}, {"id": "kirstenbosch", "name": "Kirstenbosch", "region": "Cape Town", "cat": "nature", "blurb": "Botanical garden on the eastern slopes of Table Mountain, with the 'Boomslang' canopy walkway and summer sunset concerts.", "tip": "", "lat": -33.9875, "lon": 18.4325, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg/960px-Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Kirstenbosch_National_Botanical_Garden", "artist": "Discott", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Kirstenbosch_National_Botanical_Garden_2024_7th_batch_09.jpg", "order": 3}, {"id": "waterfront", "name": "V&A Waterfront", "region": "Cape Town", "cat": "culture", "blurb": "Working harbour with restaurants, the Zeitz MOCAA museum and the ferry to Robben Island.", "tip": "", "lat": -33.9031, "lon": 18.4228, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Signal_Hill_and_Ferris_wheel_from_Victoria_Wharf_balcony%2C_Cape_Town.jpg/960px-Signal_Hill_and_Ferris_wheel_from_Victoria_Wharf_balcony%2C_Cape_Town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/V%26A_Waterfront", "artist": "Daniel Case", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Signal_Hill_and_Ferris_wheel_from_Victoria_Wharf_balcony,_Cape_Town.jpg", "order": 4}, {"id": "bokaap", "name": "Bo-Kaap", "region": "Cape Town", "cat": "culture", "blurb": "Colourful Cape Malay quarter on the slopes of Signal Hill, with a small museum and Cape Malay cooking.", "tip": "", "lat": -33.9208, "lon": 18.4153, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Boe-Kaap.jpg/960px-Boe-Kaap.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Bo-Kaap", "artist": "SkyPixels", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Boe-Kaap.jpg", "order": 5}, {"id": "robben", "name": "Robben Island", "region": "Cape Town", "cat": "culture", "blurb": "Former prison island where Nelson Mandela spent 18 of his 27 years in jail. Tours are led by former political prisoners.", "tip": "Ferries sell out in the holidays and are cancelled in rough seas.", "lat": -33.805, "lon": 18.37, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Robben_Island_-_Cape_Town%2C_South_Africa_%283883849594%29.jpg/960px-Robben_Island_-_Cape_Town%2C_South_Africa_%283883849594%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Robben_Island", "artist": "South African Tourism from South Africa", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Robben_Island_-_Cape_Town,_South_Africa_(3883849594).jpg", "order": 6}, {"id": "clifton", "name": "Clifton beaches", "region": "Cape Town", "cat": "coast", "blurb": "Four wind-sheltered beaches below Lion's Head, reached by steps. Cold Atlantic water.", "tip": "", "lat": -33.9399, "lon": 18.3759, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Clifton_Beachs.jpg/960px-Clifton_Beachs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Clifton,_Cape_Town", "artist": "SkyPixels", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Clifton_Beachs.jpg", "order": 7}, {"id": "muizenberg", "name": "Muizenberg", "region": "Cape Town", "cat": "coast", "blurb": "False Bay beach with warmer water, surf schools and the striped beach huts.", "tip": "", "lat": -34.1056, "lon": 18.4681, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Muizenberg_Railway_Station.jpg/960px-Muizenberg_Railway_Station.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Muizenberg", "artist": "Hilton Teper", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Muizenberg_Railway_Station.jpg", "order": 8}, {"id": "boulders", "name": "Boulders Beach", "region": "Cape Peninsula", "cat": "wild", "blurb": "African penguin colony viewed from boardwalks, plus a sheltered cove you can swim in, near Simon's Town.", "tip": "", "lat": -34.197, "lon": 18.451, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Boulders_Beach_Suedafrika.jpg/960px-Boulders_Beach_Suedafrika.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Boulders_Beach", "artist": "Olga Ernst", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Boulders_Beach_Suedafrika.jpg", "order": 9}, {"id": "chapmans", "name": "Chapman's Peak Drive", "region": "Cape Peninsula", "cat": "coast", "blurb": "Toll road cut into the cliffs between Hout Bay and Noordhoek, one of the great coastal drives.", "tip": "Closes in rockfall weather; check before setting off.", "lat": -34.0872, "lon": 18.3606, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Chapmans_Peak_Drive_2.jpg/960px-Chapmans_Peak_Drive_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Chapman%27s_Peak", "artist": "kallerna", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Chapmans_Peak_Drive_2.jpg", "order": 10}, {"id": "capepoint", "name": "Cape Point and Cape of Good Hope", "region": "Cape Peninsula", "cat": "coast", "blurb": "The tip of the Peninsula in Table Mountain National Park: lighthouse, sheer cliffs, ostriches and baboons.", "tip": "Keep food out of sight: baboons open car doors.", "lat": -34.3581, "lon": 18.4756, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Playa_Dias%2C_Cape_Point%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_103.jpg/960px-Playa_Dias%2C_Cape_Point%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_103.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Cape_of_Good_Hope", "artist": "Diego Delso", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Playa_Dias,_Cape_Point,_Sud%C3%A1frica,_2018-07-23,_DD_103.jpg", "order": 11}, {"id": "stellenbosch", "name": "Stellenbosch", "region": "Winelands", "cat": "wine", "blurb": "University town with oak-lined streets and dozens of wine estates, about 50 minutes from Cape Town.", "tip": "", "lat": -33.9367, "lon": 18.8614, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Stellenbosch_aerial_photo_from_north-west_2024-01.jpg/960px-Stellenbosch_aerial_photo_from_north-west_2024-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Stellenbosch", "artist": "CJJ2501", "license": "CC0", "desc_url": "https://commons.wikimedia.org/wiki/File:Stellenbosch_aerial_photo_from_north-west_2024-01.jpg", "order": 12}, {"id": "franschhoek", "name": "Franschhoek", "region": "Winelands", "cat": "wine", "blurb": "Valley settled by Huguenots; the hop-on Wine Tram links the estates.", "tip": "Book the Wine Tram ahead in December.", "lat": -33.9167, "lon": 19.1333, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Franschhoek_%28S%C3%BCdafrika%29.jpg/960px-Franschhoek_%28S%C3%BCdafrika%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Franschhoek", "artist": "Olga Ernst", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Franschhoek_(S%C3%BCdafrika).jpg", "order": 13}, {"id": "bettys", "name": "Stony Point, Betty's Bay", "region": "Overberg", "cat": "wild", "blurb": "Penguin colony with far fewer people than Boulders; dassies sun themselves on the rocks by the boardwalk.", "tip": "Combine with Clarence Drive and Hermanus in one day.", "lat": -34.363, "lon": 18.885, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Betty%27s_Bay.jpg/960px-Betty%27s_Bay.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Betty%27s_Bay", "artist": "Nick Coombe from Toronto, Canada", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Betty%27s_Bay.jpg", "order": 14}, {"id": "hermanus", "name": "Hermanus", "region": "Overberg", "cat": "coast", "blurb": "Cliff path along Walker Bay. Land-based whale watching from June to November; by mid-December most whales have left.", "tip": "", "lat": -34.4167, "lon": 19.25, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Hermanus_Old_Harbour.jpg/960px-Hermanus_Old_Harbour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Hermanus", "artist": "Olga Ernst", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Hermanus_Old_Harbour.jpg", "order": 15}, {"id": "agulhas", "name": "Cape Agulhas", "region": "Overberg", "cat": "coast", "blurb": "The southernmost point of Africa and the official meeting point of the Atlantic and Indian oceans.", "tip": "", "lat": -34.8332, "lon": 20, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Map_of_South_Africa.svg/960px-Map_of_South_Africa.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Cape_Agulhas", "artist": "Amada44", "license": "Public domain", "desc_url": "https://commons.wikimedia.org/wiki/File:Map_of_South_Africa.svg", "order": 16}, {"id": "cederberg", "name": "Cederberg", "region": "West Coast", "cat": "mtn", "blurb": "Sandstone arches, rock art and rooibos farms about three hours north of Cape Town.", "tip": "Very hot in December and January; hike early.", "lat": -32.3333, "lon": 19.0833, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/SneeubergAndMalteseCross.jpg/960px-SneeubergAndMalteseCross.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Cederberg", "artist": "Zaian", "license": "Public domain", "desc_url": "https://commons.wikimedia.org/wiki/File:SneeubergAndMalteseCross.jpg", "order": 17}, {"id": "cango", "name": "Cango Caves", "region": "Little Karoo", "cat": "nature", "blurb": "Limestone show caves near Oudtshoorn, with a gentle heritage tour or an adventure tour through tight squeezes.", "tip": "", "lat": -33.3928, "lon": 22.2147, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Cango_Caves-001.JPG/960px-Cango_Caves-001.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Cango_Caves", "artist": "Rute Martins of Leoa's Photography (www.leoa.co.za)", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Cango_Caves-001.JPG", "order": 18}, {"id": "oudtshoorn", "name": "Oudtshoorn", "region": "Little Karoo", "cat": "culture", "blurb": "Ostrich capital of the Little Karoo and the gateway to the Swartberg Pass.", "tip": "", "lat": -33.5833, "lon": 22.2, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/View_of_Oudtshoorn%2C_South_Africa.jpg/960px-View_of_Oudtshoorn%2C_South_Africa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Oudtshoorn", "artist": "thomas", "license": "CC BY-SA 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:View_of_Oudtshoorn,_South_Africa.jpg", "order": 19}, {"id": "wilderness", "name": "Wilderness", "region": "Garden Route", "cat": "coast", "blurb": "Lagoons, long beaches and forest trails at the western end of the Garden Route.", "tip": "", "lat": -33.9833, "lon": 22.5833, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Wilderness_WC.jpg/960px-Wilderness_WC.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Wilderness,_South_Africa", "artist": "Andresdewet at English Wikipedia", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Wilderness_WC.jpg", "order": 20}, {"id": "knysna", "name": "Knysna", "region": "Garden Route", "cat": "coast", "blurb": "Lagoon town between forest and sea; the viewpoint over the Knysna Heads.", "tip": "", "lat": -34.0356, "lon": 23.0489, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Knysna_waterfront.jpg/960px-Knysna_waterfront.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Knysna", "artist": "Terence27", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Knysna_waterfront.jpg", "order": 21}, {"id": "plett", "name": "Plettenberg Bay", "region": "Garden Route", "cat": "coast", "blurb": "Beach town with the Robberg Peninsula hike, where seals haul out on the rocks.", "tip": "", "lat": -34.05, "lon": 23.3667, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Plettenbergbaai_beach.jpg/960px-Plettenbergbaai_beach.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Plettenberg_Bay", "artist": "Hurkummer at English Wikipedia", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Plettenbergbaai_beach.jpg", "order": 22}, {"id": "tsitsikamma", "name": "Tsitsikamma", "region": "Garden Route", "cat": "nature", "blurb": "Coastal forest and the suspension bridge over the Storms River Mouth; start of the Otter Trail.", "tip": "", "lat": -34.0167, "lon": 23.8833, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Tsitsikamma_Park.JPG/960px-Tsitsikamma_Park.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Tsitsikamma_National_Park", "artist": "Original uploader was Conrad88 at en.wikipedia", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Tsitsikamma_Park.JPG", "order": 23}, {"id": "addo", "name": "Addo Elephant Park", "region": "Eastern Cape", "cat": "wild", "blurb": "Hundreds of elephants on easy self-drive roads, about an hour from Gqeberha. Malaria-free.", "tip": "", "lat": -33.4461, "lon": 25.7458, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Elephant_Addo.jpg/960px-Elephant_Addo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Addo_Elephant_National_Park", "artist": "Brian Snelson", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Elephant_Addo.jpg", "order": 24}, {"id": "amphitheatre", "name": "Amphitheatre, Drakensberg", "region": "KwaZulu-Natal", "cat": "mtn", "blurb": "A 5 km basalt wall in Royal Natal National Park; the Sentinel route with chain ladders leads to the top of Tugela Falls.", "tip": "Afternoon thunderstorms are routine in summer; start early.", "lat": -28.7667, "lon": 28.9, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Amphitheatre_Drakensberg.jpg/960px-Amphitheatre_Drakensberg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Amphitheatre_(Drakensberg)", "artist": "User:Bothar", "license": "Public domain", "desc_url": "https://commons.wikimedia.org/wiki/File:Amphitheatre_Drakensberg.jpg", "order": 25}, {"id": "goldengate", "name": "Golden Gate Highlands", "region": "Free State", "cat": "mtn", "blurb": "Sandstone cliffs that glow at sunset, short walks and drives, on the way between Johannesburg and Lesotho. Clarens is the nearby village base.", "tip": "", "lat": -28.5061, "lon": 28.6167, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Brandwag_-_panoramio.jpg/960px-Brandwag_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Golden_Gate_Highlands_National_Park", "artist": "Graham Maclachlan", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Brandwag_-_panoramio.jpg", "order": 26}, {"id": "durban", "name": "Durban", "region": "KwaZulu-Natal", "cat": "coast", "blurb": "Warm Indian Ocean beaches, the Golden Mile promenade and the city's Indian food, starting with bunny chow.", "tip": "", "lat": -29.8833, "lon": 31.05, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Durban_from_the_Balcony_%28Dennis_Sylvester_Hurd%29_1.jpg/960px-Durban_from_the_Balcony_%28Dennis_Sylvester_Hurd%29_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Durban", "artist": "Dennis Sylvester Hurd", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Durban_from_the_Balcony_(Dennis_Sylvester_Hurd)_1.jpg", "order": 27}, {"id": "isimangaliso", "name": "iSimangaliso Wetland Park", "region": "KwaZulu-Natal", "cat": "wild", "blurb": "Estuary with hippos and crocodiles at St Lucia, wild beaches and turtle nesting from November to March.", "tip": "", "lat": -27.65, "lon": 32.5667, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/GreaterStLucia.jpg/960px-GreaterStLucia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/ISimangaliso_Wetland_Park", "artist": "inkie1010", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:GreaterStLucia.jpg", "order": 28}, {"id": "hluhluwe", "name": "Hluhluwe–iMfolozi", "region": "KwaZulu-Natal", "cat": "wild", "blurb": "Proclaimed in 1895, the oldest park in Africa, and one of the best places to see rhino. Big Five.", "tip": "", "lat": -28.2197, "lon": 31.9519, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Hluhluwe_green_hills_..._%2847294082242%29.jpg/960px-Hluhluwe_green_hills_..._%2847294082242%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Hluhluwe%E2%80%93Imfolozi_Park", "artist": "Bernard DUPONT from FRANCE", "license": "CC BY-SA 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Hluhluwe_green_hills_..._(47294082242).jpg", "order": 29}, {"id": "apartheid", "name": "Apartheid Museum", "region": "Johannesburg", "cat": "culture", "blurb": "The essential museum on apartheid history. Allow two to three hours.", "tip": "Check opening hours over Christmas and New Year.", "lat": -26.2376, "lon": 28.009, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/South_Africa-Johannesburg-Apartheid_Museum001.jpg/960px-South_Africa-Johannesburg-Apartheid_Museum001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Apartheid_Museum", "artist": "NJR ZA", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:South_Africa-Johannesburg-Apartheid_Museum001.jpg", "order": 30}, {"id": "soweto", "name": "Soweto", "region": "Johannesburg", "cat": "culture", "blurb": "Vilakazi Street with the Mandela House and the Hector Pieterson Memorial. Best with a local guide.", "tip": "", "lat": -26.2678, "lon": 27.8585, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Soweto-002.jpg/960px-Soweto-002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Soweto", "artist": "Michael Denne from Hobart, Australia", "license": "CC BY-SA 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Soweto-002.jpg", "order": 31}, {"id": "sterkfontein", "name": "Sterkfontein Caves", "region": "Cradle of Humankind", "cat": "culture", "blurb": "Fossil caves where 'Mrs Ples' was found, part of the Cradle of Humankind World Heritage Site, about 50 km from Johannesburg.", "tip": "", "lat": -26.0157, "lon": 27.7346, "img": "https://upload.wikimedia.org/wikipedia/commons/4/40/SterkfonteinCave.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", "url": "https://en.wikipedia.org/wiki/Sterkfontein", "artist": "english Wikipedia user", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:SterkfonteinCave.jpg", "order": 32}, {"id": "pilanesberg", "name": "Pilanesberg", "region": "North West", "cat": "wild", "blurb": "Big Five reserve inside an ancient volcanic crater, about 2.5 hours from Johannesburg. Malaria-free.", "tip": "", "lat": -25.2611, "lon": 27.1008, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Animals_at_Pilanesberg_National_Park_4.jpg/960px-Animals_at_Pilanesberg_National_Park_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Pilanesberg_National_Park", "artist": "Photograph by Mike Peel (www.mikepeel.net).", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Animals_at_Pilanesberg_National_Park_4.jpg", "order": 33}, {"id": "blyde", "name": "Blyde River Canyon", "region": "Panorama Route", "cat": "mtn", "blurb": "One of the largest canyons in the world. The Three Rondavels, God's Window and Bourke's Luck Potholes line the Panorama Route.", "tip": "Mist often fills the canyon by midday; go in the morning.", "lat": -24.58, "lon": 30.83, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/20131119_162543b.jpg/960px-20131119_162543b.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Blyde_River_Canyon", "artist": "Claudirene", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:20131119_162543b.jpg", "order": 34}, {"id": "graskop", "name": "Graskop", "region": "Panorama Route", "cat": "culture", "blurb": "Small town at the top of the escarpment: base for the Panorama Route, pancakes, and the glass lift into Graskop Gorge.", "tip": "", "lat": -24.9317, "lon": 30.8417, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Graskop%2C_Mpumalanga%2C_South_Africa_%2820328207250%29.jpg/960px-Graskop%2C_Mpumalanga%2C_South_Africa_%2820328207250%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Graskop", "artist": "South African Tourism from South Africa", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Graskop,_Mpumalanga,_South_Africa_(20328207250).jpg", "order": 35}, {"id": "kruger", "name": "Kruger National Park", "region": "Mpumalanga · Limpopo", "cat": "wild", "blurb": "Almost two million hectares and the Big Five, with self-drive roads and SANParks rest camps. In the south, around Skukuza and Lower Sabie, game is densest.", "tip": "Malaria area. Entrance gates 05:30–18:30 in December and January.", "lat": -24.6, "lon": 31.55, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Kruger_Zebra.JPG/960px-Kruger_Zebra.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Kruger_National_Park", "artist": "Nithin bolar k", "license": "CC BY-SA 3.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Kruger_Zebra.JPG", "order": 36}, {"id": "hlane", "name": "Hlane Royal National Park", "region": "Eswatini", "cat": "wild", "blurb": "Eswatini's largest protected area: lions, elephants and rhino on guided drives, with a rustic camp by a waterhole.", "tip": "", "lat": -26.25, "lon": 31.88, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Hlane-Basic-Hide-At-Hippo-Pool.JPG/960px-Hlane-Basic-Hide-At-Hippo-Pool.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Hlane_Royal_National_Park", "artist": "Bjørn Christian Tørrissen", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Hlane-Basic-Hide-At-Hippo-Pool.JPG", "order": 37}, {"id": "mlilwane", "name": "Mlilwane Wildlife Sanctuary", "region": "Eswatini", "cat": "wild", "blurb": "Eswatini's oldest reserve. No big predators, so you can walk, cycle or ride among zebra and antelope.", "tip": "", "lat": -26.4691, "lon": 31.1619, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Zabras_in_Mlilwane_Wildlife_Sanctuary.jpg/960px-Zabras_in_Mlilwane_Wildlife_Sanctuary.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Mlilwane_Wildlife_Sanctuary", "artist": "Vaiz Ha", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Zabras_in_Mlilwane_Wildlife_Sanctuary.jpg", "order": 38}, {"id": "thababosiu", "name": "Thaba Bosiu", "region": "Lesotho", "cat": "culture", "blurb": "Flat-topped mountain fortress of King Moshoeshoe I, founder of the Basotho nation, half an hour from Maseru.", "tip": "", "lat": -29.354, "lon": 27.675, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/685_Thaba_Bosiu.jpg/960px-685_Thaba_Bosiu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Thaba_Bosiu", "artist": "Marduk", "license": "CC0", "desc_url": "https://commons.wikimedia.org/wiki/File:685_Thaba_Bosiu.jpg", "order": 39}, {"id": "maletsunyane", "name": "Maletsunyane Falls", "region": "Lesotho", "cat": "nature", "blurb": "A single 192 m drop at Semonkong, and one of the longest commercial abseils in the world. Pony treks with Basotho guides.", "tip": "", "lat": -29.8686, "lon": 28.0517, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Maletsunyanefalls.JPG/960px-Maletsunyanefalls.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Maletsunyane_Falls", "artist": "BagelBelt", "license": "Public domain", "desc_url": "https://commons.wikimedia.org/wiki/File:Maletsunyanefalls.JPG", "order": 40}, {"id": "katse", "name": "Katse Dam", "region": "Lesotho", "cat": "nature", "blurb": "A 185 m arch dam high in the Maluti Mountains, reached by a spectacular mountain road.", "tip": "", "lat": -29.3369, "lon": 28.5061, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Katse_Dam.jpg/960px-Katse_Dam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Katse_Dam", "artist": "SkyPixels", "license": "CC BY-SA 4.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Katse_Dam.jpg", "order": 41}, {"id": "sani", "name": "Sani Pass", "region": "Lesotho · KwaZulu-Natal", "cat": "mtn", "blurb": "Switchback road up the Drakensberg escarpment to 2,876 m, with the 'highest pub in Africa' at the top.", "tip": "4×4 only; the border posts close in the afternoon.", "lat": -29.5881, "lon": 29.2927, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Sani_Pass_heading_into_Lesotho.jpg/960px-Sani_Pass_heading_into_Lesotho.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Sani_Pass", "artist": "Vaiz Ha", "license": "CC BY 2.0", "desc_url": "https://commons.wikimedia.org/wiki/File:Sani_Pass_heading_into_Lesotho.jpg", "order": 42}, {"id": "augrabies", "name": "Augrabies Falls", "region": "Northern Cape", "cat": "nature", "blurb": "The Orange River plunging into a granite gorge on the edge of the Kalahari. Remote: about nine hours from Cape Town.", "tip": "", "lat": -28.5911, "lon": 20.3383, "img": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Augrabie%2C_Waterfalls%2C_South_Africa.jpg/960px-Augrabie%2C_Waterfalls%2C_South_Africa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", "url": "https://en.wikipedia.org/wiki/Augrabies_Falls_National_Park", "artist": "Christian Wörtz (woertz)", "license": "CC BY-SA 2.5", "desc_url": "https://commons.wikimedia.org/wiki/File:Augrabie,_Waterfalls,_South_Africa.jpg", "order": 43}];
+var CATS = [
+  {id:"wild", name:"Wildlife", v:"--c-wild"},
+  {id:"mtn", name:"Mountains & views", v:"--c-mtn"},
+  {id:"coast", name:"Coast & beaches", v:"--c-coast"},
+  {id:"nature", name:"Falls, caves & gardens", v:"--c-nature"},
+  {id:"culture", name:"History & cities", v:"--c-culture"},
+  {id:"wine", name:"Winelands", v:"--c-wine"}
+];
+function cssv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function catOf(id){ return CATS.filter(function(c){return c.id===id;})[0]; }
 
 var PLACES = {
-  SJJ:{name:"Sarajevo"}, IST:{name:"Istanbul"},
-  CPT:{name:"Cape Town", code:"CPT", lat:-33.97, lon:18.60, country:"South Africa"},
-  JNB:{name:"Johannesburg", code:"JNB", lat:-26.14, lon:28.24, country:"South Africa", dx:-12, dy:-12, anchor:"end"},
-  KRU:{name:"Kruger", lat:-24.99, lon:31.59, country:"South Africa", dx:12, dy:4},
-  WDH:{name:"Windhoek", code:"WDH", lat:-22.48, lon:17.47, country:"Namibia", dx:12, dy:4},
-  SOS:{name:"Sossusvlei", lat:-24.73, lon:15.29, country:"Namibia", minor:true, dx:-12, dy:16, anchor:"end"},
-  SWP:{name:"Swakopmund", lat:-22.68, lon:14.53, country:"Namibia", minor:true, dx:-12, dy:-8, anchor:"end"},
-  VFA:{name:"Victoria Falls", code:"VFA", lat:-17.93, lon:25.83, country:"Zimbabwe", dx:12, dy:-8},
-  MRU:{name:"Mauritius", code:"MRU", lat:-20.30, lon:57.58, country:"Mauritius", dx:-12, dy:-12, anchor:"end"}
+  SJJ:{name:"Sarajevo"},
+  CPT:{name:"Cape Town", code:"CPT", lat:-33.97, lon:18.60},
+  JNB:{name:"Johannesburg", code:"JNB", lat:-26.14, lon:28.24},
+  GRK:{name:"Graskop", lat:-24.93, lon:30.84},
+  KRU:{name:"Kruger (Skukuza)", lat:-24.995, lon:31.59},
+  HLA:{name:"Hlane", lat:-26.25, lon:31.88},
+  MLI:{name:"Mlilwane", lat:-26.47, lon:31.16},
+  GGH:{name:"Golden Gate", lat:-28.51, lon:28.62},
+  SEM:{name:"Semonkong", lat:-29.85, lon:28.05},
+  MRU:{name:"Mauritius", code:"MRU", lat:-20.30, lon:57.58}
 };
-var STOP_OF = {SOS:"WDH", SWP:"WDH"};
 
 var LEGS = {
-  /* traveller A long-haul */
   a1:{kind:"flight", from:"SJJ", to:"CPT", date:"2026-12-15", dep:"08:00", arr:"23:00", dur:"14 h", carrier:"Turkish Airlines", via:"IST", who:["a"]},
   a4:{kind:"flight", from:"CPT", to:"SJJ", date:"2027-01-13", dep:"00:55", arr:"19:30", dur:"19 h 35", carrier:"Turkish Airlines", via:"IST", who:["a"], note:"Departs just after midnight: be at the airport on the evening of 12 January."},
   m3:{kind:"flight", from:"MRU", to:"SJJ", date:"2027-01-13", dep:"20:30", arr:"14:40", arrNext:true, dur:"21 h 10", carrier:"Turkish Airlines", via:"IST", who:["a"]},
-  /* traveller B long-haul */
-  b1:{kind:"flight", from:"SJJ", to:"JNB", date:"2026-12-25", dep:"08:00", arr:"22:25", dur:"13 h 25", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Night at an airport hotel, regional flight next morning."},
-  b4_7:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-07", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 h 50", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Home on 8 January. The same ticket returning on 8 or 9 January costs the same."},
-  b4_8:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-08", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 h 50", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Home on 9 January, a day before the deadline."},
-  /* base: Namibia then the Falls */
-  a2:{kind:"flight", from:"CPT", to:"WDH", date:"2026-12-26", dep:"12:50", arr:"14:55", dur:"2 h 05", carrier:"FlySafair", via:"", who:["a"], note:"Airlink 10:40 → 12:50 costs $251 and lands together with B."},
-  b2:{kind:"flight", from:"JNB", to:"WDH", date:"2026-12-26", dep:"10:40", arr:"12:50", dur:"2 h 10", carrier:"Airlink", via:"", who:["b"]},
-  d1:{kind:"drive", from:"WDH", to:"SOS", date:"2026-12-27", dist:"340–355 km", dur:"5–6.5 h", who:["a","b"], note:"B1 → C24 → C19, about 100 km of gravel. Drive in daylight only."},
-  d2:{kind:"drive", from:"SOS", to:"SWP", date:"2026-12-29", dist:"≈345 km", dur:"≈5.5 h", who:["a","b"], note:"Via Solitaire, about 285 km of gravel, then 263 km with no fuel at all."},
-  d3:{kind:"drive", from:"SWP", to:"WDH", date:"2027-01-02", dist:"≈360 km", dur:"≈4 h", who:["a","b"], note:"Tarred B2. Overnight near the airport, return the car before the morning flight."},
-  ab1:{kind:"flight", from:"WDH", to:"VFA", date:"2027-01-03", dep:"09:15", arr:"10:40", dur:"1 h 25", carrier:"FlyNamibia (Airlink 4Z8135)", via:"", who:["a","b"], note:"Daily except Mondays. 37–50 seat aircraft, sells out early."},
-  b3:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-07", dep:"12:15", arr:"14:05", dur:"1 h 50", carrier:"Fastjet", via:"", who:["b"], note:"Separate ticket: clear immigration in Johannesburg and check in again; 4 h 45 to the home flight."},
-  a3:{kind:"flight", from:"VFA", to:"CPT", date:"2027-01-08", dep:"", arr:"", dur:"6–7 h, 1 stop", carrier:"via Johannesburg", via:"JNB", who:["a"], note:"Re-entering South Africa less than 7 days before the flight home, so the re-entry limit does not bite."},
-  /* reverse: the Falls then Namibia */
-  r_a2:{kind:"flight", from:"CPT", to:"VFA", date:"2026-12-26", dep:"07:00", arr:"13:20", dur:"6 h 20", carrier:"Airlink", via:"JNB", who:["a"], note:"Lands at the same minute as B's flight from Johannesburg."},
-  r_b2:{kind:"flight", from:"JNB", to:"VFA", date:"2026-12-26", dep:"11:35", arr:"13:20", dur:"1 h 45", carrier:"Airlink", via:"", who:["b"]},
-  r_ab1:{kind:"flight", from:"VFA", to:"WDH", date:"2026-12-30", dep:"11:15", arr:"12:50", dur:"1 h 35", carrier:"FlyNamibia (Airlink 4Z8136)", via:"", who:["a","b"], note:"Daily except Mondays; 30 December is a Wednesday. Small aircraft, book early."},
-  r_d1:{kind:"drive", from:"WDH", to:"SWP", date:"2026-12-31", dist:"≈360 km", dur:"≈4 h", who:["a","b"], note:"Tarred B2 all the way. New Year's Eve on the coast."},
-  r_d2:{kind:"drive", from:"SWP", to:"SOS", date:"2027-01-03", dist:"≈345 km", dur:"≈5.5 h", who:["a","b"], note:"Via Walvis Bay and Solitaire: 263 km with no fuel, fill up in Walvis Bay."},
-  r_d3:{kind:"drive", from:"SOS", to:"WDH", date:"2027-01-06", dist:"340–355 km", dur:"5–6.5 h", who:["a","b"], note:"C19 → C24 → B1. Leave early, gravel in the first half."},
-  r_b3:{kind:"flight", from:"WDH", to:"JNB", date:"2027-01-08", dep:"07:10", arr:"09:00", dur:"1 h 50", carrier:"Airlink", via:"", who:["b"], note:"Take the morning flight: on a separate ticket you need hours in Johannesburg. Afternoon SAA at 14:30 is $178 but leaves only 2 h 35."},
-  r_a3:{kind:"flight", from:"WDH", to:"CPT", date:"2027-01-08", dep:"13:40", arr:"15:45", dur:"2 h 05", carrier:"Airlink", via:"", who:["a"]},
-  /* Kruger finale */
-  k_ab:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-06", dep:"12:15", arr:"14:05", dur:"1 h 50", carrier:"Fastjet", via:"", who:["a","b"], note:"Pick up a hire car at OR Tambo and head east."},
-  k_d1:{kind:"drive", from:"JNB", to:"KRU", date:"2027-01-06", dist:"≈400 km", dur:"4.5–5 h", who:["a","b"], note:"N4 / N12 towards Hazyview. Arrive before dark; sleep outside the park the first night."},
-  k_d2:{kind:"drive", from:"KRU", to:"JNB", date:"2027-01-08", dist:"≈420 km", dur:"5–5.5 h", who:["a","b"], note:"Leave the park by 09:00 to reach OR Tambo by mid-afternoon for B's 18:50 flight."},
-  k_a5:{kind:"flight", from:"JNB", to:"CPT", date:"2027-01-08", dep:"19:35", arr:"21:50", dur:"2 h 15", carrier:"FlySafair", via:"", who:["a"]},
-  /* Mauritius */
-  m2:{kind:"flight", from:"CPT", to:"MRU", date:"2027-01-05", dep:"10:05", arr:"17:15", dur:"5 h 10", carrier:"Airlink", via:"", who:["a"], note:"Nonstop on Tuesdays and Fridays. Friday 1 January is $402."}
+  m2:{kind:"flight", from:"CPT", to:"MRU", date:"2027-01-05", dep:"10:05", arr:"17:15", dur:"5 h 10", carrier:"Airlink", via:"", who:["a"], note:"Nonstop on Tuesdays and Fridays. Friday 1 January is $402."},
+  b1:{kind:"flight", from:"SJJ", to:"JNB", date:"2026-12-25", dep:"08:00", arr:"22:25", dur:"13 h 25", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Night at an airport hotel."},
+  b4:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-08", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 h 50", carrier:"Turkish Airlines", via:"IST", who:["b"], note:"Home on 9 January. The same ticket returning on 7 or 9 January costs about the same."},
+  l_a2:{kind:"flight", from:"CPT", to:"JNB", date:"2026-12-26", dep:"07:00", arr:"09:00", dur:"2 h", carrier:"Lift", via:"", who:["a"], note:"Evening flights on 26 Dec are $103; the 07:00 gives you the day in Johannesburg."},
+  l_d1:{kind:"drive", from:"JNB", to:"GRK", date:"2026-12-27", dist:"≈390 km", dur:"≈4.5 h", who:["a","b"], note:"N4 east, then via Dullstroom or Sabie. Three Rondavels, God's Window and Bourke's Luck are along the Panorama Route."},
+  l_d2:{kind:"drive", from:"GRK", to:"KRU", date:"2026-12-29", dist:"≈90 km", dur:"≈1.5 h", who:["a","b"], note:"Via Hazyview to Phabeni or Paul Kruger gate. Inside the park: 50 km/h on tar, 40 on gravel."},
+  l_d3:{kind:"drive", from:"KRU", to:"HLA", date:"2027-01-01", dist:"≈260 km", dur:"≈4 h", who:["a","b"], note:"Leave Kruger in the south (Malelane or Crocodile Bridge) and cross into Eswatini at Jeppe's Reef or Mananga. Check border hours on 1 January."},
+  l_d4:{kind:"drive", from:"HLA", to:"MLI", date:"2027-01-02", dist:"≈90 km", dur:"≈1.5 h", who:["a","b"], note:"Across Eswatini to the Ezulwini Valley."},
+  l_d5:{kind:"drive", from:"MLI", to:"GGH", date:"2027-01-04", dist:"≈480 km", dur:"≈6 h", who:["a","b"], note:"Back into South Africa at Ngwenya/Oshoek, then towards Harrismith and Clarens. The longest day; leave early."},
+  l_d6:{kind:"drive", from:"GGH", to:"SEM", date:"2027-01-05", dist:"≈260 km", dur:"≈4.5 h", who:["a","b"], note:"Into Lesotho at Ficksburg or Maseru Bridge; tarred road from Maseru to Semonkong, mountain driving."},
+  l_d7:{kind:"drive", from:"SEM", to:"JNB", date:"2027-01-07", dist:"≈520 km", dur:"≈7 h", who:["a","b"], note:"Maseru Bridge, then N8/N1 to Johannesburg. Overnight near OR Tambo."},
+  l_a5:{kind:"flight", from:"JNB", to:"CPT", date:"2027-01-08", dep:"19:35", arr:"21:50", dur:"2 h 15", carrier:"FlySafair", via:"", who:["a"]}
 };
 
-var K = function(path){ return "https://www.kayak.com/flights/" + path; };
-var T_A_RT = {id:"A1", label:"Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), legs:["a1","a4"], rt:true};
-var B_NOTE = "French passport: a 2-stop routing through Europe was $1,065.";
+var K = function(p){ return "https://www.kayak.com/flights/"+p; };
+var T_A = {id:"A1", label:"Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), legs:["a1","a4"], rt:true};
 
 var SCENARIOS = [
   {
-    id:"namibia-falls", short:"Namibia → Falls", title:"Namibia first, then Victoria Falls", travellers:["a","b"],
-    blurb:"A arrives 15 Dec, B lands in Johannesburg on the 25th. You meet in Windhoek on 26 Dec, see in the New Year on the Namibian coast, then fly to Victoria Falls. B flies home from Johannesburg on 7 Jan.",
+    id:"loop", short:"SA loop with B", title:"Cape Town, then Kruger, Eswatini and Lesotho", travellers:["a","b"],
+    blurb:"A has eleven days in Cape Town. Both meet in Johannesburg on 26 Dec and drive a loop: Panorama Route, Kruger over New Year, Eswatini, Golden Gate and the Lesotho highlands, back to OR Tambo for 8 Jan.",
     tickets:[
-      T_A_RT,
-      {id:"B1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 7 Jan", carrier:"Turkish Airlines", who:["b"], price:1134, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-07?sort=price_a"), legs:["b1","b4_7"], rt:true, note:B_NOTE},
-      {id:"N1", label:"Cape Town → Windhoek, 26 Dec", carrier:"FlySafair", who:["a"], price:194, checked:"18 Oct", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["a2"]},
-      {id:"N2", label:"Johannesburg → Windhoek, 26 Dec", carrier:"Airlink", who:["b"], price:185, checked:"18 Oct", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["b2"]},
-      {id:"N3", label:"Windhoek → Victoria Falls, 3 Jan", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["ab1"]},
-      {id:"N4", label:"Victoria Falls → Johannesburg, 7 Jan", carrier:"Fastjet", who:["b"], price:183, checked:"18 Oct", url:K("VFA-JNB/2027-01-07?sort=price_a&fs=stops=0"), legs:["b3"]},
-      {id:"N5", label:"Victoria Falls → Cape Town, 8 Jan", carrier:"1 stop", who:["a"], price:286, checked:"18 Oct", url:K("VFA-CPT/2027-01-08?sort=price_a"), legs:["a3"]}
+      T_A,
+      {id:"B1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", carrier:"Turkish Airlines", who:["b"], price:1131, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-08?sort=price_a"), legs:["b1","b4"], rt:true, note:"French passport: a 2-stop routing via Europe was $1,065."},
+      {id:"L1", label:"Cape Town → Johannesburg, 26 Dec, 07:00", carrier:"Lift", who:["a"], price:107, checked:"18 Oct", url:K("CPT-JNB/2026-12-26?sort=price_a&fs=stops=0"), legs:["l_a2"]},
+      {id:"L2", label:"Johannesburg → Cape Town, 8 Jan, 19:35", carrier:"FlySafair", who:["a"], price:103, checked:"18 Oct", url:K("JNB-CPT/2027-01-08?sort=price_a&fs=stops=0"), legs:["l_a5"]}
     ],
+    extras:"Plus a hire car from OR Tambo, 26 Dec – 8 Jan, with a cross-border letter for Eswatini and Lesotho.",
     timeline:[
       {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain and the dassies early in the morning, the Cape Peninsula and Boulders penguins, Stellenbosch and Franschhoek, Hermanus. Much is closed on the 25th."}},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain and the dassies, the Peninsula and Boulders penguins, Stellenbosch and Franschhoek, Hermanus. Much is shut on the 25th."}},
       {date:"2026-12-25", leg:"b1"},
-      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, morning flight to Windhoek."}},
-      {date:"2026-12-26", leg:"b2"},
-      {date:"2026-12-26", leg:"a2"},
-      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Meet in Windhoek", text:"Collect the car at the airport. The 26th is a public holiday: stock up on cash, water and food, buy a SIM card."}},
-      {date:"2026-12-27", leg:"d1"},
-      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes and Deadvlei at sunrise, Sesriem Canyon. Up to 34–38 °C by midday."}},
-      {date:"2026-12-29", leg:"d2"},
-      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Swakopmund, New Year", text:"Walvis Bay lagoon and flamingos, Sandwich Harbour with a guide. Cool and foggy on the coast, bring a jacket."}},
-      {date:"2027-01-02", leg:"d3"},
-      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Near the airport", text:"Flight at 09:15, drop the car at the airport in the morning."}},
-      {date:"2027-01-03", leg:"ab1"},
-      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-06", nights:4, who:["a","b"], title:"Victoria Falls", text:"Rainforest trail on the Zimbabwe side, half a day on the Zambian side with KAZA, a day in Chobe (Botswana), rafting."}},
-      {date:"2027-01-07", leg:"b3"},
-      {date:"2027-01-07", leg:"b4_7"},
-      {date:"2027-01-07", stay:{place:"VFA", nights:1, who:["a"], title:"One more night at the Falls", text:"B leaves at midday, A flies the next morning."}},
-      {date:"2027-01-08", leg:"a3"},
+      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo."}},
+      {date:"2026-12-26", leg:"l_a2"},
+      {date:"2026-12-26", stay:{place:"JNB", nights:1, who:["a","b"], title:"Johannesburg", text:"Collect the car. Apartheid Museum or Soweto if open on the public holiday; stay in Rosebank or near the airport."}},
+      {date:"2026-12-27", leg:"l_d1"},
+      {date:"2026-12-27", stay:{place:"GRK", end:"2026-12-28", nights:2, who:["a","b"], title:"Panorama Route", text:"Blyde River Canyon and the Three Rondavels, God's Window, Bourke's Luck Potholes, waterfalls around Graskop and Sabie."}},
+      {date:"2026-12-29", leg:"l_d2"},
+      {date:"2026-12-29", stay:{place:"KRU", end:"2026-12-31", nights:3, who:["a","b"], title:"Kruger National Park", text:"Game drives at dawn and dusk, New Year's Eve in a rest camp. Malaria area: prophylaxis."}},
+      {date:"2027-01-01", leg:"l_d3"},
+      {date:"2027-01-01", stay:{place:"HLA", nights:1, who:["a","b"], title:"Hlane Royal National Park", text:"Lions, elephants and rhino on guided drives; rustic camp."}},
+      {date:"2027-01-02", leg:"l_d4"},
+      {date:"2027-01-02", stay:{place:"MLI", end:"2027-01-03", nights:2, who:["a","b"], title:"Mlilwane and the Ezulwini Valley", text:"Walk, cycle or ride among zebra and antelope; craft markets of the valley."}},
+      {date:"2027-01-04", leg:"l_d5"},
+      {date:"2027-01-04", stay:{place:"GGH", nights:1, who:["a","b"], title:"Golden Gate / Clarens", text:"Sandstone cliffs at sunset; Clarens is a small, easy base."}},
+      {date:"2027-01-05", leg:"l_d6"},
+      {date:"2027-01-05", stay:{place:"SEM", end:"2027-01-06", nights:2, who:["a","b"], title:"Semonkong, Lesotho", text:"Maletsunyane Falls, pony treks with Basotho guides. A Russian passport needs a Lesotho visa arranged before the trip."}},
+      {date:"2027-01-07", leg:"l_d7"},
+      {date:"2027-01-07", stay:{place:"JNB", nights:1, who:["a","b"], title:"Near OR Tambo", text:"Return the car on the 8th before the flights."}},
+      {date:"2027-01-08", leg:"b4"},
+      {date:"2027-01-08", leg:"l_a5"},
       {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Whatever was left over from December."}},
       {date:"2027-01-13", leg:"a4"}
     ],
-    checklist:["b_ticket","a_ticket","wdh_in","wdh_vfa","nam_stay","nam_car","falls","malaria","b_namvisa","back_nf","card"]
+    pois:["table","boulders","stellenbosch","bettys","apartheid","blyde","graskop","kruger","hlane","mlilwane","goldengate","maletsunyane"],
+    checklist:["b_ticket","a_ticket","cpt_jnb","car","kruger_book","beds","lso_visa","malaria","cash","card"]
   },
   {
-    id:"falls-namibia", short:"Falls → Namibia", title:"Victoria Falls first, then Namibia", travellers:["a","b"],
-    blurb:"You meet at Victoria Falls on 26 Dec (both flights land at 13:20), fly to Windhoek on the 30th and spend New Year on the coast. B flies Windhoek → Johannesburg → home on 8 Jan, A returns to Cape Town.",
-    tickets:[
-      T_A_RT,
-      {id:"R1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", carrier:"Turkish Airlines", who:["b"], price:1131, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-08?sort=price_a"), legs:["b1","b4_8"], rt:true, note:B_NOTE},
-      {id:"R2", label:"Cape Town → Victoria Falls, 26 Dec", carrier:"Airlink, via Johannesburg", who:["a"], price:339, checked:"18 Oct", url:K("CPT-VFA/2026-12-26?sort=price_a"), legs:["r_a2"]},
-      {id:"R3", label:"Johannesburg → Victoria Falls, 26 Dec", carrier:"Airlink", who:["b"], price:198, checked:"18 Oct", url:K("JNB-VFA/2026-12-26?sort=price_a&fs=stops=0"), legs:["r_b2"]},
-      {id:"R4", label:"Victoria Falls → Windhoek, 30 Dec", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["r_ab1"]},
-      {id:"R5", label:"Windhoek → Johannesburg, 8 Jan, 07:10", carrier:"Airlink", who:["b"], price:195, est:true, checked:"2 Jan fare", url:K("WDH-JNB/2027-01-08?sort=price_a&fs=stops=0"), legs:["r_b3"]},
-      {id:"R6", label:"Windhoek → Cape Town, 8 Jan", carrier:"Airlink", who:["a"], price:209, checked:"18 Oct", url:K("WDH-CPT/2027-01-08?sort=price_a&fs=stops=0"), legs:["r_a3"]}
-    ],
+    id:"sa-only", short:"SA only (A)", title:"South Africa only, a month around Cape Town", travellers:["a"],
+    blurb:"The cheapest option: out on 15 Dec, back overnight into 13 Jan. Time for the Peninsula, the Winelands, Hermanus and the Garden Route. A two-week version, 15 → 29 Dec, is $825.",
+    tickets:[T_A], extras:"",
     timeline:[
       {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain, the Peninsula, the Winelands, Hermanus. Christmas Day in town."}},
-      {date:"2026-12-25", leg:"b1"},
-      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, flight to the Falls at 11:35."}},
-      {date:"2026-12-26", leg:"r_a2"},
-      {date:"2026-12-26", leg:"r_b2"},
-      {date:"2026-12-26", stay:{place:"VFA", end:"2026-12-29", nights:4, who:["a","b"], title:"Victoria Falls", text:"Zimbabwe side and the Rainforest trail, the Zambian side with KAZA, Chobe day trip, Zambezi sunset cruise. Busy Christmas week: book now."}},
-      {date:"2026-12-30", leg:"r_ab1"},
-      {date:"2026-12-30", stay:{place:"WDH", nights:1, who:["a","b"], title:"Windhoek", text:"Collect the car at the airport, stock up for New Year."}},
-      {date:"2026-12-31", leg:"r_d1"},
-      {date:"2026-12-31", stay:{place:"SWP", end:"2027-01-02", nights:3, who:["a","b"], title:"Swakopmund, New Year", text:"New Year's Eve on the coast, Walvis Bay lagoon, Sandwich Harbour with a guide."}},
-      {date:"2027-01-03", leg:"r_d2"},
-      {date:"2027-01-03", stay:{place:"SOS", end:"2027-01-05", nights:3, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes at sunrise two mornings running, Sesriem Canyon, the night sky."}},
-      {date:"2027-01-06", leg:"r_d3"},
-      {date:"2027-01-06", stay:{place:"WDH", end:"2027-01-07", nights:2, who:["a","b"], title:"Windhoek", text:"A slack day: Daan Viljoen reserve or a cheetah farm. Return the car on the 8th."}},
-      {date:"2027-01-08", leg:"r_b3"},
-      {date:"2027-01-08", leg:"b4_8"},
-      {date:"2027-01-08", leg:"r_a3"},
-      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Re-entering South Africa less than 7 days before the flight home."}},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-11", nights:28, who:["a"], title:"Cape Town and the Western Cape", text:"Base in Cape Town; a 4–5 day Garden Route road trip (Wilderness, Knysna, Plettenberg Bay, Tsitsikamma) fits well in early January."}},
       {date:"2027-01-13", leg:"a4"}
     ],
-    checklist:["b_ticket8","a_ticket","vfa_in","vfa_wdh","falls_dec","nam_stay2","nam_car2","malaria","b_namvisa","back_fn","card"]
+    pois:["table","lionshead","boulders","capepoint","chapmans","kirstenbosch","stellenbosch","franschhoek","hermanus","knysna","tsitsikamma"],
+    checklist:["a_ticket","s_stay","s_cable","card"]
   },
   {
-    id:"kruger", short:"+ Kruger", title:"Namibia, Victoria Falls, then Kruger", travellers:["a","b"],
-    blurb:"The base route with a safari at the end: from the Falls you fly to Johannesburg on 6 Jan, drive to Kruger for two nights and are back at OR Tambo for B's flight on 8 Jan.",
-    tickets:[
-      T_A_RT,
-      {id:"K1", label:"Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", carrier:"Turkish Airlines", who:["b"], price:1131, checked:"18 Oct", url:K("SJJ-JNB/2026-12-25/2027-01-08?sort=price_a"), legs:["b1","b4_8"], rt:true, note:B_NOTE},
-      {id:"K2", label:"Cape Town → Windhoek, 26 Dec", carrier:"FlySafair", who:["a"], price:194, checked:"18 Oct", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["a2"]},
-      {id:"K3", label:"Johannesburg → Windhoek, 26 Dec", carrier:"Airlink", who:["b"], price:185, checked:"18 Oct", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0"), legs:["b2"]},
-      {id:"K4", label:"Windhoek → Victoria Falls, 3 Jan", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"estimate", url:"https://www.flyairlink.com/", legs:["ab1"]},
-      {id:"K5", label:"Victoria Falls → Johannesburg, 6 Jan", carrier:"Fastjet", who:["a","b"], price:182, checked:"18 Oct", url:K("VFA-JNB/2027-01-06?sort=price_a&fs=stops=0"), legs:["k_ab"]},
-      {id:"K6", label:"Johannesburg → Cape Town, 8 Jan", carrier:"FlySafair", who:["a"], price:103, checked:"18 Oct", url:K("JNB-CPT/2027-01-08?sort=price_a&fs=stops=0"), legs:["k_a5"]}
-    ],
-    timeline:[
-      {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Cape Town", text:"Table Mountain, the Peninsula, the Winelands, Hermanus."}},
-      {date:"2026-12-25", leg:"b1"},
-      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Airport hotel", text:"Hotel at OR Tambo, morning flight to Windhoek."}},
-      {date:"2026-12-26", leg:"b2"},
-      {date:"2026-12-26", leg:"a2"},
-      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Meet in Windhoek", text:"Collect the car, stock up: the 26th is a public holiday."}},
-      {date:"2026-12-27", leg:"d1"},
-      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Sossusvlei and Deadvlei", text:"Dunes at sunrise, Sesriem Canyon."}},
-      {date:"2026-12-29", leg:"d2"},
-      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Swakopmund, New Year", text:"Coast, flamingos, Sandwich Harbour with a guide."}},
-      {date:"2027-01-02", leg:"d3"},
-      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Near the airport", text:"Morning flight to the Falls."}},
-      {date:"2027-01-03", leg:"ab1"},
-      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-05", nights:3, who:["a","b"], title:"Victoria Falls", text:"Both sides of the Falls and a Zambezi cruise. Chobe only if time allows."}},
-      {date:"2027-01-06", leg:"k_ab"},
-      {date:"2027-01-06", leg:"k_d1"},
-      {date:"2027-01-06", stay:{place:"KRU", end:"2027-01-07", nights:2, who:["a","b"], title:"Kruger National Park", text:"First night near Hazyview, second in a SANParks rest camp such as Skukuza or Lower Sabie. Game drives at dawn and dusk; gates close at sunset."}},
-      {date:"2027-01-08", leg:"k_d2"},
-      {date:"2027-01-08", leg:"b4_8"},
-      {date:"2027-01-08", leg:"k_a5"},
-      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Back in Cape Town", text:"Re-entered South Africa on 6 Jan; leaving on the 13th is within 7 days."}},
-      {date:"2027-01-13", leg:"a4"}
-    ],
-    checklist:["b_ticket8","a_ticket","wdh_in","wdh_vfa","nam_stay","nam_car","falls3","kruger_book","kruger_car","malaria","b_namvisa","card"]
-  },
-  {
-    id:"mauritius", short:"SA + Mauritius", title:"Cape Town, then Mauritius", travellers:["a"],
-    blurb:"Three weeks in Cape Town, a nonstop flight to Mauritius on 5 Jan and home straight from the island. One Turkish ticket covers both long-haul flights.",
+    id:"mauritius", short:"SA + Mauritius (A)", title:"Cape Town, then Mauritius", travellers:["a"],
+    blurb:"Three weeks in Cape Town, a nonstop flight to Mauritius on 5 Jan and home straight from the island on one Turkish ticket.",
     tickets:[
       {id:"M1", label:"Sarajevo → Cape Town 15 Dec + Mauritius → Sarajevo 13 Jan", carrier:"Turkish Airlines", who:["a"], price:979, checked:"16 Oct", url:K("SJJ-CPT/2026-12-15/MRU-SJJ/2027-01-13?sort=price_a&fs=layoverair=IST"), legs:["a1","m3"], rt:true},
       {id:"M2", label:"Cape Town → Mauritius, 5 Jan", carrier:"Airlink", who:["a"], price:403, checked:"16 Oct", url:K("CPT-MRU/2027-01-05?sort=price_a&fs=stops=0"), legs:["m2"]}
-    ],
+    ], extras:"",
     timeline:[
       {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-04", nights:21, who:["a"], title:"Cape Town and around", text:"Table Mountain, the Peninsula, the Winelands, Hermanus. Room for a Namibia side trip: Cape Town ⇄ Windhoek nonstop from $319."}},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-04", nights:21, who:["a"], title:"Cape Town and around", text:"Table Mountain, the Peninsula, the Winelands, Hermanus."}},
       {date:"2027-01-05", leg:"m2"},
-      {date:"2027-01-05", stay:{place:"MRU", end:"2027-01-12", nights:8, who:["a"], title:"Mauritius", text:"Hot, humid, heavy showers, the peak of cyclone season. Book only with free cancellation."}},
+      {date:"2027-01-05", stay:{place:"MRU", end:"2027-01-12", nights:8, who:["a"], title:"Mauritius", text:"Hot, humid, the peak of cyclone season: book only with free cancellation."}},
       {date:"2027-01-13", leg:"m3"}
     ],
-    checklist:["m_t1","m_t2","m_stay","m_ins","card"]
-  },
-  {
-    id:"sa-only", short:"SA only", title:"South Africa only, a month in Cape Town", travellers:["a"],
-    blurb:"The cheapest option: out 15 Dec, back overnight into 13 Jan. A two-week version, 15 → 29 Dec, is $825.",
-    tickets:[ T_A_RT ],
-    timeline:[
-      {date:"2026-12-15", leg:"a1"},
-      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-11", nights:28, who:["a"], title:"Cape Town and the Western Cape", text:"Time for everything: the Peninsula, Hermanus, the Garden Route, the Winelands. Side trips are listed in the comparison below."}},
-      {date:"2027-01-13", leg:"a4"}
-    ],
-    checklist:["s_t1","s_stay","s_cable","card"]
+    pois:["table","boulders","stellenbosch","hermanus"],
+    checklist:["m_t1","m_t2","m_stay","card"]
   }
 ];
 
 var CHECK = {
-  b_ticket:{t:"B: Sarajevo ⇄ Johannesburg, 25 Dec → 7 Jan", w:"$1,134, the most expensive ticket and the one most likely to rise"},
-  b_ticket8:{t:"B: Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", w:"$1,131, the most expensive ticket and the one most likely to rise"},
+  b_ticket:{t:"B: Sarajevo ⇄ Johannesburg, 25 Dec → 8 Jan", w:"$1,131, the most expensive ticket"},
   a_ticket:{t:"A: Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", w:"$843"},
-  wdh_in:{t:"Flights to Windhoek on 26 Dec: A from Cape Town, B from Johannesburg", w:"FlySafair $194 / Airlink $185"},
-  wdh_vfa:{t:"Windhoek → Victoria Falls, 3 Jan, FlyNamibia", w:"Small aircraft, book as soon as the dates are fixed"},
-  vfa_in:{t:"Flights to Victoria Falls on 26 Dec: A via Johannesburg, B nonstop", w:"Both land at 13:20"},
-  vfa_wdh:{t:"Victoria Falls → Windhoek, 30 Dec, FlyNamibia", w:"Small aircraft, book early"},
-  nam_stay:{t:"Beds: Windhoek 26 Dec and 2 Jan, Sesriem 27–28 Dec, Swakopmund 29 Dec – 1 Jan", w:"New Year sells out; book with free cancellation"},
-  nam_stay2:{t:"Beds: Windhoek 30 Dec and 6–7 Jan, Swakopmund 31 Dec – 2 Jan, Sesriem 3–5 Jan", w:"New Year sells out; book with free cancellation"},
-  nam_car:{t:"Car in Windhoek, 26 Dec – 3 Jan", w:"High-clearance 2WD, credit card for the deposit, international driving permit"},
-  nam_car2:{t:"Car in Windhoek, 30 Dec – 8 Jan", w:"High-clearance 2WD, credit card for the deposit, international driving permit"},
-  falls:{t:"Victoria Falls: room for 3–7 Jan, small US dollar notes", w:"KAZA UniVisa $50 or a Zimbabwe visa $30"},
-  falls3:{t:"Victoria Falls: room for 3–5 Jan, small US dollar notes", w:"KAZA UniVisa $50 or a Zimbabwe visa $30"},
-  falls_dec:{t:"Victoria Falls: room for 26–29 Dec, small US dollar notes", w:"Christmas week is busy; KAZA $50 or visa $30"},
-  kruger_book:{t:"Kruger: a room near Hazyview on 6 Jan and a SANParks rest camp on 7 Jan", w:"School holidays, camps fill up"},
-  kruger_car:{t:"Hire car at OR Tambo, 6–8 Jan", w:"Return at the airport before B's 18:50 flight"},
-  malaria:{t:"Malaria tablets", w:"Victoria Falls and Kruger are malaria areas; start before arrival"},
-  b_namvisa:{t:"B (French passport): Namibia visa online before travel", w:"Visa on arrival portal, about $88; South Africa and Botswana need no visa"},
-  back_nf:{t:"Flights out of the Falls: B to Johannesburg on 7 Jan, A to Cape Town on 8 Jan", w:"$183 and $286"},
-  back_fn:{t:"Flights out of Windhoek on 8 Jan: B to Johannesburg 07:10, A to Cape Town 13:40", w:"≈$195 and $209"},
+  cpt_jnb:{t:"A: Cape Town → Johannesburg 26 Dec and back on 8 Jan", w:"$107 and $103"},
+  car:{t:"Hire car at OR Tambo, 26 Dec – 8 Jan, with a cross-border letter", w:"Eswatini and Lesotho must be named on the letter; credit card for the deposit"},
+  kruger_book:{t:"Kruger rest camp for 29–31 Dec", w:"School holidays and New Year: SANParks camps fill first"},
+  beds:{t:"Beds: Graskop 27–28 Dec, Hlane 1 Jan, Mlilwane 2–3 Jan, Clarens 4 Jan, Semonkong 5–6 Jan, near OR Tambo 7 Jan", w:"Free cancellation where possible"},
+  lso_visa:{t:"A (Russian passport): Lesotho visa before travel", w:"Not issued at the border; without it, swap Lesotho for the Drakensberg"},
+  malaria:{t:"Malaria tablets for Kruger and the Eswatini lowveld", w:"Start before arrival"},
+  cash:{t:"Some cash in rand", w:"Rand is accepted in Eswatini and Lesotho alongside their own currencies"},
   card:{t:"A non-Russian card for every payment", w:"Russian bank cards do not work abroad"},
-  m_t1:{t:"Turkish: Sarajevo → Cape Town 15 Dec + Mauritius → Sarajevo 13 Jan", w:"$979"},
-  m_t2:{t:"Airlink Cape Town → Mauritius, 5 Jan", w:"$403; check whether a suitcase is included"},
-  m_stay:{t:"Accommodation in Mauritius with free cancellation", w:"January is peak cyclone season"},
-  m_ins:{t:"Travel insurance that covers weather cancellations", w:""},
-  s_t1:{t:"Turkish: Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", w:"$843"},
   s_stay:{t:"Accommodation in Cape Town for the whole stay", w:"South African school holidays: book early"},
-  s_cable:{t:"Table Mountain cableway ticket online", w:"R475 return, valid 7 days"}
+  s_cable:{t:"Table Mountain cableway ticket online", w:"R475 return, valid 7 days"},
+  m_t1:{t:"Turkish: Sarajevo → Cape Town 15 Dec + Mauritius → Sarajevo 13 Jan", w:"$979"},
+  m_t2:{t:"Airlink Cape Town → Mauritius, 5 Jan", w:"$403"},
+  m_stay:{t:"Accommodation in Mauritius with free cancellation", w:"January is peak cyclone season"}
 };
 
-var STOPS = {
-  CPT:{name:"Cape Town", country:"South Africa", facts:[
-    {k:"Entry", v:"Russian passport: visa-free up to 90 days, passport valid 30 days past departure, 2 blank pages, onward ticket. French passport: visa-free up to 90 days."},
-    {k:"Season", v:"School holidays 10 Dec – 12 Jan: peak prices for beds and cars. 16 Dec is a public holiday, much is shut on the 25th."},
-    {k:"Dassies", v:"A colony by the upper cableway station, best on the first car up. Also Stony Point at Betty's Bay (R45, 08:00–16:30) and the Hermanus cliff path."},
-    {k:"Cableway", v:"Closes in the south-easterly wind, often in December and January. The online ticket (R475) is valid 7 days: go on the first calm morning.", warn:true},
-    {k:"Health", v:"No malaria."}
-  ], links:[{t:"Russian MFA: South Africa", u:"https://www.kdmid.ru/docs/south-africa/information-about-the-country/"},{t:"Table Mountain cableway", u:"https://www.tablemountain.net/"}]},
-  JNB:{name:"Johannesburg", country:"South Africa", facts:[
-    {k:"Role", v:"The hub: nonstop flights to Windhoek, Victoria Falls, Cape Town and Istanbul."},
-    {k:"Connections", v:"On separate tickets you clear immigration and check bags again. Leave at least 4 hours."},
-    {k:"Overnight", v:"Hotels inside the OR Tambo terminal area save a night-time transfer."}
-  ], links:[]},
-  KRU:{name:"Kruger National Park", country:"South Africa", facts:[
-    {k:"Getting there", v:"About 400 km from OR Tambo on the N4/N12, 4.5–5 hours to Hazyview and the Phabeni or Paul Kruger gates."},
-    {k:"Inside", v:"Speed limits 50 km/h on tar and 40 on gravel; gates open around dawn and close at sunset. Be in camp or out of the park by closing time.", warn:true},
-    {k:"Beds", v:"SANParks rest camps fill up in the school holidays. Book directly with SANParks; private lodges just outside the gates are the fallback."},
-    {k:"Fees", v:"Daily conservation fee per international visitor, paid at the gate or with the booking. Check the current tariff on the SANParks site."},
-    {k:"Health", v:"Malaria area, higher risk in the summer rainy season: prophylaxis, long sleeves at dusk.", warn:true}
-  ], links:[{t:"SANParks: Kruger", u:"https://www.sanparks.org/parks/kruger"}]},
-  WDH:{name:"Namibia", country:"Windhoek · Sossusvlei · Swakopmund", facts:[
-    {k:"Entry", v:"Russian passport: visa-free, 90 days in 180. French passport: visa needed since April 2025, visa on arrival applied for online, N$1,600 (about $88)."},
-    {k:"Dunes", v:"Since 1 May 2026 private cars stop at the 2×4 parking: a shuttle goes on to Deadvlei and Sossusvlei, N$260 per adult. You do not need a 4×4 for it."},
-    {k:"Car", v:"High-clearance 2WD with two spare tyres. Deposit on a credit card from N$3,000–5,000; an international driving permit is required."},
-    {k:"Roads", v:"Gravel: 60–80 km/h at most and never after dark; roll-overs are the main cause of tourist deaths. No fuel for 263 km between Solitaire and Walvis Bay.", warn:true},
-    {k:"Beds", v:"Namibians spend the holidays on the coast; Swakopmund and Sesriem sell out. Sesriem Camp: N$670 per person, tel. +264 63 293 652."},
-    {k:"Health", v:"No malaria in the desert or on the coast."}
-  ], links:[{t:"Russian MFA: Namibia", u:"https://www.kdmid.ru/docs/namibia/information-about-the-country/"}]},
-  VFA:{name:"Victoria Falls", country:"Zimbabwe", facts:[
-    {k:"Entry", v:"Both passports: visa on arrival, $30 single entry. Or KAZA UniVisa, $50: 30 days for Zimbabwe and Zambia plus day trips to Botswana. KAZA stickers sometimes run out; carry cash for a regular visa."},
-    {k:"Water", v:"Rising in late December and January, light spray, a thin rain jacket is enough. Devil's Pool is usually closed; Angel's Pool is the alternative."},
-    {k:"Money", v:"Cash US dollars in small, clean notes printed after 2009. ATMs are unreliable.", warn:true},
-    {k:"Health", v:"Malaria area, prophylaxis needed. No yellow fever certificate on these routes."}
-  ], links:[{t:"Russian MFA: Zimbabwe", u:"https://www.kdmid.ru/docs/zimbabwe/information-about-the-country/"}]},
-  MRU:{name:"Mauritius", country:"Mauritius", facts:[
-    {k:"Entry", v:"Russian passport: visa-free up to 60 days. Border staff ask for the onward ticket and accommodation."},
-    {k:"Season", v:"Cyclones from 15 November to 15 May, strongest January–March. Cyclone Belal closed the airport in January 2024. Refundable fares and weather cover.", warn:true},
-    {k:"Flights", v:"Airlink nonstop from Cape Town on Tuesdays and Fridays, 5 h 10."},
-    {k:"Health", v:"No malaria."}
-  ], links:[]}
-};
+var STOPS = {"CPT": {"name": "Cape Town", "country": "South Africa", "facts": [{"k": "Entry", "v": "Russian passport: visa-free up to 90 days, passport valid 30 days past departure, 2 blank pages, onward ticket. French passport: visa-free up to 90 days."}, {"k": "Season", "v": "School holidays 10 Dec – 12 Jan: peak prices for beds and cars. 16 Dec is a public holiday; much is shut on the 25th."}, {"k": "Where", "v": "Safer bases: Sea Point, Green Point, Camps Bay, Gardens, Tamboerskloof, Vredehoek, Claremont, Rondebosch. Avoid the CBD at night."}, {"k": "Cableway", "v": "Closes in the south-easter, often in December and January. The online ticket (R475) is valid 7 days.", "warn": true}, {"k": "Health", "v": "No malaria."}], "links": [{"t": "Russian MFA: South Africa", "u": "https://www.kdmid.ru/docs/south-africa/information-about-the-country/"}, {"t": "Table Mountain cableway", "u": "https://www.tablemountain.net/"}]}, "JNB": {"name": "Johannesburg", "country": "South Africa", "facts": [{"k": "Arrival", "v": "B lands at 22:25 after the last Gautrain; stay at or right next to OR Tambo, with a 24-hour desk and shuttle."}, {"k": "Where", "v": "Rosebank, Melrose Arch, Sandton and Parkhurst are the usual safe northern suburbs. Use Uber or Bolt after dark."}, {"k": "Car", "v": "Collect at OR Tambo. Ask for a cross-border letter that names Eswatini and Lesotho; most big firms issue it for a fee."}], "links": []}, "KRU": {"name": "Kruger and the Panorama Route", "country": "South Africa", "facts": [{"k": "Fees", "v": "Conservation fee 2026/27: R692 per adult per day for international visitors (from 1 Nov 2026)."}, {"k": "Gates", "v": "Entrance gates 05:30–18:30 in December and January; be in camp or out of the park by closing. Festive-season day visitors need pre-booked entry.", "warn": true}, {"k": "Beds", "v": "Rest camps fill in the school holidays; book with SANParks now or look for cancellations. Lodges in Hazyview, Malelane or Marloth Park are the fallback."}, {"k": "Weather", "v": "Hot, 20–35 °C, with afternoon storms. Some roads were still being repaired after the January 2026 floods."}, {"k": "Health", "v": "Malaria area, higher risk December–April: prophylaxis, long sleeves at dusk.", "warn": true}], "links": [{"t": "SANParks: Kruger", "u": "https://www.sanparks.org/parks/kruger"}]}, "SWZ": {"name": "Eswatini", "country": "Ezulwini · Mlilwane · Hlane", "facts": [{"k": "Entry", "v": "Russian and French passports: visa-free for a short visit (check the latest rules before travel). Passport stamped at each crossing."}, {"k": "Money", "v": "Lilangeni is pegged 1:1 to the rand, and rand is accepted everywhere."}, {"k": "Parks", "v": "Mlilwane and Hlane are run by Big Game Parks; a small daily conservation fee is added to the bed."}, {"k": "Health", "v": "The eastern lowveld around Hlane is a malaria-risk area in summer."}], "links": [{"t": "Big Game Parks", "u": "https://biggameparks.org/"}]}, "LSO": {"name": "Lesotho", "country": "Semonkong · Malealea · Thaba Bosiu", "facts": [{"k": "Entry", "v": "Russian passport: visa required and not issued at the border; arrange it before the trip. French passport: visa-free for a short stay. Without A's visa, swap Lesotho for the Drakensberg.", "warn": true}, {"k": "Safety", "v": "Crime is concentrated in Maseru and the northern lowland towns; stay rural, in the mountains."}, {"k": "Roads", "v": "Tarred roads to Semonkong and Malealea, steep and slow; Sani Pass needs a 4×4. January is the rainy season: drive in daylight."}, {"k": "Money", "v": "Loti is pegged 1:1 to the rand; rand is accepted. Bring cash, cards fail in rural lodges."}], "links": [{"t": "Russian MFA: Lesotho", "u": "https://www.kdmid.ru/docs/lesotho/information-about-the-country/"}]}, "MRU": {"name": "Mauritius", "country": "Mauritius", "facts": [{"k": "Entry", "v": "Russian passport: visa-free up to 60 days; onward ticket and accommodation are checked."}, {"k": "Season", "v": "Cyclones from 15 November to 15 May, strongest January–March. Refundable fares and weather cover.", "warn": true}, {"k": "Flights", "v": "Airlink nonstop from Cape Town on Tuesdays and Fridays."}], "links": []}};
 
 var COMPARE = [
-  {name:"South Africa only", detail:"Sarajevo ⇄ Cape Town, 15 Dec → 13 Jan", price:843, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), scn:"sa-only"},
-  {name:"South Africa, two weeks", detail:"15 → 29 Dec, return 14 h 45", price:825, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2026-12-29?sort=price_a&fs=layoverair=IST")},
-  {name:"SA + Namibia side trip", detail:"Cape Town ⇄ Windhoek 5 → 9 Jan, FlySafair nonstop", price:1178, date:"12 Oct", approx:true},
+  {name:"South Africa, two weeks", detail:"15 → 29 Dec", price:825, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2026-12-29?sort=price_a&fs=layoverair=IST")},
+  {name:"South Africa only", detail:"15 Dec → 13 Jan", price:843, date:"16 Oct", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), scn:"sa-only"},
+  {name:"SA loop with B", detail:"A's flights: Turkish + two domestic hops", price:1053, date:"16–18 Oct", approx:true, scn:"loop"},
   {name:"SA + Zanzibar", detail:"Home from Zanzibar on 10 Jan", price:1346, date:"12 Oct", approx:true},
-  {name:"SA + Victoria Falls side trip", detail:"Cape Town ⇄ Victoria Falls 3 → 7 Jan", price:1367, date:"12 Oct", approx:true},
   {name:"SA + Mauritius", detail:"Home from Mauritius on 13 Jan", price:1382, date:"16 Oct", scn:"mauritius"},
   {name:"London ⇄ Cape Town", detail:"Norse, nonstop, 15 Dec → 14 Jan", price:1412, date:"12 Oct", url:K("LON-CPT/2026-12-15/2027-01-14?sort=price_a&fs=stops=0")},
-  {name:"SA + Kenya", detail:"Home from Nairobi on 10 Jan", price:1494, date:"12 Oct", approx:true},
-  {name:"Namibia → Falls with B", detail:"A's flights on the base route", price:1573, date:"16–18 Oct", approx:true, scn:"namibia-falls"},
-  {name:"Namibia → Falls → Kruger with B", detail:"A's flights, car hire extra", price:1572, date:"16–18 Oct", approx:true, scn:"kruger"},
-  {name:"Falls → Namibia with B", detail:"A's flights on the reversed route", price:1641, date:"16–18 Oct", approx:true, scn:"falls-namibia"},
-  {name:"SA + Madagascar", detail:"Home from Antananarivo", price:2150, date:"12 Oct", approx:true}
+  {name:"SA + Kenya", detail:"Home from Nairobi on 10 Jan", price:1494, date:"12 Oct", approx:true}
 ];
 
 /* ---------- state ---------- */
-var state = {scn:SCENARIOS[0].id, who:"all", cur:"usd", sel:null, open:{}};
+var state = {scn:"loop", who:"all", cur:"usd", sel:null, open:{}, cats:{}};
+CATS.forEach(function(c){ state.cats[c.id]=true; });
 function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function save(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 function isScn(id){ return SCENARIOS.some(function(s){return s.id===id;}); }
-var savedCur = load("route-en-cur"); if(savedCur==="usd"||savedCur==="rub") state.cur = savedCur;
-var savedScn = load("route-en-scn"); if(savedScn && isScn(savedScn)) state.scn = savedScn;
-var hash = (location.hash||"").replace("#",""); if(isScn(hash)) state.scn = hash;
-var checks = {}; try{ checks = JSON.parse(load("route-en-checks")||"{}")||{}; }catch(e){ checks = {}; }
+var sc=load("v3-cur"); if(sc==="usd"||sc==="rub") state.cur=sc;
+var ss=load("v3-scn"); if(ss&&isScn(ss)) state.scn=ss;
+var hash=(location.hash||"").replace("#",""); if(isScn(hash)) state.scn=hash;
+var checks={}; try{ checks=JSON.parse(load("v3-checks")||"{}")||{}; }catch(e){ checks={}; }
 
 function scn(){ return SCENARIOS.filter(function(s){return s.id===state.scn;})[0]; }
-function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
-function nf(n){ return n.toLocaleString("en-US"); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
 function money(usd, approx){
-  if(state.cur==="rub"){ return "≈ " + Math.round(usd*RATE/1000).toLocaleString("ru-RU").replace(/[  ]/g," ") + " 000 ₽"; }
-  return (approx?"≈ ":"") + "$" + nf(usd);
+  if(state.cur==="rub") return "≈ "+Math.round(usd*RATE/1000).toLocaleString("ru-RU").replace(/[  ]/g," ")+" 000 ₽";
+  return (approx?"≈ ":"")+"$"+usd.toLocaleString("en-US");
 }
-var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-var WD = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], WD=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 function parse(d){ var p=d.split("-"); return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); }
 function dayLabel(d){ var x=parse(d); return {n:x.getUTCDate(), m:MON[x.getUTCMonth()], w:WD[x.getUTCDay()]}; }
 function short(d){ var x=parse(d); return x.getUTCDate()+" "+MON[x.getUTCMonth()]; }
-function whoKey(w){ return (w.indexOf("a")>-1 && w.indexOf("b")>-1) ? "ab" : w[0]; }
-function visible(w){ return state.who==="all" || w.indexOf(state.who)>-1; }
-function placeName(code){ return (PLACES[code]&&PLACES[code].name)||code; }
+function whoKey(w){ return (w.indexOf("a")>-1&&w.indexOf("b")>-1)?"ab":w[0]; }
+function visible(w){ return state.who==="all"||w.indexOf(state.who)>-1; }
+function placeName(c){ return (PLACES[c]&&PLACES[c].name)||c; }
 function chipsFor(w){ return w.map(function(x){ return '<span class="chip '+x+'">'+x.toUpperCase()+'</span>'; }).join(""); }
-function ticketForLeg(s, legId){ return s.tickets.filter(function(t){ return t.legs && t.legs.indexOf(legId)>-1; })[0]; }
-
-/* ---------- controls ---------- */
+function ticketForLeg(s,id){ return s.tickets.filter(function(t){ return t.legs&&t.legs.indexOf(id)>-1; })[0]; }
+function poiById(id){ return POIS.filter(function(p){return p.id===id;})[0]; }
 function seg(el, opts, cur, onPick){
-  el.innerHTML = opts.map(function(o){
-    return '<button type="button" data-v="'+o.v+'" aria-pressed="'+(o.v===cur)+'"'+(o.disabled?' disabled':'')+'>'+esc(o.t)+'</button>';
-  }).join("");
-  Array.prototype.forEach.call(el.querySelectorAll("button"), function(b){
-    b.addEventListener("click", function(){ onPick(b.getAttribute("data-v")); });
-  });
-}
-function setScn(v){
-  state.scn=v; state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all";
-  save("route-en-scn",v); try{ history.replaceState(null,"","#"+v); }catch(e){}
-  renderAll();
-}
-function renderControls(){
-  var s = scn(), two = s.travellers.length>1;
-  seg(document.getElementById("segScn"), SCENARIOS.map(function(x){return {v:x.id,t:x.short};}), state.scn, setScn);
-  seg(document.getElementById("segWho"), [{v:"all",t:"Both"},{v:"a",t:"A"},{v:"b",t:"B",disabled:!two}], state.who, function(v){ state.who=v; renderAll(); });
-  seg(document.getElementById("segCur"), [{v:"usd",t:"$"},{v:"rub",t:"₽"}], state.cur, function(v){ state.cur=v; save("route-en-cur",v); renderAll(); });
-}
-
-/* ---------- totals ---------- */
-function totals(s){
-  var t={a:0,b:0,aEst:false,bEst:false};
-  s.tickets.forEach(function(k){
-    if(k.who.indexOf("a")>-1){ t.a+=k.price; if(k.est) t.aEst=true; }
-    if(k.who.indexOf("b")>-1){ t.b+=k.price; if(k.est) t.bEst=true; }
-  });
-  return t;
-}
-function nightsBy(s, who){
-  var out={}, order=[];
-  s.timeline.forEach(function(e){
-    if(!e.stay || e.stay.who.indexOf(who)<0) return;
-    var c = PLACES[e.stay.place].country; if(!out[c]){ out[c]=0; order.push(c); } out[c]+=e.stay.nights;
-  });
-  return order.map(function(c){ return c+" "+out[c]; }).join(" · ");
-}
-function renderSummary(){
-  var s=scn(), t=totals(s), two=s.travellers.length>1, html="";
-  html += '<div class="sum"><span class="k"><span class="dot a"></span>A, flights</span><span class="v">'+money(t.a,t.aEst)+'</span><span class="s">Nights: '+esc(nightsBy(s,"a"))+'</span></div>';
-  if(two){
-    html += '<div class="sum"><span class="k"><span class="dot b"></span>B, flights</span><span class="v">'+money(t.b,t.bEst)+'</span><span class="s">Nights: '+esc(nightsBy(s,"b"))+'</span></div>';
-    html += '<div class="sum"><span class="k"><span class="dot ab"></span>Together</span><span class="v">'+money(t.a+t.b,true)+'</span><span class="s">Before beds, car hire and visas</span></div>';
-    html += '<div class="sum"><span class="k">The plan</span><span class="s" style="font-size:14px;color:var(--ink)">'+esc(s.blurb)+'</span></div>';
-  } else {
-    html += '<div class="sum"><span class="k">The plan</span><span class="v" style="font-size:19px;line-height:1.25">'+esc(s.title)+'</span><span class="s">'+esc(s.blurb)+'</span></div>';
-  }
-  document.getElementById("summary").innerHTML = html;
-  document.getElementById("mapTitle").textContent = s.title;
-}
-
-/* ---------- timeline ---------- */
-function legItem(s, e){
-  var L = LEGS[e.leg], wk = whoKey(L.who), dim = !visible(L.who), open = !!state.open[e.leg];
-  if(L.kind==="drive"){
-    return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div>'+
-      '<div class="kind">By car</div>'+
-      '<div class="route">'+esc(placeName(L.from))+' <span aria-hidden="true">→</span> '+esc(placeName(L.to))+'</div>'+
-      '<div class="meta"><span class="mono">'+esc(L.dist)+'</span><span class="mono">'+esc(L.dur)+'</span></div>'+
-      '<p class="stay-text">'+esc(L.note)+'</p></div><div class="chips">'+chipsFor(L.who)+'</div></div></div>';
-  }
-  var t = ticketForLeg(s, e.leg);
-  var time = L.dep ? '<span class="mono">'+esc(L.dep)+' → '+esc(L.arr)+(L.arrNext?' +1':'')+'</span>' : '';
-  var head = '<button type="button" class="ihead" aria-expanded="'+open+'" data-toggle="'+e.leg+'"><div>'+
-    '<div class="kind">Flight · '+esc(L.carrier)+'</div>'+
-    '<div class="route"><span class="code">'+esc(L.from)+'</span><span aria-hidden="true">→</span><span class="code">'+esc(L.to)+'</span>'+(L.via?'<span class="via">via '+esc(L.via)+'</span>':'')+'</div>'+
-    '<div class="meta">'+time+'<span>'+esc(L.dur)+'</span></div></div>'+
-    '<div class="chips">'+chipsFor(L.who)+(t&&t.est?'<span class="chip est">estimate</span>':'')+'</div></button>';
-  var detail = '';
-  if(open && t){
-    var per = (t.who.length>1) ? " per person" : "";
-    detail = '<div class="detail">'+
-      '<div class="row"><span><span class="lbl">Ticket:</span> '+esc(t.label)+'</span></div>'+
-      '<div class="row"><span><span class="lbl">Fare:</span> <b class="mono">'+money(t.price,t.est)+per+'</b>'+(t.rt?' <span class="lbl">(return ticket, both directions)</span>':'')+'</span><span><span class="lbl">Checked:</span> '+esc(t.checked)+'</span></div>'+
-      (L.note?'<p>'+esc(L.note)+'</p>':'')+(t.note?'<p>'+esc(t.note)+'</p>':'')+
-      '<div class="links"><a href="'+esc(t.url)+'" target="_blank" rel="noopener">Open fare</a></div></div>';
-  }
-  return '<div class="item who-'+wk+(dim?' dim':'')+'">'+head+detail+'</div>';
-}
-function stayItem(e){
-  var S = e.stay, wk=whoKey(S.who), dim=!visible(S.who);
-  var range = S.end ? short(e.date)+" – "+short(S.end) : short(e.date);
-  return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div>'+
-    '<div class="kind">Stay · '+esc(placeName(S.place))+'</div>'+
-    '<div class="stay-title">'+esc(S.title)+'</div>'+
-    '<div class="meta"><span class="nights">'+range+' · '+S.nights+' night'+(S.nights===1?'':'s')+'</span></div>'+
-    (S.text?'<p class="stay-text">'+esc(S.text)+'</p>':'')+
-    '</div><div class="chips">'+chipsFor(S.who)+'</div></div></div>';
-}
-function renderTimeline(){
-  var s=scn(), groups=[], byDate={};
-  s.timeline.forEach(function(e){ if(!byDate[e.date]){ byDate[e.date]=[]; groups.push(e.date); } byDate[e.date].push(e); });
-  var el = document.getElementById("timeline");
-  el.innerHTML = groups.map(function(d){
-    var L = dayLabel(d);
-    return '<div class="day"><div class="date"><b>'+L.n+' '+L.m+'</b>'+L.w+'</div><div class="items">'+
-      byDate[d].map(function(e){ return e.leg ? legItem(s,e) : stayItem(e); }).join("")+'</div></div>';
-  }).join("");
-  Array.prototype.forEach.call(el.querySelectorAll("[data-toggle]"), function(b){
-    var id=b.getAttribute("data-toggle");
-    b.addEventListener("click", function(){
-      state.open[id]=!state.open[id]; state.sel = state.open[id] ? id : null;
-      renderTimeline(); renderMap();
-      var nb = document.querySelector('[data-toggle="'+id+'"]'); if(nb) nb.focus();
-    });
-    b.addEventListener("mouseenter", function(){ highlight(id); });
-    b.addEventListener("mouseleave", function(){ highlight(state.sel); });
-  });
+  el.innerHTML = opts.map(function(o){ return '<button type="button" data-v="'+o.v+'" aria-pressed="'+(o.v===cur)+'"'+(o.disabled?' disabled':'')+'>'+esc(o.t)+'</button>'; }).join("");
+  Array.prototype.forEach.call(el.querySelectorAll("button"), function(b){ b.addEventListener("click", function(){ onPick(b.getAttribute("data-v")); }); });
 }
 
 /* ---------- map ---------- */
-var LON0=8, LON1=62, LAT0=3, LAT1=-37, KX=Math.cos(17*Math.PI/180), W=1000;
-var SC = W/((LON1-LON0)*KX);
-function px(lon){ return (lon-LON0)*KX*SC; }
-function py(lat){ return (LAT0-lat)*SC; }
-var COAST = [[3,9.6],[1,9.4],[-1,8.9],[-3,10.4],[-4.8,11.85],[-5.9,12.3],[-8.8,13.2],[-12.4,13.5],[-15.2,12.1],[-17.3,11.8],[-20,13.1],[-22.95,14.5],[-24.6,14.8],[-26.6,15.15],[-28.6,16.45],[-31.5,18.1],[-33.9,18.4],[-34.36,18.47],[-34.4,19.3],[-34.83,20.0],[-34.2,22.1],[-34.05,24.9],[-33.96,25.6],[-33.0,27.9],[-31.6,29.5],[-29.86,31.03],[-27.3,32.6],[-25.97,32.6],[-24.7,34.9],[-23.9,35.5],[-21.9,35.4],[-19.8,34.85],[-17.9,36.9],[-16.2,39.9],[-15.0,40.7],[-13.0,40.55],[-10.5,40.4],[-8.0,39.3],[-6.8,39.3],[-5.1,39.1],[-4.05,39.67],[-2.3,40.9],[-0.4,42.5],[2.0,45.3],[3,46.5],[3,9.6]];
-var MADA = [[-11.95,49.26],[-13.4,50.0],[-15.5,50.4],[-17.0,49.8],[-18.15,49.4],[-21.3,48.3],[-23.4,47.6],[-25.03,46.99],[-25.5,45.1],[-24.6,43.9],[-23.35,43.67],[-21.5,43.4],[-20.28,44.28],[-18.2,44.0],[-16.2,44.5],[-15.72,46.3],[-14.4,47.9],[-12.9,48.9]];
-function poly(pts){ return pts.map(function(p,i){ return (i?"L":"M")+px(p[1]).toFixed(1)+" "+py(p[0]).toFixed(1); }).join(" ")+" Z"; }
-function scnPoints(s){
-  var pts={};
+var map=null, tiles=null, poiLayer=null, routeLayer=null, markers={};
+function tileUrl(){
+  var dark = document.documentElement.getAttribute("data-theme")==="dark" ||
+    (document.documentElement.getAttribute("data-theme")!=="light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  return "https://{s}.basemaps.cartocdn.com/"+(dark?"dark_all":"light_all")+"/{z}/{x}/{y}{r}.png";
+}
+function initMap(){
+  if(typeof L==="undefined"){ document.getElementById("map").innerHTML='<p style="padding:20px;color:var(--muted)">The map library did not load. The photo atlas below still works.</p>'; return; }
+  map = L.map("map", {scrollWheelZoom:false, zoomSnap:0.5}).setView([-28.8, 25.5], 5);
+  tiles = L.tileLayer(tileUrl(), {maxZoom:18, subdomains:"abcd", attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+  map.on("focus", function(){ map.scrollWheelZoom.enable(); });
+  map.on("blur", function(){ map.scrollWheelZoom.disable(); });
+  routeLayer = L.layerGroup().addTo(map);
+  poiLayer = L.layerGroup().addTo(map);
+  if(window.matchMedia){ var mq=window.matchMedia("(prefers-color-scheme: dark)"); var h=function(){ tiles.setUrl(tileUrl()); drawPois(); drawRoute(); }; if(mq.addEventListener) mq.addEventListener("change",h); else if(mq.addListener) mq.addListener(h); }
+  drawPois(); drawRoute(true);
+}
+function drawPois(){
+  if(!map) return; poiLayer.clearLayers(); markers={};
+  POIS.forEach(function(p){
+    if(!state.cats[p.cat]) return;
+    var col = cssv(catOf(p.cat).v);
+    var m = L.circleMarker([p.lat,p.lon], {radius:7, color:cssv("--surface"), weight:2, fillColor:col, fillOpacity:1});
+    m.bindTooltip(p.name, {direction:"top", offset:[0,-6]});
+    m.on("click", function(){ selectPoi(p.id, false); });
+    m.addTo(poiLayer); markers[p.id]=m;
+  });
+}
+function legLatLng(c){ var P=PLACES[c]; return P&&P.lat!=null ? [P.lat,P.lon] : null; }
+function drawRoute(fit){
+  if(!map) return; routeLayer.clearLayers();
+  var s=scn(), pts=[];
   s.timeline.forEach(function(e){
-    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts[c]=1; }); }
-    if(e.stay) pts[e.stay.place]=1;
+    if(!e.leg) return; var L2=LEGS[e.leg];
+    var A=legLatLng(L2.from), B=legLatLng(L2.to); if(!A||!B) return;
+    var col = cssv(L2.who.length>1?"--both":(L2.who[0]==="a"?"--a":"--b"));
+    var dim = !visible(L2.who) || (state.sel && state.sel!==e.leg);
+    L.polyline(curvePts(A,B,L2.kind==="drive"?0.06:0.18), {color:col, weight:state.sel===e.leg?6:3.5, opacity:dim?0.18:0.9, dashArray:L2.kind==="drive"?"8 7":null}).addTo(routeLayer);
+    pts.push(A,B);
   });
-  return Object.keys(pts);
-}
-function viewBox(s){
-  var pts=scnPoints(s).map(function(c){return PLACES[c];});
-  var xs=pts.map(function(p){return px(p.lon);}), ys=pts.map(function(p){return py(p.lat);});
-  var x0=Math.min.apply(null,xs)-110, x1=Math.max.apply(null,xs)+150, y0=Math.min.apply(null,ys)-110, y1=Math.max.apply(null,ys)+70;
-  var w=x1-x0, h=y1-y0, ratio=0.86;
-  if(h/w<ratio){ var nh=w*ratio; y0-=(nh-h)/2; h=nh; } else { var nw=h/ratio; x0-=(nw-w)/2; w=nw; }
-  return {x:Math.max(0,x0),y:Math.max(0,y0),w:w,h:h};
-}
-function curve(a,b,bend){
-  var x1=px(a.lon),y1=py(a.lat),x2=px(b.lon),y2=py(b.lat);
-  var mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1;
-  var k=bend*len, cx=mx-dy/len*k, cy=my+dx/len*k;
-  return "M"+x1.toFixed(1)+" "+y1.toFixed(1)+" Q"+cx.toFixed(1)+" "+cy.toFixed(1)+" "+x2.toFixed(1)+" "+y2.toFixed(1);
-}
-var BEND = {a2:0.14, b2:-0.12, a3:0.18, b3:-0.14, r_a2:0.16, r_b2:-0.1, r_ab1:0.12, r_b3:-0.12, r_a3:0.14, k_ab:0.12, k_a5:0.16, ab1:-0.12, m2:-0.1};
-function renderMap(){
-  var s=scn(), vb=viewBox(s), svg=document.getElementById("map"), f=vb.w/1000, out=[];
-  svg.setAttribute("viewBox", vb.x.toFixed(1)+" "+vb.y.toFixed(1)+" "+vb.w.toFixed(1)+" "+vb.h.toFixed(1));
-  for(var lat=0; lat>=-35; lat-=5){
-    var y=py(lat); if(y<vb.y||y>vb.y+vb.h) continue;
-    out.push('<line class="grat" x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>');
-    out.push('<text class="gratlbl" x="'+(vb.x+8*f)+'" y="'+(y-5*f)+'" font-size="'+(12*f)+'">'+(lat===0?"equator":Math.abs(lat)+"°S")+'</text>');
-  }
-  for(var lon=10; lon<=60; lon+=5){
-    var x=px(lon); if(x<vb.x||x>vb.x+vb.w) continue;
-    out.push('<line class="grat" x1="'+x+'" y1="'+vb.y+'" x2="'+x+'" y2="'+(vb.y+vb.h)+'"/>');
-    out.push('<text class="gratlbl" x="'+(x+5*f)+'" y="'+(vb.y+vb.h-8*f)+'" font-size="'+(12*f)+'">'+lon+'°E</text>');
-  }
-  out.push('<path class="land" d="'+poly(COAST)+'"/>');
-  out.push('<path class="land" d="'+poly(MADA)+'"/>');
-  out.push('<text class="sealbl" x="'+(Math.max(vb.x+10*f,px(9.5)))+'" y="'+py(-29)+'" font-size="'+(14*f)+'">ATLANTIC</text>');
-  if(px(40)<vb.x+vb.w) out.push('<text class="sealbl" x="'+(Math.min(px(36),vb.x+vb.w-210*f))+'" y="'+py(-32)+'" font-size="'+(14*f)+'">INDIAN OCEAN</text>');
-
-  var legsOut=[], homeOut=[], used={}, flip=1;
+  var seen={};
   s.timeline.forEach(function(e){
-    if(!e.leg) return; var L=LEGS[e.leg], wk=whoKey(L.who);
-    var dim = !visible(L.who) || (state.sel && state.sel!==e.leg);
-    var extra = (state.sel===e.leg?" sel":"")+(dim?" dim":"");
-    if(L.from==="SJJ"||L.to==="SJJ"){
-      var inbound = L.from==="SJJ", p = PLACES[inbound?L.to:L.from];
-      var x2=px(p.lon), y2=py(p.lat), off=(inbound?-36:36)*f + (L.who[0]==="b"?26*f:0);
-      var x1=x2+off+(inbound?-30*f:30*f), y1=vb.y+4*f, cx=x1+(x2-x1)*0.2, cy=(y1+y2)/2;
-      var d = inbound ? "M"+x1+" "+y1+" Q"+cx+" "+cy+" "+x2+" "+y2 : "M"+x2+" "+y2+" Q"+cx+" "+cy+" "+x1+" "+y1;
-      homeOut.push('<path class="leg home '+wk+extra+'" d="'+d+'" data-mleg="'+e.leg+'"/>');
-      var key=(inbound?"in":"out")+L.who.join("")+(inbound?L.to:L.from);
-      if(!used[key]){ used[key]=1; homeOut.push('<text class="homelbl" x="'+(x1+(inbound?-4:4)*f)+'" y="'+(y1+16*f)+'" text-anchor="'+(inbound?"end":"start")+'" font-size="'+(12*f)+'">'+(inbound?"from Istanbul ↓":"↑ home")+'</text>'); }
-      return;
-    }
-    flip=-flip;
-    var bend = BEND[e.leg]!=null ? BEND[e.leg] : (L.kind==="drive" ? 0.08*flip : 0.15*flip);
-    legsOut.push('<path class="leg '+L.kind+' '+wk+extra+'" d="'+curve(PLACES[L.from],PLACES[L.to],bend)+'" data-mleg="'+e.leg+'"/>');
+    var c = e.stay ? e.stay.place : null; if(!c||seen[c]) return; seen[c]=1;
+    var ll=legLatLng(c); if(!ll) return;
+    L.circleMarker(ll, {radius:9, color:cssv("--surface"), weight:3, fillColor:cssv("--ink"), fillOpacity:1}).bindTooltip(placeName(c), {permanent:true, direction:"right", offset:[10,0], className:"stoplbl"}).addTo(routeLayer);
+    pts.push(ll);
   });
-  out = out.concat(homeOut, legsOut);
-  scnPoints(s).forEach(function(c){
-    var P=PLACES[c], x=px(P.lon), y=py(P.lat), r=(P.minor?5:7)*f;
-    var dx=(P.dx!=null?P.dx:12)*f, dy=(P.dy!=null?P.dy:-8)*f, anc=P.anchor||"start", stopId=STOP_OF[c]||c;
-    out.push('<g class="pt'+(P.minor?' minor':'')+'" tabindex="0" role="button" aria-label="'+esc(P.name)+'" data-stop="'+stopId+'">'+
-      '<circle cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+
-      '<text x="'+(x+dx)+'" y="'+(y+dy)+'" text-anchor="'+anc+'" font-size="'+((P.minor?13:15)*f)+'">'+esc(P.name)+'</text>'+
-      (P.code?'<text class="code" x="'+(x+dx)+'" y="'+(y+dy+15*f)+'" text-anchor="'+anc+'" font-size="'+(11*f)+'">'+P.code+'</text>':'')+'</g>');
-  });
-  svg.innerHTML = out.join("");
-  Array.prototype.forEach.call(svg.querySelectorAll(".pt"), function(g){
-    var go=function(){ var el=document.getElementById("stop-"+g.getAttribute("data-stop")); if(!el) return; el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.add("flash"); setTimeout(function(){el.classList.remove("flash");},1400); };
-    g.addEventListener("click", go);
-    g.addEventListener("keydown", function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); go(); } });
-  });
+  if(fit && pts.length){ map.fitBounds(L.latLngBounds(pts).pad(0.15)); }
 }
-function highlight(id){
-  Array.prototype.forEach.call(document.querySelectorAll("#map [data-mleg]"), function(p){
-    var lid=p.getAttribute("data-mleg"), L=LEGS[lid];
-    p.classList.toggle("dim", !visible(L.who) || (!!id && id!==lid)); p.classList.toggle("sel", id===lid);
-  });
+function curvePts(a,b,bend){
+  var out=[], mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2, dx=b[0]-a[0], dy=b[1]-a[1];
+  var cx=mx - dy*bend, cy=my + dx*bend;
+  for(var i=0;i<=24;i++){ var t=i/24, u=1-t; out.push([u*u*a[0]+2*u*t*cx+t*t*b[0], u*u*a[1]+2*u*t*cy+t*t*b[1]]); }
+  return out;
+}
+function poiCardHtml(p, compact){
+  var c=catOf(p.cat);
+  var img = p.img ? '<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy" width="800" height="600">' : '';
+  var credit = p.artist||p.license ? '<div class="credit">Photo: '+(p.desc_url?'<a href="'+esc(p.desc_url)+'" target="_blank" rel="noopener">':'')+esc(p.artist||"Wikimedia Commons")+(p.license?' · '+esc(p.license):'')+(p.desc_url?'</a>':'')+'</div>' : '';
+  return img+'<div class="'+(compact?'pb':'pbody')+'">'+
+    (compact?'<div class="reg">'+esc(p.region)+'</div>':'')+
+    '<h3>'+esc(p.name)+'</h3>'+
+    (compact?'':'<div class="pmeta"><span class="cat"><span class="sw" style="background:var('+c.v+')"></span>'+esc(c.name)+'</span><span>'+esc(p.region)+'</span></div>')+
+    '<p>'+esc(p.blurb)+'</p>'+(p.tip?'<p class="tip">'+esc(p.tip)+'</p>':'')+
+    (compact?'<div class="acts"><button type="button" class="linkbtn" data-show="'+p.id+'">Show on map</button>'+(p.url?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener">Wikipedia</a>':'')+(scn().pois.indexOf(p.id)>-1?'<span class="onroute">on this route</span>':'')+'</div>':(p.url?'<div class="links"><a href="'+esc(p.url)+'" target="_blank" rel="noopener">Wikipedia</a></div>':''))+
+    credit+'</div>';
+}
+function selectPoi(id, fly){
+  var p=poiById(id); if(!p) return;
+  document.getElementById("panel").innerHTML = '<div class="pcard">'+poiCardHtml(p,false)+'</div>';
+  if(map){
+    if(fly){ map.flyTo([p.lat,p.lon], Math.max(map.getZoom(),8), {duration:0.8}); }
+    Object.keys(markers).forEach(function(k){ markers[k].setRadius(k===id?11:7); });
+  }
 }
 
-/* ---------- tables, places, checklist ---------- */
+/* ---------- filters + atlas ---------- */
+function renderFilters(){
+  var el=document.getElementById("catFilters");
+  el.innerHTML = CATS.map(function(c){
+    var n=POIS.filter(function(p){return p.cat===c.id;}).length;
+    return '<button type="button" class="fchip" data-cat="'+c.id+'" aria-pressed="'+(!!state.cats[c.id])+'"><span class="sw" style="background:var('+c.v+')"></span>'+esc(c.name)+'<span class="n">'+n+'</span></button>';
+  }).join("") + '<button type="button" class="fchip" data-cat="__all"><span class="n">all</span></button>';
+  Array.prototype.forEach.call(el.querySelectorAll("[data-cat]"), function(b){
+    b.addEventListener("click", function(){
+      var id=b.getAttribute("data-cat");
+      if(id==="__all"){ CATS.forEach(function(c){ state.cats[c.id]=true; }); }
+      else { var onlyThis = CATS.every(function(c){ return state.cats[c.id]; }); if(onlyThis){ CATS.forEach(function(c){ state.cats[c.id]=(c.id===id); }); } else { state.cats[id]=!state.cats[id]; if(!CATS.some(function(c){return state.cats[c.id];})) CATS.forEach(function(c){ state.cats[c.id]=true; }); } }
+      renderFilters(); drawPois(); renderAtlas();
+    });
+  });
+}
+function renderAtlas(){
+  var list=POIS.filter(function(p){ return state.cats[p.cat]; });
+  var route=scn().pois;
+  list.sort(function(a,b){ var ra=route.indexOf(a.id)>-1?0:1, rb=route.indexOf(b.id)>-1?0:1; return ra-rb || a.order-b.order; });
+  document.getElementById("atlasCount").textContent = list.length+" places · those on the selected route come first";
+  var el=document.getElementById("atlasGrid");
+  el.innerHTML = list.map(function(p){ return '<article class="poi" id="poi-'+p.id+'">'+poiCardHtml(p,true)+'</article>'; }).join("");
+  Array.prototype.forEach.call(el.querySelectorAll("[data-show]"), function(b){
+    b.addEventListener("click", function(){ selectPoi(b.getAttribute("data-show"), true); document.getElementById("places").scrollIntoView({behavior:"smooth", block:"start"}); });
+  });
+}
+
+/* ---------- plan ---------- */
+function setScn(v){ state.scn=v; state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all"; save("v3-scn",v); try{ history.replaceState(null,"","#"+v); }catch(e){} renderPlan(); drawRoute(true); renderAtlas(); }
+function renderControls(){
+  var s=scn(), two=s.travellers.length>1;
+  seg(document.getElementById("segScn"), SCENARIOS.map(function(x){return {v:x.id,t:x.short};}), state.scn, setScn);
+  seg(document.getElementById("segWho"), [{v:"all",t:"Both"},{v:"a",t:"A"},{v:"b",t:"B",disabled:!two}], state.who, function(v){ state.who=v; renderPlan(); drawRoute(false); });
+  seg(document.getElementById("segCur"), [{v:"usd",t:"$"},{v:"rub",t:"₽"}], state.cur, function(v){ state.cur=v; save("v3-cur",v); renderPlan(); });
+}
+function totals(s){ var t={a:0,b:0}; s.tickets.forEach(function(k){ if(k.who.indexOf("a")>-1) t.a+=k.price; if(k.who.indexOf("b")>-1) t.b+=k.price; }); return t; }
+function nights(s,who){ var n=0; s.timeline.forEach(function(e){ if(e.stay&&e.stay.who.indexOf(who)>-1) n+=e.stay.nights; }); return n; }
+function renderSummary(){
+  var s=scn(), t=totals(s), two=s.travellers.length>1, h="";
+  h+='<div class="sum"><span class="k"><span class="dot a"></span>A, flights</span><span class="v">'+money(t.a)+'</span><span class="s">'+nights(s,"a")+' nights on the ground</span></div>';
+  if(two){
+    h+='<div class="sum"><span class="k"><span class="dot b"></span>B, flights</span><span class="v">'+money(t.b)+'</span><span class="s">'+nights(s,"b")+' nights on the ground</span></div>';
+    h+='<div class="sum"><span class="k"><span class="dot ab"></span>Together</span><span class="v">'+money(t.a+t.b,true)+'</span><span class="s">'+esc(s.extras||"Before beds and visas")+'</span></div>';
+  }
+  h+='<div class="sum"><span class="k">The plan</span><span class="s" style="font-size:14px;color:var(--ink)">'+esc(s.blurb)+'</span></div>';
+  document.getElementById("summary").innerHTML=h;
+}
+function legItem(s,e){
+  var L2=LEGS[e.leg], wk=whoKey(L2.who), dim=!visible(L2.who), open=!!state.open[e.leg];
+  if(L2.kind==="drive"){
+    return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div><div class="kind">By car</div>'+
+      '<div class="route">'+esc(placeName(L2.from))+' <span aria-hidden="true">→</span> '+esc(placeName(L2.to))+'</div>'+
+      '<div class="meta"><span class="mono">'+esc(L2.dist)+'</span><span class="mono">'+esc(L2.dur)+'</span></div>'+
+      '<p class="stay-text">'+esc(L2.note)+'</p></div><div class="chips">'+chipsFor(L2.who)+'</div></div></div>';
+  }
+  var t=ticketForLeg(s,e.leg);
+  var time = L2.dep ? '<span class="mono">'+esc(L2.dep)+' → '+esc(L2.arr)+(L2.arrNext?' +1':'')+'</span>' : '';
+  var head='<button type="button" class="ihead" aria-expanded="'+open+'" data-toggle="'+e.leg+'"><div><div class="kind">Flight · '+esc(L2.carrier)+'</div>'+
+    '<div class="route"><span class="code">'+esc(L2.from)+'</span><span aria-hidden="true">→</span><span class="code">'+esc(L2.to)+'</span>'+(L2.via?'<span class="via">via '+esc(L2.via)+'</span>':'')+'</div>'+
+    '<div class="meta">'+time+'<span>'+esc(L2.dur)+'</span></div></div><div class="chips">'+chipsFor(L2.who)+'</div></button>';
+  var det='';
+  if(open&&t){
+    det='<div class="detail"><div class="row"><span><span class="lbl">Ticket:</span> '+esc(t.label)+'</span></div>'+
+      '<div class="row"><span><span class="lbl">Fare:</span> <b class="mono">'+money(t.price)+'</b>'+(t.rt?' <span class="lbl">(return ticket, both directions)</span>':'')+'</span><span><span class="lbl">Checked:</span> '+esc(t.checked)+'</span></div>'+
+      (L2.note?'<p>'+esc(L2.note)+'</p>':'')+(t.note?'<p>'+esc(t.note)+'</p>':'')+
+      '<div class="links"><a href="'+esc(t.url)+'" target="_blank" rel="noopener">Open fare</a></div></div>';
+  }
+  return '<div class="item who-'+wk+(dim?' dim':'')+'">'+head+det+'</div>';
+}
+function stayItem(e){
+  var S=e.stay, wk=whoKey(S.who), dim=!visible(S.who), range=S.end?short(e.date)+" – "+short(S.end):short(e.date);
+  return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div><div class="kind">Stay · '+esc(placeName(S.place))+'</div>'+
+    '<div class="stay-title">'+esc(S.title)+'</div><div class="meta"><span class="nights">'+range+' · '+S.nights+' night'+(S.nights===1?'':'s')+'</span></div>'+
+    (S.text?'<p class="stay-text">'+esc(S.text)+'</p>':'')+'</div><div class="chips">'+chipsFor(S.who)+'</div></div></div>';
+}
+function renderTimeline(){
+  var s=scn(), groups=[], by={};
+  s.timeline.forEach(function(e){ if(!by[e.date]){ by[e.date]=[]; groups.push(e.date); } by[e.date].push(e); });
+  var el=document.getElementById("timeline");
+  el.innerHTML=groups.map(function(d){ var L2=dayLabel(d); return '<div class="day"><div class="date"><b>'+L2.n+' '+L2.m+'</b>'+L2.w+'</div><div class="items">'+by[d].map(function(e){ return e.leg?legItem(s,e):stayItem(e); }).join("")+'</div></div>'; }).join("");
+  Array.prototype.forEach.call(el.querySelectorAll("[data-toggle]"), function(b){
+    var id=b.getAttribute("data-toggle");
+    b.addEventListener("click", function(){ state.open[id]=!state.open[id]; state.sel=state.open[id]?id:null; renderTimeline(); drawRoute(false); var nb=document.querySelector('[data-toggle="'+id+'"]'); if(nb) nb.focus(); });
+  });
+}
 function renderCosts(){
   var s=scn(), two=s.travellers.length>1, t=totals(s);
   var head='<thead><tr><th>Ticket</th>'+(two?'<th class="num">A</th><th class="num">B</th>':'<th class="num">Fare</th>')+'<th class="num">Checked</th><th>Book</th></tr></thead>';
   var rows=s.tickets.map(function(k){
     var a=k.who.indexOf("a")>-1, b=k.who.indexOf("b")>-1;
-    var cells = two ? '<td class="num">'+(a?money(k.price,k.est):'—')+'</td><td class="num">'+(b?money(k.price,k.est):'—')+'</td>' : '<td class="num">'+money(k.price,k.est)+'</td>';
-    var sub = esc(k.carrier)+(k.rt?' · return ticket':'')+(k.est?' · estimated fare':'')+(k.note?' · '+esc(k.note):'');
-    return '<tr><td>'+esc(k.label)+'<span class="sub">'+sub+'</span></td>'+cells+'<td class="num">'+esc(k.checked)+'</td><td><a href="'+esc(k.url)+'" target="_blank" rel="noopener">'+(k.url.indexOf("kayak")>-1?"Kayak":"Airline")+'</a></td></tr>';
+    var cells=two?'<td class="num">'+(a?money(k.price):'—')+'</td><td class="num">'+(b?money(k.price):'—')+'</td>':'<td class="num">'+money(k.price)+'</td>';
+    return '<tr><td>'+esc(k.label)+'<span class="sub">'+esc(k.carrier)+(k.rt?' · return ticket':'')+(k.note?' · '+esc(k.note):'')+'</span></td>'+cells+'<td class="num">'+esc(k.checked)+'</td><td><a href="'+esc(k.url)+'" target="_blank" rel="noopener">Kayak</a></td></tr>';
   }).join("");
-  var tot = '<tr class="total"><td>Flights total'+(two?'<span class="sub">together '+money(t.a+t.b,true)+'</span>':'')+'</td>'+(two?'<td class="num">'+money(t.a,t.aEst)+'</td><td class="num">'+money(t.b,t.bEst)+'</td>':'<td class="num">'+money(t.a,t.aEst)+'</td>')+'<td></td><td></td></tr>';
-  document.getElementById("costTable").innerHTML = head+'<tbody>'+rows+tot+'</tbody>';
+  var tot='<tr class="total"><td>Flights total'+(s.extras?'<span class="sub">'+esc(s.extras)+'</span>':'')+'</td>'+(two?'<td class="num">'+money(t.a)+'</td><td class="num">'+money(t.b)+'</td>':'<td class="num">'+money(t.a)+'</td>')+'<td></td><td></td></tr>';
+  document.getElementById("costTable").innerHTML=head+'<tbody>'+rows+tot+'</tbody>';
 }
 function renderStops(){
-  var s=scn(), order=[], seen={};
-  s.timeline.forEach(function(e){
-    var codes = e.leg ? [LEGS[e.leg].from, LEGS[e.leg].to] : [e.stay.place];
-    codes.forEach(function(c){ var id=STOP_OF[c]||c; if(STOPS[id] && !seen[id]){ seen[id]=1; order.push(id); } });
-  });
-  document.getElementById("stopCards").innerHTML = order.map(function(id){
+  var s=scn(), ids=s.stops||Object.keys(STOPS);
+  var want = s.id==="loop" ? ["CPT","JNB","KRU","SWZ","LSO"] : (s.id==="mauritius" ? ["CPT","MRU"] : ["CPT"]);
+  document.getElementById("stopCards").innerHTML = want.filter(function(id){return STOPS[id];}).map(function(id){
     var S=STOPS[id];
     var facts=S.facts.map(function(f){ return '<div class="fact'+(f.warn?' warn':'')+'"><dt>'+esc(f.k)+'</dt><dd>'+esc(f.v)+'</dd></div>'; }).join("");
-    var links=S.links.length?'<div class="links">'+S.links.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener">'+esc(l.t)+'</a>';}).join("")+'</div>':'';
-    return '<article class="stop" id="stop-'+id+'"><header><h3>'+esc(S.name)+'</h3><span class="ctry">'+esc(S.country)+'</span></header><dl class="facts">'+facts+'</dl>'+links+'</article>';
+    var links=(S.links||[]).length?'<div class="links">'+S.links.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener">'+esc(l.t)+'</a>';}).join("")+'</div>':'';
+    return '<article class="stop"><header><h3>'+esc(S.name)+'</h3><span class="ctry">'+esc(S.country)+'</span></header><dl class="facts">'+facts+'</dl>'+links+'</article>';
   }).join("");
 }
 function renderCompare(){
-  var rows = COMPARE.slice().sort(function(a,b){return a.price-b.price;}).map(function(r){
-    var link = r.url ? '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">Kayak</a>' :
-      (r.scn ? '<button type="button" class="linkbtn" data-scn="'+r.scn+'">Show route</button>' : '<span class="muted">—</span>');
-    if(r.url && r.scn) link += ' · <button type="button" class="linkbtn" data-scn="'+r.scn+'">Show route</button>';
-    return '<tr'+(r.scn===state.scn?' class="hl"':'')+'><td><b>'+esc(r.name)+'</b><span class="sub">'+esc(r.detail)+'</span></td><td class="num">'+money(r.price,r.approx)+'</td><td class="num">'+esc(r.date)+'</td><td>'+link+'</td></tr>';
+  var rows=COMPARE.slice().sort(function(a,b){return a.price-b.price;}).map(function(r){
+    var link = r.url ? '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">Kayak</a>' : '';
+    if(r.scn) link += (link?' · ':'')+'<button type="button" class="linkbtn" data-scn="'+r.scn+'">Show route</button>';
+    return '<tr'+(r.scn===state.scn?' class="hl"':'')+'><td><b>'+esc(r.name)+'</b><span class="sub">'+esc(r.detail)+'</span></td><td class="num">'+money(r.price,r.approx)+'</td><td class="num">'+esc(r.date)+'</td><td>'+(link||'<span style="color:var(--faint)">—</span>')+'</td></tr>';
   }).join("");
   var el=document.getElementById("compareTable");
   el.innerHTML='<thead><tr><th>Option</th><th class="num">A\'s flights</th><th class="num">Checked</th><th>Link</th></tr></thead><tbody>'+rows+'</tbody>';
-  Array.prototype.forEach.call(el.querySelectorAll("[data-scn]"), function(b){
-    b.addEventListener("click", function(){ setScn(b.getAttribute("data-scn")); window.scrollTo({top:0,behavior:"smooth"}); });
-  });
+  Array.prototype.forEach.call(el.querySelectorAll("[data-scn]"), function(b){ b.addEventListener("click", function(){ setScn(b.getAttribute("data-scn")); document.getElementById("plan").scrollIntoView({behavior:"smooth"}); }); });
 }
 function renderChecklist(){
-  var s=scn(), done=0;
-  var el=document.getElementById("checklist");
-  el.innerHTML=s.checklist.map(function(id){
-    var c=CHECK[id], on=!!checks[id]; if(on) done++;
-    return '<li class="'+(on?'done':'')+'"><label for="ck-'+id+'"><input type="checkbox" id="ck-'+id+'" data-ck="'+id+'"'+(on?' checked':'')+'><span class="t">'+esc(c.t)+'</span><span class="w">'+esc(c.w)+'</span></label></li>';
-  }).join("");
-  document.getElementById("progress").textContent = done+" of "+s.checklist.length+" done";
-  Array.prototype.forEach.call(el.querySelectorAll("[data-ck]"), function(inp){
-    inp.addEventListener("change", function(){ checks[inp.getAttribute("data-ck")]=inp.checked; save("route-en-checks", JSON.stringify(checks)); renderChecklist(); var n=document.getElementById(inp.id); if(n) n.focus(); });
-  });
+  var s=scn(), done=0, el=document.getElementById("checklist");
+  el.innerHTML=s.checklist.map(function(id){ var c=CHECK[id], on=!!checks[id]; if(on) done++; return '<li class="'+(on?'done':'')+'"><label for="ck-'+id+'"><input type="checkbox" id="ck-'+id+'" data-ck="'+id+'"'+(on?' checked':'')+'><span class="t">'+esc(c.t)+'</span><span class="w">'+esc(c.w)+'</span></label></li>'; }).join("");
+  document.getElementById("progress").textContent=done+" of "+s.checklist.length+" done";
+  Array.prototype.forEach.call(el.querySelectorAll("[data-ck]"), function(inp){ inp.addEventListener("change", function(){ checks[inp.getAttribute("data-ck")]=inp.checked; save("v3-checks",JSON.stringify(checks)); renderChecklist(); var n=document.getElementById(inp.id); if(n) n.focus(); }); });
 }
-function renderAll(){ renderControls(); renderSummary(); renderTimeline(); renderMap(); renderCosts(); renderStops(); renderCompare(); renderChecklist(); }
-renderAll();
+var STAYS = [{"place": "Cape Town", "dates": "15–26 Dec · 11 nights", "advice": "Southern suburbs (Rondebosch, Claremont) are quieter and cheaper; Sea Point, Tamboerskloof and Vredehoek put you closer to the mountain and the sea.", "options": [{"name": "Charming apartment with rooftop deck", "area": "Rondebosch", "price": "$587 total", "rating": "Airbnb 4.87 (94)", "cancel": "free until 10 Dec", "url": "https://www.airbnb.com/rooms/32035246?check_in=2026-12-15&check_out=2026-12-26&adults=2"}, {"name": "Little Cottage", "area": "Claremont", "price": "$643 total", "rating": "Airbnb 4.91 (76)", "cancel": "free until 14 Dec", "url": "https://www.airbnb.com/rooms/38532555?check_in=2026-12-15&check_out=2026-12-26&adults=2"}, {"name": "Spacious secure studio", "area": "Vredehoek, below Table Mountain", "price": "$673 total", "rating": "Airbnb 4.73 (55)", "cancel": "free until 15 Nov", "url": "https://www.airbnb.com/rooms/1304769359530695688?check_in=2026-12-15&check_out=2026-12-26&adults=2"}, {"name": "4 on Highworth", "area": "Sea Point", "price": "$761 total", "rating": "Booking 8.1 (155)", "cancel": "free cancellation", "url": "https://www.booking.com/hotel/za/4-on-highworth.html?checkin=2026-12-15&checkout=2026-12-26&group_adults=2&no_rooms=1"}]}, {"place": "Johannesburg", "dates": "25–27 Dec · 2 nights", "advice": "First night next to OR Tambo because B lands at 22:25; the second night either there or in Rosebank.", "options": [{"name": "Airport Inn and Suites", "area": "Isando, 3.5 km from OR Tambo", "price": "≈$36–43 / night", "rating": "Booking 8.2 (2,111)", "cancel": "flexible rate", "url": "https://www.booking.com/hotel/za/airport-inn-and-suites.html?checkin=2026-12-25&checkout=2026-12-27&group_adults=2&no_rooms=1"}, {"name": "Premier Hotel O.R. Tambo", "area": "Kempton Park, 1.2 km from OR Tambo", "price": "$134 / night flexible", "rating": "Booking 8.4 (8,576)", "cancel": "free until 25 Dec", "url": "https://www.booking.com/hotel/za/premier-o-r-tambo.html?checkin=2026-12-25&checkout=2026-12-27&group_adults=2&no_rooms=1"}, {"name": "Koemi Guest House", "area": "Edleen, Kempton Park", "price": "$34 / night", "rating": "Booking 9.4 (387)", "cancel": "free until 24 Dec, pay there", "url": "https://www.booking.com/hotel/za/koemi-inn.html?checkin=2026-12-26&checkout=2026-12-27&group_adults=2&no_rooms=1"}, {"name": "Executive apartment, The Bolton", "area": "Rosebank", "price": "$48 / night", "rating": "Booking 8.7 (97)", "cancel": "free until 25 Dec", "url": "https://www.booking.com/hotel/za/executive-apartment-rosebank-johannesburg.html?checkin=2026-12-26&checkout=2026-12-27&group_adults=2&no_rooms=1"}]}, {"place": "Eswatini", "dates": "searched 27–30 Dec · 3 nights", "advice": "Sleep inside or next to Mlilwane in the Ezulwini Valley; add a night at Hlane for lions and rhino.", "options": [{"name": "Sondzela Backpackers", "area": "Inside Mlilwane", "price": "≈$155 total, double", "rating": "Hostelworld 9.7 (441)", "cancel": "24 h notice", "url": "https://biggameparks.org/properties/sondzela-backpackers"}, {"name": "Home Cottage", "area": "Lobamba, near Mlilwane", "price": "$171 total", "rating": "Airbnb 4.89 (83)", "cancel": "free until 27 Nov", "url": "https://www.airbnb.com/rooms/33760106"}, {"name": "Hlane: Bhubesi Camp cottage", "area": "Hlane Royal NP", "price": "≈$316 total incl. park fee", "rating": "Booking 8.5 (1,538)", "cancel": "free until 13 Dec", "url": "https://www.booking.com/hotel/sz/hlane-royal-national-park.html"}, {"name": "Mantenga Lodge", "area": "Ezulwini Valley", "price": "$342 total", "rating": "Booking 8.7 (1,704)", "cancel": "free cancellation", "url": "https://www.booking.com/hotel/sz/mantenga-lodge.html"}]}, {"place": "Lesotho", "dates": "searched 30 Dec – 3 Jan · 4 nights", "advice": "Stay rural and skip Maseru town. Malealea and Semonkong are the classic mountain bases.", "options": [{"name": "Malealea Lodge", "area": "Malealea", "price": "$163–246 for 4 nights", "rating": "Booking 9.1 (104)", "cancel": "free until 29 Dec", "url": "https://www.booking.com/hotel/ls/malealea-lodge.html?checkin=2026-12-30&checkout=2027-01-03&group_adults=2&no_rooms=1"}, {"name": "Mmelesi Lodge", "area": "Thaba Bosiu, 25 km from Maseru", "price": "$60 / night with breakfast", "rating": "Booking 9.0 (184)", "cancel": "free until 16 Dec, pay there", "url": "https://www.booking.com/hotel/ls/mmelesi-lodge.html?checkin=2026-12-30&checkout=2026-12-31&group_adults=2&no_rooms=1"}, {"name": "Maletsunyane Gardens Lodge", "area": "Semonkong, near the falls", "price": "≈$57 / night", "rating": "Booking 8.9 (7)", "cancel": "free until 31 Dec, pay there", "url": "https://www.booking.com/hotel/ls/maletsunyane-gardens-lodge.html?checkin=2027-01-01&checkout=2027-01-03&group_adults=2&no_rooms=1"}, {"name": "Semonkong Lodge", "area": "Semonkong, on the river", "price": "≈$130–140 / night B&B", "rating": "Google 4.5 (384)", "cancel": "prepaid, cancellation fees", "url": "https://www.semonkonglodge.com/semonkong-lodge-accommodation-and-activity-rates/"}]}];
+function renderStays(){
+  document.getElementById("stayCards").innerHTML = STAYS.map(function(g){
+    var opts = g.options.map(function(o){
+      return '<div class="fact"><dt>'+esc(o.price)+'</dt><dd><a href="'+esc(o.url)+'" target="_blank" rel="noopener"><b>'+esc(o.name)+'</b></a><br>'+esc(o.area)+' · '+esc(o.rating)+(o.cancel?' · '+esc(o.cancel):'')+(o.note?'<br><span style="color:var(--muted)">'+esc(o.note)+'</span>':'')+'</dd></div>';
+    }).join("");
+    return '<article class="stop"><header><h3>'+esc(g.place)+'</h3><span class="ctry">'+esc(g.dates)+'</span></header><p style="margin:0;font-size:14px;color:var(--muted)">'+esc(g.advice)+'</p><dl class="facts">'+opts+'</dl></article>';
+  }).join("");
+}
+function renderPlan(){ renderControls(); renderSummary(); renderTimeline(); renderCosts(); renderStops(); renderCompare(); renderChecklist(); }
+
+renderFilters(); renderAtlas(); renderPlan(); renderStays(); initMap();
 })();
 </script>
 </body>
