@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="План поездки 15.12.2026 – 13.01.2027: Кейптаун, Намибия, водопад Виктория, Маврикий. Маршруты по дням, билеты с ценами, особенности остановок.">
+<meta property="og:title" content="Кейптаун / Намиб / Замбези">
+<meta property="og:description" content="Маршруты, билеты и цены на 15.12.2026 – 13.01.2027">
+<meta property="og:type" content="website">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Кейптаун — Виктория 26/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: route chart (sticky) beside a day-by-day manifest; tickets, stops, comparison and checklist follow in one column */
+:root{
+  --bg:#EEF2F1; --surface:#FFFFFF; --surface-2:#F5F8F7; --ink:#14212B; --muted:#56646F; --faint:#8A979F; --line:#D0D9DA;
+  --sea:#D6E4E8; --land:#E5E1D4; --land-edge:#BDB6A0; --grid:#BFD0D5;
+  --a:#0D716C; --a-soft:#D3EAE7; --b:#A3561A; --b-soft:#F2E1CF; --both:#2C3B47; --both-soft:#DDE4E8;
+  --warn:#93381A; --warn-soft:#F5E2D8; --note:#2F5E86; --note-soft:#DCE8F2;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --r:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1418; --surface:#141D22; --surface-2:#18232A; --ink:#E4EBED; --muted:#9AA8AF; --faint:#6E7D85; --line:#26343C;
+    --sea:#0F2129; --land:#1D2A2E; --land-edge:#33454A; --grid:#1D343D;
+    --a:#45B9AE; --a-soft:#163A38; --b:#E39A55; --b-soft:#3D2A18; --both:#B9C6CE; --both-soft:#25333B;
+    --warn:#F0956B; --warn-soft:#3A2018; --note:#86B5DE; --note-soft:#182B3B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1418; --surface:#141D22; --surface-2:#18232A; --ink:#E4EBED; --muted:#9AA8AF; --faint:#6E7D85; --line:#26343C;
+  --sea:#0F2129; --land:#1D2A2E; --land-edge:#33454A; --grid:#1D343D;
+  --a:#45B9AE; --a-soft:#163A38; --b:#E39A55; --b-soft:#3D2A18; --both:#B9C6CE; --both-soft:#25333B;
+  --warn:#F0956B; --warn-soft:#3A2018; --note:#86B5DE; --note-soft:#182B3B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+a{color:var(--note)}
+a:hover{text-decoration-thickness:2px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--note);outline-offset:2px;border-radius:6px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+
+/* Header */
+.top{display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(30px,5vw,54px);font-weight:800;font-stretch:118%;line-height:1;letter-spacing:-.01em;margin-top:8px}
+h1 .sep{color:var(--faint);font-weight:500}
+.lede{max-width:62ch;color:var(--muted);margin:12px 0 0}
+.stamp{display:grid;gap:4px;justify-items:end;text-align:right;font-size:13px;color:var(--muted)}
+.stamp b{font-family:var(--mono);font-weight:600;color:var(--ink)}
+
+/* Controls */
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-block:18px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
+.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctl-label{font-size:12px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button:hover:not([aria-pressed="true"]){color:var(--ink);background:var(--surface-2)}
+.seg button:disabled{opacity:.4;cursor:not-allowed}
+
+/* Summary */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:26px}
+.sum{background:var(--surface);padding:14px 16px;display:grid;gap:2px;min-width:0}
+.sum .k{font-size:12px;font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.sum .v{font-family:var(--display);font-size:26px;font-weight:700;font-stretch:105%;font-variant-numeric:tabular-nums}
+.sum .s{font-size:13px;color:var(--muted)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.dot.a{background:var(--a)} .dot.b{background:var(--b)} .dot.ab{background:var(--both)}
+
+/* Main grid */
+.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.mapcard{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.maphead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.maphead h2{font-size:15px;font-weight:700;font-stretch:110%}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:22px;height:0;border-top:2.5px solid var(--both)}
+.legend i.drive{border-top-style:dashed}
+.legend i.home{border-top:1.5px dotted var(--faint)}
+svg.map{display:block;width:100%;height:auto;background:var(--sea)}
+.map .land{fill:var(--land);stroke:var(--land-edge);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.map .grat{stroke:var(--grid);stroke-width:1;vector-effect:non-scaling-stroke;fill:none}
+.map .gratlbl{fill:var(--faint);font-family:var(--mono)}
+.map .sealbl{fill:var(--faint);font-family:var(--body);font-style:italic;letter-spacing:.12em}
+.map .leg{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:opacity .2s,stroke-width .2s}
+.map .leg.a{stroke:var(--a)} .map .leg.b{stroke:var(--b)} .map .leg.ab{stroke:var(--both)}
+.map .leg.flight{stroke-width:2.6}
+.map .leg.drive{stroke-width:2.6;stroke-dasharray:7 6}
+.map .leg.home{stroke-width:1.6;stroke-dasharray:2 5;opacity:.9}
+.map .leg.dim{opacity:.13}
+.map .leg.sel{stroke-width:5}
+.map .pt{cursor:pointer}
+.map .pt circle{fill:var(--surface);stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.map .pt.minor circle{stroke-width:1.5}
+.map .pt text{fill:var(--ink);font-family:var(--body);font-weight:700;paint-order:stroke;stroke:var(--sea);stroke-width:4px;stroke-linejoin:round}
+.map .pt .code{font-family:var(--mono);font-weight:600;fill:var(--muted)}
+.map .pt:hover circle,.map .pt:focus-visible circle{fill:var(--ink)}
+.map .pt:focus{outline:none}
+.map .homelbl{fill:var(--muted);font-family:var(--mono);paint-order:stroke;stroke:var(--sea);stroke-width:4px}
+.mapnote{padding:10px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* Timeline */
+.timeline{display:grid;gap:0}
+.day{display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;padding-block:14px;border-top:1px solid var(--line)}
+.day:first-child{border-top:0;padding-top:0}
+.date{font-family:var(--mono);font-size:13px;line-height:1.3;color:var(--muted);padding-top:3px}
+.date b{display:block;font-size:20px;color:var(--ink);font-family:var(--display);font-weight:700;font-stretch:100%}
+.items{display:grid;gap:8px;min-width:0}
+.item{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);min-width:0;transition:opacity .2s}
+.item.dim{opacity:.35}
+.item.who-a{box-shadow:inset 3px 0 0 var(--a)} .item.who-b{box-shadow:inset 3px 0 0 var(--b)} .item.who-ab{box-shadow:inset 3px 0 0 var(--both)}
+.ihead{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:11px 14px 11px 16px;width:100%;text-align:left;background:none;border:0;border-radius:var(--r)}
+button.ihead{cursor:pointer}
+button.ihead:hover{background:var(--surface-2)}
+.kind{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.route{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-weight:700;font-size:17px}
+.route .code{font-family:var(--mono);font-weight:600;font-size:15px;padding:1px 6px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line)}
+.route .via{font-weight:400;font-size:13px;color:var(--muted)}
+.meta{font-size:14px;color:var(--muted);display:flex;gap:4px 12px;flex-wrap:wrap}
+.meta .mono{color:var(--ink)}
+.chips{display:flex;gap:6px;align-items:start;justify-content:end;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.chip.a{background:var(--a-soft);color:var(--a)} .chip.b{background:var(--b-soft);color:var(--b)}
+.chip.est{background:var(--note-soft);color:var(--note)}
+.price{font-family:var(--mono);font-weight:600;font-size:14px;text-align:right;white-space:nowrap}
+.detail{padding:0 16px 14px;display:grid;gap:8px;font-size:14px;border-top:1px dashed var(--line);margin-top:2px;padding-top:12px}
+.detail p{margin:0}
+.detail .row{display:flex;gap:6px 18px;flex-wrap:wrap}
+.detail .lbl{color:var(--muted)}
+.stay-title{font-weight:700;font-size:16px}
+.stay-text{margin:2px 0 0;font-size:14px;color:var(--muted);grid-column:1/-1}
+.nights{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+
+/* Sections */
+section.block{margin-top:52px}
+.bhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.bhead h2{font-size:clamp(22px,3vw,30px);font-weight:800;font-stretch:112%}
+.bhead p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.total td{font-weight:700;background:var(--surface-2);border-top:2px solid var(--ink)}
+td .sub{display:block;font-size:13px;color:var(--muted)}
+td.empty{color:var(--faint);text-align:right}
+tr.hl td{background:var(--a-soft)}
+
+.stops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px}
+.stop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:12px;align-content:start;min-width:0;scroll-margin-top:90px}
+.stop.flash{outline:2px solid var(--note);outline-offset:2px}
+.stop header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.stop h3{font-size:22px;font-weight:800;font-stretch:112%}
+.stop .ctry{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.facts{display:grid;gap:10px;margin:0}
+.fact{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;font-size:14px}
+.fact dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.fact dd{margin:0}
+.fact.warn dd{color:var(--warn)}
+.links{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:13px}
+
+.check{list-style:none;margin:0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.check li{border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 16px;cursor:pointer}
+.check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--a)}
+.check .t{font-size:15px}
+.check .w{font-size:13px;color:var(--muted)}
+.check li.done .t{text-decoration:line-through;color:var(--muted)}
+.progress{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;font-size:14px;color:var(--muted)}
+.notes p{margin:0}
+.notes b{color:var(--ink)}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:960px){
+  .main{grid-template-columns:minmax(0,1fr)}
+  .mapcard{position:static}
+}
+@media (max-width:640px){
+  .top{grid-template-columns:minmax(0,1fr)}
+  .stamp{justify-items:start;text-align:left}
+  .controls{position:static}
+  .day{grid-template-columns:minmax(0,1fr);gap:8px}
+  .date b{display:inline;margin-right:6px}
+  .fact{grid-template-columns:minmax(0,1fr);gap:2px}
+  .ihead{grid-template-columns:minmax(0,1fr)}
+  .chips{justify-content:start}
+  .price{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">ЮАР · Намибия · Зимбабве · Маврикий</div>
+      <h1>Кейптаун <span class="sep">/</span> Намиб <span class="sep">/</span> Замбези</h1>
+      <p class="lede">Маршруты на 15 декабря 2026 – 13 января 2027 из Сараево через Стамбул, без пересадок в шенгене. Выбери вариант, отфильтруй по попутчику, нажми на перелёт, чтобы увидеть детали и ссылку на билет.</p>
+    </div>
+    <div class="stamp">
+      <span>Цены Kayak за 1 взрослого</span>
+      <b id="stampDate">проверены 16–18 окт 2026</b>
+      <span>курс 84,8 ₽ за $</span>
+    </div>
+  </header>
+
+  <div class="controls" role="toolbar" aria-label="Настройки маршрута">
+    <div class="ctl">
+      <span class="ctl-label" id="lblScn">Вариант</span>
+      <div class="seg" id="segScn" aria-labelledby="lblScn"></div>
+    </div>
+    <div class="ctl">
+      <span class="ctl-label" id="lblWho">Кто</span>
+      <div class="seg" id="segWho" aria-labelledby="lblWho"></div>
+    </div>
+    <div class="ctl">
+      <span class="ctl-label" id="lblCur">Валюта</span>
+      <div class="seg" id="segCur" aria-labelledby="lblCur"></div>
+    </div>
+  </div>
+
+  <div class="summary" id="summary"></div>
+
+  <div class="main">
+    <div class="mapcard">
+      <div class="maphead">
+        <h2 id="mapTitle">Схема маршрута</h2>
+        <div class="legend">
+          <span><span class="dot a"></span>ты</span>
+          <span><span class="dot b"></span>второй</span>
+          <span><span class="dot ab"></span>вместе</span>
+          <span><i></i>перелёт</span>
+          <span><i class="drive"></i>на машине</span>
+          <span><i class="home"></i>Стамбул и домой</span>
+        </div>
+      </div>
+      <svg class="map" id="map" role="img" aria-label="Схема маршрута на карте юга Африки"></svg>
+      <div class="mapnote">Схема, береговая линия упрощена. Нажми на город, чтобы открыть его особенности.</div>
+    </div>
+    <div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+
+  <section class="block" id="tickets">
+    <div class="bhead">
+      <h2>Билеты и цены</h2>
+      <p>Только перелёты. Цена в момент проверки, за одного взрослого в экономе; тарифы меняются каждый день.</p>
+    </div>
+    <div class="tablewrap"><table id="costTable"></table></div>
+  </section>
+
+  <section class="block" id="stops">
+    <div class="bhead">
+      <h2>Остановки</h2>
+      <p>Въезд с российским паспортом, сезон, деньги и то, что легко упустить.</p>
+    </div>
+    <div class="stops" id="stopCards"></div>
+  </section>
+
+  <section class="block" id="compare">
+    <div class="bhead">
+      <h2>Все варианты рядом</h2>
+      <p>Перелёты на одного, из Сараево через Стамбул или Персидский залив. Строки без ссылки проверялись как сумма нескольких билетов.</p>
+    </div>
+    <div class="tablewrap"><table id="compareTable"></table></div>
+  </section>
+
+  <section class="block" id="todo">
+    <div class="bhead">
+      <h2>Что сделать</h2>
+      <span class="progress" id="progress"></span>
+    </div>
+    <ul class="check" id="checklist"></ul>
+  </section>
+
+  <section class="block">
+    <div class="bhead"><h2>Как читать цены</h2></div>
+    <div class="notes">
+      <p><b>Источник.</b> Kayak, поиск только через безвизовые для россиян хабы: Стамбул, Доха, Дубай, Абу-Даби, Аддис-Абеба, Йоханнесбург. Дата проверки указана у каждого билета.</p>
+      <p><b>Оценки.</b> Рейс FlyNamibia Виндхук → Виктория Kayak не продаёт. В октябре–ноябре он стоит 160–230 $, на праздники в расчёте взято 250 $.</p>
+      <p><b>Оплата.</b> Российские карты не работают ни на сайтах, ни в ЮАР, Намибии и Зимбабве. Для проката машины нужна иностранная кредитная карта под залог.</p>
+      <p><b>Здоровье.</b> ЮАР, Намибия и Зимбабве не в списке стран риска жёлтой лихорадки, сертификат на этом маршруте не нужен. У водопада малярия: профилактику начинают до прилёта.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Собрано 18 октября 2026. Цены и расписания перепроверять перед покупкой.</span>
+    <span class="mono">SJJ · IST · CPT · WDH · VFA · JNB · MRU</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var RATE = 84.8;
+
+var PLACES = {
+  SJJ:{name:"Сараево"}, IST:{name:"Стамбул"},
+  CPT:{name:"Кейптаун", code:"CPT", lat:-33.97, lon:18.60, country:"ЮАР"},
+  JNB:{name:"Йоханнесбург", code:"JNB", lat:-26.14, lon:28.24, country:"ЮАР", dx:10, dy:-10},
+  WDH:{name:"Виндхук", code:"WDH", lat:-22.48, lon:17.47, country:"Намибия", dx:12, dy:4},
+  SOS:{name:"Соссусфлей", lat:-24.73, lon:15.29, country:"Намибия", minor:true, dx:-12, dy:16, anchor:"end"},
+  SWP:{name:"Свакопмунд", lat:-22.68, lon:14.53, country:"Намибия", minor:true, dx:-12, dy:-8, anchor:"end"},
+  VFA:{name:"Водопад Виктория", code:"VFA", lat:-17.93, lon:25.83, country:"Зимбабве", dx:12, dy:-8},
+  MRU:{name:"Маврикий", code:"MRU", lat:-20.30, lon:57.58, country:"Маврикий", dx:-12, dy:-12, anchor:"end"}
+};
+
+var LEGS = {
+  a1:{kind:"flight", from:"SJJ", to:"CPT", date:"2026-12-15", dep:"08:00", arr:"23:00", dur:"14 ч", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"T1"},
+  a4:{kind:"flight", from:"CPT", to:"SJJ", date:"2027-01-13", dep:"00:55", arr:"19:30", dur:"19 ч 35", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"T1", note:"Вылет в ночь с 12 на 13 января: в аэропорт вечером 12-го."},
+  b1:{kind:"flight", from:"SJJ", to:"JNB", date:"2026-12-25", dep:"08:00", arr:"≈22:25", dur:"13 ч 25", carrier:"Turkish Airlines", via:"IST", who:["b"], ticket:"T2", note:"Время прилёта примерное, сверить при покупке. Ночь в отеле при аэропорту."},
+  a2:{kind:"flight", from:"CPT", to:"WDH", date:"2026-12-26", dep:"12:50", arr:"14:55", dur:"2 ч 05", carrier:"FlySafair", via:"", who:["a"], ticket:"T3", note:"Airlink в 10:40 → 12:50 стоит 251 $ и прилетает одновременно со вторым."},
+  b2:{kind:"flight", from:"JNB", to:"WDH", date:"2026-12-26", dep:"10:40", arr:"12:50", dur:"2 ч 10", carrier:"Airlink", via:"", who:["b"], ticket:"T4"},
+  d1:{kind:"drive", from:"WDH", to:"SOS", date:"2026-12-27", dist:"340–355 км", dur:"5–6,5 ч", who:["a","b"], note:"B1 → C24 → C19, около 100 км гравия. Ехать светлым днём."},
+  d2:{kind:"drive", from:"SOS", to:"SWP", date:"2026-12-29", dist:"≈345 км", dur:"≈5,5 ч", who:["a","b"], note:"Через Solitaire, около 285 км гравия. Дальше 263 км без единой заправки."},
+  d3:{kind:"drive", from:"SWP", to:"WDH", date:"2027-01-02", dist:"≈360 км", dur:"≈4 ч", who:["a","b"], note:"Асфальт B2. Ночь у аэропорта, машину сдать утром перед вылетом."},
+  ab1:{kind:"flight", from:"WDH", to:"VFA", date:"2027-01-03", dep:"09:15", arr:"10:40", dur:"1 ч 25", carrier:"FlyNamibia (Airlink 4Z8135)", via:"", who:["a","b"], ticket:"T5", note:"Летает каждый день, кроме понедельника. Самолёт на 37–50 мест, раскупят быстро."},
+  b3:{kind:"flight", from:"VFA", to:"JNB", date:"2027-01-07", dep:"12:15", arr:"14:05", dur:"1 ч 50", carrier:"Fastjet", via:"", who:["b"], ticket:"T6", note:"Отдельный билет: в Йоханнесбурге паспортный контроль и новая регистрация, запас больше 4 часов."},
+  b4:{kind:"flight", from:"JNB", to:"SJJ", date:"2027-01-07", dep:"18:50", arr:"14:40", arrNext:true, dur:"20 ч 50", carrier:"Turkish Airlines", via:"IST", who:["b"], ticket:"T2", note:"Дома 8 января, до дедлайна 10 января остаётся 2 дня."},
+  a3:{kind:"flight", from:"VFA", to:"CPT", date:"2027-01-08", dep:"", arr:"", dur:"6–7 ч, 1 пересадка", carrier:"через Йоханнесбург", via:"JNB", who:["a"], ticket:"T7", note:"Повторный въезд в ЮАР: до вылета домой меньше 7 дней, ограничение на повторный въезд не мешает."},
+  m2:{kind:"flight", from:"CPT", to:"MRU", date:"2027-01-05", dep:"10:05", arr:"17:15", dur:"5 ч 10", carrier:"Airlink", via:"", who:["a"], ticket:"M2", note:"Прямой рейс летает по вторникам и пятницам. 1 января (пт) тот же рейс за 402 $."},
+  m3:{kind:"flight", from:"MRU", to:"SJJ", date:"2027-01-13", dep:"20:30", arr:"14:40", arrNext:true, dur:"21 ч 10", carrier:"Turkish Airlines", via:"IST", who:["a"], ticket:"M1"}
+};
+
+var K = function(path){ return "https://www.kayak.com/flights/" + path; };
+
+var SCENARIOS = [
+  {
+    id:"namibia", short:"Намибия и водопад", title:"Кейптаун, Намибия и водопад вдвоём", travellers:["a","b"],
+    blurb:"Ты прилетаешь 15 декабря, второй 25-го в Йоханнесбург. Встречаетесь в Виндхуке 26-го, Новый год на побережье Намибии, потом водопад Виктория.",
+    tickets:[
+      {id:"T1", label:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST")},
+      {id:"T2", label:"Сараево ⇄ Йоханнесбург, 25 дек → 7 янв", carrier:"Turkish Airlines", who:["b"], price:1134, checked:"18.10", url:K("SJJ-JNB/2026-12-25/2027-01-07?sort=price_a&fs=layoverair=IST")},
+      {id:"T3", label:"Кейптаун → Виндхук, 26 дек", carrier:"FlySafair", who:["a"], price:194, checked:"18.10", url:K("CPT-WDH/2026-12-26?sort=price_a&fs=stops=0")},
+      {id:"T4", label:"Йоханнесбург → Виндхук, 26 дек", carrier:"Airlink", who:["b"], price:185, checked:"18.10", url:K("JNB-WDH/2026-12-26?sort=price_a&fs=stops=0")},
+      {id:"T5", label:"Виндхук → водопад Виктория, 3 янв", carrier:"FlyNamibia", who:["a","b"], price:250, est:true, checked:"оценка", url:"https://www.flyairlink.com/"},
+      {id:"T6", label:"Водопад Виктория → Йоханнесбург, 7 янв", carrier:"Fastjet", who:["b"], price:183, checked:"18.10", url:K("VFA-JNB/2027-01-07?sort=price_a&fs=stops=0")},
+      {id:"T7", label:"Водопад Виктория → Кейптаун, 8 янв", carrier:"1 пересадка", who:["a"], price:286, checked:"18.10", url:K("VFA-CPT/2027-01-08?sort=price_a")}
+    ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2026-12-25", nights:11, who:["a"], title:"Кейптаун", text:"Столовая гора и даманы с утра, Капский полуостров и пингвины Боулдерс, винодельни Стелленбоса и Франсхука, Хермануc. 25-го Рождество, многое закрыто."}},
+      {date:"2026-12-25", leg:"b1"},
+      {date:"2026-12-25", stay:{place:"JNB", nights:1, who:["b"], title:"Ночь у аэропорта", text:"Отель прямо при аэропорту OR Tambo, утром рейс в Виндхук."}},
+      {date:"2026-12-26", leg:"b2"},
+      {date:"2026-12-26", leg:"a2"},
+      {date:"2026-12-26", stay:{place:"WDH", nights:1, who:["a","b"], title:"Встреча в Виндхуке", text:"Машину берёте в аэропорту. 26-е выходной: запастись наличными, водой и продуктами, купить SIM-карту."}},
+      {date:"2026-12-27", leg:"d1"},
+      {date:"2026-12-27", stay:{place:"SOS", end:"2026-12-28", nights:2, who:["a","b"], title:"Соссусфлей и Дедвлей", text:"Дюны и Дедвлей на рассвете, каньон Сесрием. Днём до +34–38°."}},
+      {date:"2026-12-29", leg:"d2"},
+      {date:"2026-12-29", stay:{place:"SWP", end:"2027-01-01", nights:4, who:["a","b"], title:"Свакопмунд, Новый год", text:"Уолфиш-Бей и фламинго, Сэндвич-Харбор только с гидом. На побережье прохладно и туманно, нужна куртка."}},
+      {date:"2027-01-02", leg:"d3"},
+      {date:"2027-01-02", stay:{place:"WDH", nights:1, who:["a","b"], title:"Ночь у аэропорта", text:"Рейс в 09:15, машину сдать утром в аэропорту."}},
+      {date:"2027-01-03", leg:"ab1"},
+      {date:"2027-01-03", stay:{place:"VFA", end:"2027-01-06", nights:4, who:["a","b"], title:"Водопад Виктория", text:"Зимбабвийская сторона и тропа Rainforest, полдня на замбийской стороне по KAZA, день в Чобе (Ботсвана), рафтинг."}},
+      {date:"2027-01-07", leg:"b3"},
+      {date:"2027-01-07", leg:"b4"},
+      {date:"2027-01-07", stay:{place:"VFA", nights:1, who:["a"], title:"Ещё ночь у водопада", text:"Второй улетает днём, у тебя рейс на следующее утро."}},
+      {date:"2027-01-08", leg:"a3"},
+      {date:"2027-01-08", stay:{place:"CPT", end:"2027-01-12", nights:4, who:["a"], title:"Снова Кейптаун", text:"Хвост поездки: то, что не успел в декабре."}},
+      {date:"2027-01-13", leg:"a4"}
+    ],
+    checklist:["c_b","c_a","c_wdh","c_vfa","c_stay","c_car","c_cash","c_malaria","c_serb","c_back","c_card"]
+  },
+  {
+    id:"mauritius", short:"ЮАР и Маврикий", title:"Кейптаун, потом Маврикий", travellers:["a"],
+    blurb:"Три недели в Кейптауне, 5 января прямой рейс на Маврикий и домой прямо с острова. Один билет Turkish на оба дальних участка.",
+    tickets:[
+      {id:"M1", label:"Сараево → Кейптаун 15 дек + Маврикий → Сараево 13 янв", carrier:"Turkish Airlines", who:["a"], price:979, checked:"16.10", url:K("SJJ-CPT/2026-12-15/MRU-SJJ/2027-01-13?sort=price_a&fs=layoverair=IST")},
+      {id:"M2", label:"Кейптаун → Маврикий, 5 янв", carrier:"Airlink", who:["a"], price:403, checked:"16.10", url:K("CPT-MRU/2027-01-05?sort=price_a&fs=stops=0")}
+    ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1", ticketOverride:"M1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-04", nights:21, who:["a"], title:"Кейптаун и окрестности", text:"Столовая гора, полуостров, винодельни, Хермануc. Можно вставить вылазку в Намибию: Кейптаун ⇄ Виндхук прямым рейсом от 319 $."}},
+      {date:"2027-01-05", leg:"m2"},
+      {date:"2027-01-05", stay:{place:"MRU", end:"2027-01-12", nights:8, who:["a"], title:"Маврикий", text:"Январь: жарко, влажно, ливни, пик сезона циклонов. Жильё только с бесплатной отменой."}},
+      {date:"2027-01-13", leg:"m3"}
+    ],
+    checklist:["m_t1","m_t2","m_stay","m_ins","c_card"]
+  },
+  {
+    id:"sa", short:"Только ЮАР", title:"Только ЮАР, месяц в Кейптауне", travellers:["a"],
+    blurb:"Самый дешёвый вариант. Туда 15 декабря, обратно в ночь на 13 января. Есть и двухнедельный: 15 → 29 декабря за 825 $.",
+    tickets:[
+      {id:"T1", label:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", carrier:"Turkish Airlines", who:["a"], price:843, checked:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST")}
+    ],
+    timeline:[
+      {date:"2026-12-15", leg:"a1"},
+      {date:"2026-12-15", stay:{place:"CPT", end:"2027-01-11", nights:28, who:["a"], title:"Кейптаун и Западный Кейп", text:"Время на всё: полуостров, Хермануc, Садовый маршрут, винодельни. Вылазки в соседние страны выше, в сравнении вариантов."}},
+      {date:"2027-01-13", leg:"a4"}
+    ],
+    checklist:["s_t1","s_stay","s_cable","c_card"]
+  }
+];
+
+var CHECK = {
+  c_b:{t:"Купить билет второго: Сараево ⇄ Йоханнесбург, 25 дек → 7 янв", w:"1 134 $, самый дорогой и сильнее всего дорожает"},
+  c_a:{t:"Купить свой билет: Сараево ⇄ Кейптаун, 15 дек → 13 янв", w:"843 $"},
+  c_wdh:{t:"Перелёты в Виндхук на 26 декабря: тебе из Кейптауна, второму из Йоханнесбурга", w:"FlySafair 194 $ / Airlink 185 $"},
+  c_vfa:{t:"Виндхук → водопад Виктория, 3 января, FlyNamibia", w:"Маленький самолёт, брать сразу"},
+  c_stay:{t:"Жильё: Виндхук 26 дек и 2 янв, Сесрием 27–28 дек, Свакопмунд 29 дек – 1 янв", w:"На Новый год раскупают, бронировать с бесплатной отменой"},
+  c_car:{t:"Машина в Виндхуке на 26 дек – 3 янв", w:"Высокий 2WD-кроссовер, кредитная карта под залог, международные права"},
+  c_cash:{t:"Водопад: жильё на 3–7 янв, наличные доллары мелкими купюрами", w:"KAZA UniVisa 50 $ или виза Зимбабве 30 $"},
+  c_malaria:{t:"Таблетки от малярии для водопада", w:"Начинать до прилёта, по схеме препарата"},
+  c_serb:{t:"Если второй — гражданин Сербии: ETA для ЮАР и виза Намибии онлайн", w:"eta.dha.gov.za и портал визы по прилёту Намибии, около 90 $"},
+  c_back:{t:"Обратные перелёты: второму Виктория → Йоханнесбург 7 янв, тебе Виктория → Кейптаун 8 янв", w:"183 $ и 286 $"},
+  c_card:{t:"Иностранная карта для всех оплат", w:"Российские карты не работают"},
+  m_t1:{t:"Билет Turkish: Сараево → Кейптаун 15 дек + Маврикий → Сараево 13 янв", w:"979 $"},
+  m_t2:{t:"Airlink Кейптаун → Маврикий, 5 января", w:"403 $, проверить, входит ли чемодан"},
+  m_stay:{t:"Жильё на Маврикии с бесплатной отменой", w:"Январь — пик циклонов"},
+  m_ins:{t:"Страховка с покрытием отмены из-за погоды", w:""},
+  s_t1:{t:"Билет Turkish: Сараево ⇄ Кейптаун, 15 дек → 13 янв", w:"843 $"},
+  s_stay:{t:"Жильё в Кейптауне на весь срок", w:"Школьные каникулы в ЮАР, бронировать заранее"},
+  s_cable:{t:"Билет на канатку Столовой горы онлайн", w:"R475 туда-обратно, действует 7 дней"}
+};
+
+var STOPS = {
+  CPT:{name:"Кейптаун", country:"ЮАР", facts:[
+    {k:"Въезд", v:"Россиянам без визы до 90 дней. Паспорт действует ещё 30 дней после выезда, 2 чистые страницы, обратный билет. Новая ETA для россиян не обязательна."},
+    {k:"Сезон", v:"Школьные каникулы 10 декабря – 12 января: пик цен на жильё и машины. 16 декабря выходной, 25-го многое закрыто."},
+    {k:"Даманы", v:"Колония у верхней станции канатки, лучше первым вагоном утром. Ещё Stony Point в Betty's Bay (вход R45, 08:00–16:30) и тропа вдоль скал в Hermanus."},
+    {k:"Канатка", v:"Закрывается при юго-восточном ветре, в декабре–январе часто. Онлайн-билет R475 действует 7 дней: ехать в первое тихое утро.", warn:true},
+    {k:"Здоровье", v:"Малярии нет."}
+  ], links:[{t:"Посольство РФ: ЮАР", u:"https://www.kdmid.ru/docs/south-africa/information-about-the-country/"},{t:"Канатка", u:"https://www.tablemountain.net/"}]},
+  JNB:{name:"Йоханнесбург", country:"ЮАР", facts:[
+    {k:"Роль", v:"Пересадочный хаб: отсюда прямые рейсы в Виндхук, на водопад и домой через Стамбул."},
+    {k:"Стыковки", v:"На отдельных билетах проходишь паспортный контроль ЮАР и сдаёшь багаж заново. Россиянам виза не нужна, запас на пересадку от 4 часов."}
+  ], links:[]},
+  WDH:{name:"Намибия", country:"Виндхук · Соссусфлей · Свакопмунд", facts:[
+    {k:"Въезд", v:"Россиянам без визы, 90 дней в 180. Обратный билет, брони жилья, паспорт на 6 месяцев. Гражданам Сербии нужна виза по прилёту через онлайн-портал, около 90 $."},
+    {k:"Дюны", v:"С 1 мая 2026 к Дедвлей и Соссусфлей своей машиной не проехать: шаттл от парковки, N$260 со взрослого. Полный привод ради этого не нужен."},
+    {k:"Машина", v:"Высокий 2WD-кроссовер с двумя запасками. Залог кредитной картой от N$3–5 тыс., международные права обязательны."},
+    {k:"Дороги", v:"Гравий: не быстрее 60–80 км/ч и никогда в темноте, перевороты — главная причина аварий у туристов. Между Solitaire и Уолфиш-Бей 263 км без заправок.", warn:true},
+    {k:"Жильё", v:"Намибийцы встречают праздники на побережье, Свакопмунд и Сесрием раскупают. Кемпинг Sesriem Camp: N$670 с человека, тел. +264 63 293 652."},
+    {k:"Здоровье", v:"В пустыне и на побережье малярии нет."}
+  ], links:[{t:"Посольство РФ: Намибия", u:"https://www.kdmid.ru/docs/namibia/information-about-the-country/"}]},
+  VFA:{name:"Водопад Виктория", country:"Зимбабве", facts:[
+    {k:"Въезд", v:"Виза по прилёту: 30 $ однократная. Или KAZA UniVisa 50 $: 30 дней, Зимбабве и Замбия, поездки на день в Ботсвану. Наклеек KAZA иногда не хватает, держи наличные на обычную визу."},
+    {k:"Январь", v:"Вода прибывает, брызг умеренно, хватит лёгкого дождевика. Devil's Pool в это время обычно закрыт, есть Angel's Pool."},
+    {k:"Деньги", v:"Наличные доллары мелкими купюрами после 2009 года, целые и чистые. Банкоматы ненадёжны.", warn:true},
+    {k:"Здоровье", v:"Малярийная зона, профилактика обязательна. Сертификат о прививке от жёлтой лихорадки на этом маршруте не нужен."}
+  ], links:[{t:"Посольство РФ: Зимбабве", u:"https://www.kdmid.ru/docs/zimbabwe/information-about-the-country/"}]},
+  MRU:{name:"Маврикий", country:"Маврикий", facts:[
+    {k:"Въезд", v:"Россиянам без визы до 60 дней. На границе спрашивают обратный билет и бронь жилья."},
+    {k:"Сезон", v:"Циклоны с 15 ноября по 15 мая, сильнее всего в январе–марте. В январе 2024 циклон Belal закрыл аэропорт. Тарифы с возвратом и страховка с отменой из-за погоды.", warn:true},
+    {k:"Рейсы", v:"Airlink из Кейптауна прямым рейсом по вторникам и пятницам, 5 ч 10."},
+    {k:"Здоровье", v:"Малярии нет."}
+  ], links:[]}
+};
+
+var COMPARE = [
+  {name:"Только ЮАР", detail:"Сараево ⇄ Кейптаун, 15 дек → 13 янв", price:843, date:"16.10", url:K("SJJ-CPT/2026-12-15/2027-01-13?sort=price_a&fs=layoverair=IST"), scn:"sa"},
+  {name:"ЮАР, две недели", detail:"15 → 29 дек, обратно 14 ч 45", price:825, date:"16.10", url:K("SJJ-CPT/2026-12-15/2026-12-29?sort=price_a&fs=layoverair=IST")},
+  {name:"ЮАР + Намибия, вылазка", detail:"Кейптаун ⇄ Виндхук 5 → 9 янв, прямой FlySafair", price:1178, date:"12.10", approx:true},
+  {name:"ЮАР + Занзибар", detail:"Домой с Занзибара 10 янв", price:1346, date:"12.10", approx:true},
+  {name:"ЮАР + водопад Виктория, вылазка", detail:"Кейптаун ⇄ Виктория 3 → 7 янв", price:1367, date:"12.10", approx:true},
+  {name:"ЮАР + Маврикий", detail:"Домой с Маврикия 13 янв", price:1382, date:"16.10", scn:"mauritius"},
+  {name:"ЮАР + Кения", detail:"Домой из Найроби 10 янв", price:1494, date:"12.10", approx:true},
+  {name:"Лондон ⇄ Кейптаун", detail:"Norse, прямой, 15 дек → 14 янв", price:1412, date:"12.10", url:K("LON-CPT/2026-12-15/2027-01-14?sort=price_a&fs=stops=0")},
+  {name:"ЮАР + Мадагаскар", detail:"Домой из Антананариву", price:2150, date:"12.10", approx:true},
+  {name:"Намибия и водопад вдвоём", detail:"Твой маршрут, перелёты на тебя", price:1573, date:"16–18.10", approx:true, scn:"namibia"}
+];
+
+/* ---------- state ---------- */
+var state = {scn:"namibia", who:"all", cur:"usd", sel:null, open:{}};
+function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function save(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+var savedCur = load("route-cur"); if(savedCur==="usd"||savedCur==="rub") state.cur = savedCur;
+var savedScn = load("route-scn"); if(savedScn && SCENARIOS.some(function(s){return s.id===savedScn;})) state.scn = savedScn;
+var hash = (location.hash||"").replace("#","");
+if(SCENARIOS.some(function(s){return s.id===hash;})) state.scn = hash;
+var checks = {}; try{ checks = JSON.parse(load("route-checks")||"{}")||{}; }catch(e){ checks = {}; }
+
+function scn(){ return SCENARIOS.filter(function(s){return s.id===state.scn;})[0]; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+function nf(n){ return n.toLocaleString("ru-RU").replace(/[  ]/g," "); }
+function money(usd, approx){
+  if(state.cur==="rub"){ return "≈ " + nf(Math.round(usd*RATE/1000)*1000) + " ₽"; }
+  return (approx?"≈ ":"") + nf(usd) + " $";
+}
+var MON = ["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+var WD = ["вс","пн","вт","ср","чт","пт","сб"];
+function parse(d){ var p=d.split("-"); return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); }
+function dayLabel(d){ var x=parse(d); return {n:x.getUTCDate(), m:MON[x.getUTCMonth()], w:WD[x.getUTCDay()]}; }
+function short(d){ var x=parse(d); return x.getUTCDate()+" "+MON[x.getUTCMonth()]; }
+function whoKey(w){ return (w.indexOf("a")>-1 && w.indexOf("b")>-1) ? "ab" : w[0]; }
+function visible(w){ return state.who==="all" || w.indexOf(state.who)>-1; }
+function placeName(code){ return (PLACES[code]&&PLACES[code].name)||code; }
+
+/* ---------- controls ---------- */
+function seg(el, opts, cur, onPick){
+  el.innerHTML = opts.map(function(o){
+    return '<button type="button" data-v="'+o.v+'" aria-pressed="'+(o.v===cur)+'"'+(o.disabled?' disabled':'')+'>'+esc(o.t)+'</button>';
+  }).join("");
+  Array.prototype.forEach.call(el.querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){ onPick(b.getAttribute("data-v")); });
+  });
+}
+function renderControls(){
+  var s = scn();
+  seg(document.getElementById("segScn"), SCENARIOS.map(function(x){return {v:x.id,t:x.short};}), state.scn, function(v){
+    state.scn=v; state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all";
+    save("route-scn",v); try{ history.replaceState(null,"","#"+v); }catch(e){}
+    renderAll();
+  });
+  var two = s.travellers.length>1;
+  seg(document.getElementById("segWho"), [{v:"all",t:"Оба"},{v:"a",t:"Ты"},{v:"b",t:"Второй",disabled:!two}], state.who, function(v){ state.who=v; renderAll(); });
+  seg(document.getElementById("segCur"), [{v:"usd",t:"$"},{v:"rub",t:"₽"}], state.cur, function(v){ state.cur=v; save("route-cur",v); renderAll(); });
+}
+
+/* ---------- totals ---------- */
+function totals(s){
+  var t={a:0,b:0,aEst:false,bEst:false};
+  s.tickets.forEach(function(k){
+    if(k.who.indexOf("a")>-1){ t.a+=k.price; if(k.est) t.aEst=true; }
+    if(k.who.indexOf("b")>-1){ t.b+=k.price; if(k.est) t.bEst=true; }
+  });
+  return t;
+}
+function nightsBy(s, who){
+  var out={};
+  s.timeline.forEach(function(e){
+    if(!e.stay || e.stay.who.indexOf(who)<0) return;
+    var c = PLACES[e.stay.place].country; out[c]=(out[c]||0)+e.stay.nights;
+  });
+  return out;
+}
+function nightsStr(o){ return Object.keys(o).map(function(k){return k+" "+o[k];}).join(" · "); }
+
+function renderSummary(){
+  var s=scn(), t=totals(s), el=document.getElementById("summary"), two=s.travellers.length>1;
+  var na=nightsBy(s,"a"), nb=nightsBy(s,"b");
+  var html = '<div class="sum"><span class="k"><span class="dot a"></span>Ты, перелёты</span><span class="v">'+money(t.a,t.aEst)+'</span><span class="s">Ночей: '+esc(nightsStr(na))+'</span></div>';
+  if(two){
+    html += '<div class="sum"><span class="k"><span class="dot b"></span>Второй, перелёты</span><span class="v">'+money(t.b,t.bEst)+'</span><span class="s">Ночей: '+esc(nightsStr(nb))+'</span></div>';
+    html += '<div class="sum"><span class="k"><span class="dot ab"></span>Вдвоём</span><span class="v">'+money(t.a+t.b,true)+'</span><span class="s">Без жилья, машины и виз</span></div>';
+  } else {
+    html += '<div class="sum"><span class="k">Вариант</span><span class="v" style="font-size:19px;line-height:1.25">'+esc(s.title)+'</span><span class="s">'+esc(s.blurb)+'</span></div>';
+  }
+  if(two) html += '<div class="sum"><span class="k">Суть</span><span class="s" style="font-size:14px;color:var(--ink)">'+esc(s.blurb)+'</span></div>';
+  el.innerHTML = html;
+  document.getElementById("mapTitle").textContent = s.title;
+}
+
+/* ---------- timeline ---------- */
+function ticketOf(s, id){ return s.tickets.filter(function(t){return t.id===id;})[0]; }
+function legItem(s, e){
+  var L = LEGS[e.leg], wk = whoKey(L.who), dim = !visible(L.who), open = !!state.open[e.leg];
+  var t = ticketOf(s, e.ticketOverride || L.ticket);
+  var who = L.who.map(function(w){ return '<span class="chip '+w+'">'+(w==="a"?"ты":"второй")+'</span>'; }).join("");
+  if(L.kind==="drive"){
+    return '<div class="item who-'+wk+(dim?' dim':'')+'" data-leg="'+e.leg+'"><div class="ihead"><div>'+
+      '<div class="kind">На машине</div>'+
+      '<div class="route">'+esc(placeName(L.from))+' <span aria-hidden="true">→</span> '+esc(placeName(L.to))+'</div>'+
+      '<div class="meta"><span class="mono">'+esc(L.dist)+'</span><span class="mono">'+esc(L.dur)+'</span></div>'+
+      '<p class="stay-text">'+esc(L.note)+'</p></div><div class="chips">'+who+'</div></div></div>';
+  }
+  var time = L.dep ? '<span class="mono">'+esc(L.dep)+' → '+esc(L.arr)+(L.arrNext?' +1':'')+'</span>' : '';
+  var price = t ? (t.who.length>1 && L.who.length>1 ? money(t.price,t.est)+" / чел." : money(t.price,t.est)) : "";
+  var shared = t && (t.id==="T1"||t.id==="T2"||t.id==="M1") ? '<span class="sub">в билете туда-обратно</span>' : '';
+  var head = '<button type="button" class="ihead" aria-expanded="'+open+'" data-toggle="'+e.leg+'"><div>'+
+    '<div class="kind">Перелёт · '+esc(L.carrier)+'</div>'+
+    '<div class="route"><span class="code">'+esc(L.from)+'</span><span aria-hidden="true">→</span><span class="code">'+esc(L.to)+'</span>'+(L.via?'<span class="via">через '+esc(L.via)+'</span>':'')+'</div>'+
+    '<div class="meta">'+time+'<span>'+esc(L.dur)+'</span></div></div>'+
+    '<div class="chips">'+who+(t&&t.est?'<span class="chip est">оценка</span>':'')+'</div></button>';
+  var detail = '';
+  if(open && t){
+    detail = '<div class="detail">'+
+      '<div class="row"><span><span class="lbl">Билет:</span> '+esc(t.label)+'</span></div>'+
+      '<div class="row"><span><span class="lbl">Цена:</span> <b class="mono">'+price+'</b> '+shared+'</span><span><span class="lbl">Проверено:</span> '+esc(t.checked)+'</span></div>'+
+      (L.note?'<p>'+esc(L.note)+'</p>':'')+
+      '<div class="links"><a href="'+esc(t.url)+'" target="_blank" rel="noopener">Открыть билет</a></div></div>';
+  }
+  return '<div class="item who-'+wk+(dim?' dim':'')+'" data-leg="'+e.leg+'">'+head+detail+'</div>';
+}
+function stayItem(e){
+  var S = e.stay, wk=whoKey(S.who), dim=!visible(S.who);
+  var who = S.who.map(function(w){ return '<span class="chip '+w+'">'+(w==="a"?"ты":"второй")+'</span>'; }).join("");
+  var range = S.end ? short(e.date)+" – "+short(S.end) : short(e.date);
+  return '<div class="item who-'+wk+(dim?' dim':'')+'"><div class="ihead"><div>'+
+    '<div class="kind">Ночёвки · '+esc(placeName(S.place))+'</div>'+
+    '<div class="stay-title">'+esc(S.title)+'</div>'+
+    '<div class="meta"><span class="nights">'+range+' · '+S.nights+' '+plural(S.nights,"ночь","ночи","ночей")+'</span></div>'+
+    (S.text?'<p class="stay-text">'+esc(S.text)+'</p>':'')+
+    '</div><div class="chips">'+who+'</div></div></div>';
+}
+function plural(n,a,b,c){ var m10=n%10,m100=n%100; if(m10===1&&m100!==11) return a; if(m10>=2&&m10<=4&&(m100<12||m100>14)) return b; return c; }
+
+function renderTimeline(){
+  var s=scn(), groups=[], byDate={};
+  s.timeline.forEach(function(e){
+    if(!byDate[e.date]){ byDate[e.date]=[]; groups.push(e.date); }
+    byDate[e.date].push(e);
+  });
+  var html = groups.map(function(d){
+    var L = dayLabel(d);
+    var items = byDate[d].map(function(e){ return e.leg ? legItem(s,e) : stayItem(e); }).join("");
+    return '<div class="day"><div class="date"><b>'+L.n+' '+L.m+'</b>'+L.w+'</div><div class="items">'+items+'</div></div>';
+  }).join("");
+  var el = document.getElementById("timeline");
+  el.innerHTML = html;
+  Array.prototype.forEach.call(el.querySelectorAll("[data-toggle]"), function(b){
+    var id=b.getAttribute("data-toggle");
+    b.addEventListener("click", function(){
+      state.open[id]=!state.open[id]; state.sel = state.open[id] ? id : null;
+      renderTimeline(); renderMap();
+      var nb = document.querySelector('[data-toggle="'+id+'"]'); if(nb) nb.focus();
+    });
+    b.addEventListener("mouseenter", function(){ highlight(id); });
+    b.addEventListener("mouseleave", function(){ highlight(state.sel); });
+  });
+}
+
+/* ---------- map ---------- */
+var LON0=8, LON1=62, LAT0=3, LAT1=-37, KX=Math.cos(17*Math.PI/180), W=1000;
+var SC = W/((LON1-LON0)*KX), H=(LAT0-LAT1)*SC;
+function px(lon){ return (lon-LON0)*KX*SC; }
+function py(lat){ return (LAT0-lat)*SC; }
+var COAST = [[3,9.6],[1,9.4],[-1,8.9],[-3,10.4],[-4.8,11.85],[-5.9,12.3],[-8.8,13.2],[-12.4,13.5],[-15.2,12.1],[-17.3,11.8],[-20,13.1],[-22.95,14.5],[-24.6,14.8],[-26.6,15.15],[-28.6,16.45],[-31.5,18.1],[-33.9,18.4],[-34.36,18.47],[-34.4,19.3],[-34.83,20.0],[-34.2,22.1],[-34.05,24.9],[-33.96,25.6],[-33.0,27.9],[-31.6,29.5],[-29.86,31.03],[-27.3,32.6],[-25.97,32.6],[-24.7,34.9],[-23.9,35.5],[-21.9,35.4],[-19.8,34.85],[-17.9,36.9],[-16.2,39.9],[-15.0,40.7],[-13.0,40.55],[-10.5,40.4],[-8.0,39.3],[-6.8,39.3],[-5.1,39.1],[-4.05,39.67],[-2.3,40.9],[-0.4,42.5],[2.0,45.3],[3,46.5],[3,9.6]];
+var MADA = [[-11.95,49.26],[-13.4,50.0],[-15.5,50.4],[-17.0,49.8],[-18.15,49.4],[-21.3,48.3],[-23.4,47.6],[-25.03,46.99],[-25.5,45.1],[-24.6,43.9],[-23.35,43.67],[-21.5,43.4],[-20.28,44.28],[-18.2,44.0],[-16.2,44.5],[-15.72,46.3],[-14.4,47.9],[-12.9,48.9]];
+var ZANZ = [[-5.75,39.29],[-6.1,39.35],[-6.45,39.5],[-6.3,39.22],[-5.9,39.2]];
+function poly(pts){ return pts.map(function(p,i){ return (i?"L":"M")+px(p[1]).toFixed(1)+" "+py(p[0]).toFixed(1); }).join(" ")+" Z"; }
+
+function viewBox(s){
+  var pts=[];
+  s.timeline.forEach(function(e){
+    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts.push(PLACES[c]); }); }
+    if(e.stay){ pts.push(PLACES[e.stay.place]); }
+  });
+  var xs=pts.map(function(p){return px(p.lon);}), ys=pts.map(function(p){return py(p.lat);});
+  var x0=Math.min.apply(null,xs)-90, x1=Math.max.apply(null,xs)+150, y0=Math.min.apply(null,ys)-110, y1=Math.max.apply(null,ys)+70;
+  var w=x1-x0, h=y1-y0, ratio=0.86;
+  if(h/w<ratio){ var nh=w*ratio; y0-=(nh-h)/2; h=nh; } else { var nw=h/ratio; x0-=(nw-w)/2; w=nw; }
+  if(x0<0){ x0=0; } if(y0<0){ y0=0; }
+  return {x:x0,y:y0,w:w,h:h};
+}
+function curve(a,b,bend){
+  var x1=px(a.lon),y1=py(a.lat),x2=px(b.lon),y2=py(b.lat);
+  var mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1;
+  var k=bend*len, cx=mx-dy/len*k, cy=my+dx/len*k;
+  return "M"+x1.toFixed(1)+" "+y1.toFixed(1)+" Q"+cx.toFixed(1)+" "+cy.toFixed(1)+" "+x2.toFixed(1)+" "+y2.toFixed(1);
+}
+
+function renderMap(){
+  var s=scn(), vb=viewBox(s), svg=document.getElementById("map"), f=vb.w/1000;
+  svg.setAttribute("viewBox", vb.x.toFixed(1)+" "+vb.y.toFixed(1)+" "+vb.w.toFixed(1)+" "+vb.h.toFixed(1));
+  var out=[];
+  // graticule
+  for(var lat=0; lat>=-35; lat-=5){
+    var y=py(lat); if(y<vb.y||y>vb.y+vb.h) continue;
+    out.push('<line class="grat" x1="'+vb.x+'" y1="'+y+'" x2="'+(vb.x+vb.w)+'" y2="'+y+'"/>');
+    out.push('<text class="gratlbl" x="'+(vb.x+8*f)+'" y="'+(y-5*f)+'" font-size="'+(12*f)+'">'+(lat===0?"экватор":Math.abs(lat)+"° ю.ш.")+'</text>');
+  }
+  for(var lon=10; lon<=60; lon+=5){
+    var x=px(lon); if(x<vb.x||x>vb.x+vb.w) continue;
+    out.push('<line class="grat" x1="'+x+'" y1="'+vb.y+'" x2="'+x+'" y2="'+(vb.y+vb.h)+'"/>');
+    out.push('<text class="gratlbl" x="'+(x+5*f)+'" y="'+(vb.y+vb.h-8*f)+'" font-size="'+(12*f)+'">'+lon+'° в.д.</text>');
+  }
+  out.push('<path class="land" d="'+poly(COAST)+'"/>');
+  out.push('<path class="land" d="'+poly(MADA)+'"/>');
+  out.push('<path class="land" d="'+poly(ZANZ)+'"/>');
+  if(px(10)>vb.x-50) out.push('<text class="sealbl" x="'+(px(9.5))+'" y="'+py(-29)+'" font-size="'+(14*f)+'">АТЛАНТИКА</text>');
+  if(px(44)<vb.x+vb.w) out.push('<text class="sealbl" x="'+(Math.max(px(36),vb.x+vb.w-240*f))+'" y="'+py(-32)+'" font-size="'+(14*f)+'">ИНДИЙСКИЙ ОКЕАН</text>');
+
+  // legs
+  var legsOut=[], homeOut=[], used={}, bendSign=1;
+  s.timeline.forEach(function(e){
+    if(!e.leg) return; var L=LEGS[e.leg], wk=whoKey(L.who);
+    var cls = "leg "+L.kind+" "+wk;
+    var dim = !visible(L.who) || (state.sel && state.sel!==e.leg);
+    if(state.sel===e.leg) cls+=" sel";
+    if(dim) cls+=" dim";
+    var A=PLACES[L.from], B=PLACES[L.to];
+    if(L.from==="SJJ"||L.to==="SJJ"){
+      var p = L.from==="SJJ" ? B : A, inbound = L.from==="SJJ";
+      var x2=px(p.lon), y2=py(p.lat), off=(inbound? -38 : 38)*f + (L.who[0]==="b"?24*f:0);
+      var x1=x2+off+ (inbound?-30*f:30*f), y1=vb.y+4*f;
+      var d = inbound ? "M"+x1+" "+y1+" Q"+(x1+(x2-x1)*0.2)+" "+((y1+y2)/2)+" "+x2+" "+y2 : "M"+x2+" "+y2+" Q"+(x1+(x2-x1)*0.2)+" "+((y1+y2)/2)+" "+x1+" "+y1;
+      homeOut.push('<path class="leg home '+wk+(dim?' dim':'')+(state.sel===e.leg?' sel':'')+'" d="'+d+'" data-mleg="'+e.leg+'"/>');
+      var key=(inbound?"in":"out")+L.who.join("");
+      if(!used[key]){ used[key]=1; homeOut.push('<text class="homelbl" x="'+(x1+(inbound?-4:4)*f)+'" y="'+(y1+16*f)+'" text-anchor="'+(inbound?"end":"start")+'" font-size="'+(12*f)+'">'+(inbound?"из Стамбула ↓":"↑ домой")+'</text>'); }
+      return;
+    }
+    bendSign = -bendSign;
+    var bend = L.kind==="drive" ? 0.08*bendSign : 0.16*bendSign;
+    if(e.leg==="a2") bend=0.14; if(e.leg==="b2") bend=-0.12; if(e.leg==="a3") bend=0.18; if(e.leg==="b3") bend=-0.14;
+    legsOut.push('<path class="'+cls+'" d="'+curve(A,B,bend)+'" data-mleg="'+e.leg+'"/>');
+  });
+  out = out.concat(homeOut, legsOut);
+
+  // points
+  var pts={};
+  s.timeline.forEach(function(e){
+    if(e.leg){ var L=LEGS[e.leg]; [L.from,L.to].forEach(function(c){ if(PLACES[c].lat!=null) pts[c]=1; }); }
+    if(e.stay) pts[e.stay.place]=1;
+  });
+  Object.keys(pts).forEach(function(c){
+    var P=PLACES[c], x=px(P.lon), y=py(P.lat), r=(P.minor?5:7)*f;
+    var dx=(P.dx!=null?P.dx:12)*f, dy=(P.dy!=null?P.dy:-8)*f, anc=P.anchor||"start";
+    var stopId = (c==="SOS"||c==="SWP") ? "WDH" : c;
+    out.push('<g class="pt'+(P.minor?' minor':'')+'" tabindex="0" role="button" aria-label="'+esc(P.name)+'" data-stop="'+stopId+'">'+
+      '<circle cx="'+x+'" cy="'+y+'" r="'+r+'"/>'+
+      '<text x="'+(x+dx)+'" y="'+(y+dy)+'" text-anchor="'+anc+'" font-size="'+((P.minor?13:15)*f)+'">'+esc(P.name)+'</text>'+
+      (P.code?'<text class="code" x="'+(x+dx)+'" y="'+(y+dy+15*f)+'" text-anchor="'+anc+'" font-size="'+(11*f)+'">'+P.code+'</text>':'')+
+      '</g>');
+  });
+  svg.innerHTML = out.join("");
+  Array.prototype.forEach.call(svg.querySelectorAll(".pt"), function(g){
+    var go=function(){ var el=document.getElementById("stop-"+g.getAttribute("data-stop")); if(!el) return; el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.add("flash"); setTimeout(function(){el.classList.remove("flash");},1400); };
+    g.addEventListener("click", go);
+    g.addEventListener("keydown", function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); go(); } });
+  });
+}
+function highlight(id){
+  var s=scn();
+  Array.prototype.forEach.call(document.querySelectorAll("#map [data-mleg]"), function(p){
+    var lid=p.getAttribute("data-mleg"), L=LEGS[lid];
+    var dim = !visible(L.who) || (id && id!==lid);
+    p.classList.toggle("dim", dim); p.classList.toggle("sel", id===lid);
+  });
+}
+
+/* ---------- tables, stops, checklist ---------- */
+function renderCosts(){
+  var s=scn(), two=s.travellers.length>1, t=totals(s);
+  var head='<thead><tr><th>Билет</th>'+(two?'<th class="num">Ты</th><th class="num">Второй</th>':'<th class="num">Цена</th>')+'<th class="num">Проверено</th><th>Купить</th></tr></thead>';
+  var rows=s.tickets.map(function(k){
+    var a=k.who.indexOf("a")>-1, b=k.who.indexOf("b")>-1;
+    var cells = two ? '<td class="num">'+(a?money(k.price,k.est):'—')+'</td><td class="num">'+(b?money(k.price,k.est):'—')+'</td>' : '<td class="num">'+money(k.price,k.est)+'</td>';
+    return '<tr><td>'+esc(k.label)+'<span class="sub">'+esc(k.carrier)+(k.est?' · цена оценочная':'')+'</span></td>'+cells+'<td class="num">'+esc(k.checked)+'</td><td><a href="'+esc(k.url)+'" target="_blank" rel="noopener">'+(k.url.indexOf("kayak")>-1?"Kayak":"Сайт")+'</a></td></tr>';
+  }).join("");
+  var tot = '<tr class="total"><td>Итого перелёты'+(two?'<span class="sub">вдвоём '+money(t.a+t.b,true)+'</span>':'')+'</td>'+(two?'<td class="num">'+money(t.a,t.aEst)+'</td><td class="num">'+money(t.b,t.bEst)+'</td>':'<td class="num">'+money(t.a,t.aEst)+'</td>')+'<td></td><td></td></tr>';
+  document.getElementById("costTable").innerHTML = head+'<tbody>'+rows+tot+'</tbody>';
+}
+function renderStops(){
+  var s=scn(), order=[], seen={};
+  s.timeline.forEach(function(e){
+    var codes = e.leg ? [LEGS[e.leg].from, LEGS[e.leg].to] : [e.stay.place];
+    codes.forEach(function(c){ var id=(c==="SOS"||c==="SWP")?"WDH":c; if(STOPS[id] && !seen[id]){ seen[id]=1; order.push(id); } });
+  });
+  document.getElementById("stopCards").innerHTML = order.map(function(id){
+    var S=STOPS[id];
+    var facts=S.facts.map(function(f){ return '<div class="fact'+(f.warn?' warn':'')+'"><dt>'+esc(f.k)+'</dt><dd>'+esc(f.v)+'</dd></div>'; }).join("");
+    var links=S.links.length?'<div class="links">'+S.links.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener">'+esc(l.t)+'</a>';}).join("")+'</div>':'';
+    return '<article class="stop" id="stop-'+id+'"><header><h3>'+esc(S.name)+'</h3><span class="ctry">'+esc(S.country)+'</span></header><dl class="facts">'+facts+'</dl>'+links+'</article>';
+  }).join("");
+}
+function renderCompare(){
+  var rows = COMPARE.slice().sort(function(a,b){return a.price-b.price;}).map(function(r){
+    var hl = r.scn===state.scn ? ' class="hl"' : '';
+    var link = r.url ? '<a href="'+esc(r.url)+'" target="_blank" rel="noopener">Kayak</a>' : (r.scn ? '<button type="button" class="linkbtn" data-scn="'+r.scn+'" style="border:0;background:none;color:var(--note);text-decoration:underline;cursor:pointer;padding:0">Показать</button>' : '<span style="color:var(--faint)">—</span>');
+    return '<tr'+hl+'><td><b>'+esc(r.name)+'</b><span class="sub">'+esc(r.detail)+'</span></td><td class="num">'+money(r.price,r.approx)+'</td><td class="num">'+esc(r.date)+'</td><td>'+link+'</td></tr>';
+  }).join("");
+  var el=document.getElementById("compareTable");
+  el.innerHTML='<thead><tr><th>Вариант</th><th class="num">Перелёты на 1</th><th class="num">Проверено</th><th>Ссылка</th></tr></thead><tbody>'+rows+'</tbody>';
+  Array.prototype.forEach.call(el.querySelectorAll("[data-scn]"), function(b){
+    b.addEventListener("click", function(){ state.scn=b.getAttribute("data-scn"); state.sel=null; state.open={}; if(scn().travellers.length<2) state.who="all"; save("route-scn",state.scn); try{history.replaceState(null,"","#"+state.scn);}catch(e){} renderAll(); window.scrollTo({top:0,behavior:"smooth"}); });
+  });
+}
+function renderChecklist(){
+  var s=scn(), done=0;
+  var html=s.checklist.map(function(id){
+    var c=CHECK[id], on=!!checks[id]; if(on) done++;
+    return '<li class="'+(on?'done':'')+'"><label for="ck-'+id+'"><input type="checkbox" id="ck-'+id+'" data-ck="'+id+'"'+(on?' checked':'')+'><span class="t">'+esc(c.t)+'</span><span class="w">'+esc(c.w)+'</span></label></li>';
+  }).join("");
+  var el=document.getElementById("checklist"); el.innerHTML=html;
+  document.getElementById("progress").textContent = done+" из "+s.checklist.length+" готово";
+  Array.prototype.forEach.call(el.querySelectorAll("[data-ck]"), function(inp){
+    inp.addEventListener("change", function(){ checks[inp.getAttribute("data-ck")]=inp.checked; save("route-checks", JSON.stringify(checks)); renderChecklist(); var n=document.getElementById(inp.id); if(n) n.focus(); });
+  });
+}
+
+function renderAll(){ renderControls(); renderSummary(); renderTimeline(); renderMap(); renderCosts(); renderStops(); renderCompare(); renderChecklist(); }
+renderAll();
+})();
+</script>
+</body>
+</html>
