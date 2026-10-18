@@ -100,6 +100,8 @@ section.block{margin-top:44px}
 .credit{font-size:11px;color:var(--faint)}
 .credit a{color:var(--faint)}
 .leaflet-container{font-family:var(--body)}
+#map.dark-tiles .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.88) saturate(.6)}
+.leaflet-control-layers{border-radius:8px!important;font-size:13px}
 .leaflet-tooltip.stoplbl{background:var(--surface);color:var(--ink);border:1px solid var(--line);font-weight:700;font-size:12px;box-shadow:none;padding:2px 6px}
 .leaflet-tooltip.stoplbl:before{display:none}
 .maplegend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
@@ -240,7 +242,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     <div class="maplegend">
       <span><span class="dot a"></span>A</span><span><span class="dot b"></span>B</span><span><span class="dot ab"></span>together</span>
       <span><i></i>flight</span><span><i class="drive"></i>by car</span>
-      <span class="mono" style="color:var(--faint)">Map © OpenStreetMap contributors © CARTO</span>
+      <span class="mono" style="color:var(--faint)">Map © OpenStreetMap contributors · Satellite © Esri</span>
     </div>
   </section>
 
@@ -482,21 +484,26 @@ function seg(el, opts, cur, onPick){
 }
 
 /* ---------- map ---------- */
-var map=null, tiles=null, poiLayer=null, routeLayer=null, markers={};
-function tileUrl(){
-  var dark = document.documentElement.getAttribute("data-theme")==="dark" ||
-    (document.documentElement.getAttribute("data-theme")!=="light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  return "https://{s}.basemaps.cartocdn.com/"+(dark?"dark_all":"light_all")+"/{z}/{x}/{y}{r}.png";
+var map=null, poiLayer=null, routeLayer=null, markers={}, baseName="Map";
+function isDark(){
+  var t=document.documentElement.getAttribute("data-theme");
+  return t==="dark" || (t!=="light" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
 }
+function syncTileTheme(){ var el=document.getElementById("map"); el.classList.toggle("dark-tiles", isDark() && baseName==="Map"); }
 function initMap(){
   if(typeof L==="undefined"){ document.getElementById("map").innerHTML='<p style="padding:20px;color:var(--muted)">The map library did not load. The photo atlas below still works.</p>'; return; }
   map = L.map("map", {scrollWheelZoom:false, zoomSnap:0.5}).setView([-28.8, 25.5], 5);
-  tiles = L.tileLayer(tileUrl(), {maxZoom:18, subdomains:"abcd", attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+  var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+  var sat = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {maxZoom:18, attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'});
+  osm.addTo(map);
+  L.control.layers({"Map":osm, "Satellite":sat}, null, {collapsed:false, position:"topright"}).addTo(map);
+  map.on("baselayerchange", function(e){ baseName=e.name; syncTileTheme(); });
   map.on("focus", function(){ map.scrollWheelZoom.enable(); });
   map.on("blur", function(){ map.scrollWheelZoom.disable(); });
   routeLayer = L.layerGroup().addTo(map);
   poiLayer = L.layerGroup().addTo(map);
-  if(window.matchMedia){ var mq=window.matchMedia("(prefers-color-scheme: dark)"); var h=function(){ tiles.setUrl(tileUrl()); drawPois(); drawRoute(); }; if(mq.addEventListener) mq.addEventListener("change",h); else if(mq.addListener) mq.addListener(h); }
+  syncTileTheme();
+  if(window.matchMedia){ var mq=window.matchMedia("(prefers-color-scheme: dark)"); var h=function(){ syncTileTheme(); drawPois(); drawRoute(); }; if(mq.addEventListener) mq.addEventListener("change",h); else if(mq.addListener) mq.addListener(h); }
   drawPois(); drawRoute(true);
 }
 function drawPois(){
